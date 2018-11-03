@@ -4372,7 +4372,7 @@ COPY public.wagtailcore_pageviewrestriction_groups (id, pageviewrestriction_id, 
 --
 
 COPY public.wagtailcore_site (id, hostname, port, is_default_site, root_page_id, site_name) FROM stdin;
-2	localhost	80	t	3	Chrisdev Wagtail
+2	localhost	80	t	3	Grand Rapids Historical Society
 \.
 
 

@@ -47,9 +47,11 @@
 
     	<div class="off-canvas-content" data-off-canvas-content>
 
-      	{% block breadcrumbs %}
-      		{% breadcrumbs %}
-      	{% endblock %}
+        {% block header_area %}
+        <header>
+          <h1 class="grid-container">{% block header %}{% endblock %}</h1>
+        </header>
+        {% endblock %}
 
       	{% block content %}{% endblock %}
 

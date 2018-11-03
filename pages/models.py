@@ -159,6 +159,44 @@ StandardIndexPage.promote_panels = [
 ]
 
 
+class AwardIndexPage(Page):
+    description = RichTextField()
+
+    content_panels = Page.content_panels + [
+        FieldPanel('description')
+    ]
+
+    subpage_types = ['AwardPage']
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        awardpages = self.get_children().live().order_by('-slug')
+        context['awardpages'] = awardpages
+        return context
+
+
+class AwardPage(Page):
+    winner = models.CharField(max_length=255)
+    year = models.IntegerField()
+    body = RichTextField(blank=True)
+    image = models.ForeignKey(
+        'wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True, blank=True
+    )
+    search_fields = Page.search_fields + [
+        FieldPanel('winner'),
+        FieldPanel('body', classname='full')
+    ]
+
+    content_panels = Page.content_panels + [
+        FieldPanel('winner'),
+        FieldPanel('year'),
+        FieldPanel('body'),
+        ImageChooserPanel('image'),
+    ]
+
+    parent_page_types = ['AwardIndexPage']
+
+
 # Standard page
 
 class StandardPageCarouselItem(Orderable, CarouselItem):
