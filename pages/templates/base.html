@@ -6,7 +6,7 @@
   	<head>
     	<meta charset="utf-8" />
     	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    	<title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
+    	<title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}GRHS - {{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
     	<meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}">
     	<meta name="viewport" content="width=device-width, initial-scale=1" />
     	<link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}"/>
@@ -77,7 +77,7 @@
 							<button class="float-right button secondary" type="submit">Search</button>
 						</form>
 	          		</div>
-	
+
 	          		<div class="medium-3 cell text-center">
   	            		<h5><strong>Follow Us</strong></h5>
   	            		<div class="social">
