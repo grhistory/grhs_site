@@ -30,6 +30,14 @@
   		      {% endfor %}
   		    </ul>
   		  </div>
+      <nav class="orbit-bullets">
+        {% for block in self.content_items.all %}
+          <button {% if forloop.first %}class="is-active"{% endif %} data-slide="{{forloop.counter0}}">
+            <span class="show-for-sr">Slide {{ forloop.counter }} details.</span>
+            {% if forloop.first %}<span class="show-for-sr">Current Slide</span>{% endif %}
+          </button>
+        {% endfor %}
+      </nav>
   		</div>
   		
   		<div class="grid-x grid-padding-x align-center">
