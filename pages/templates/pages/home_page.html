@@ -4,32 +4,36 @@
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
-	
-	<div id="intro">
-  		
-  		<div class="orbit clean-hero-slider pad" role="region" aria-label="Homepage Slider" data-orbit>
-  		  <div class="orbit-wrapper">
-  		    <ul class="orbit-container">
-  		      {% for block in self.content_items.all %}
-  		      <li class="orbit-slide">
-  		      	<figure class="orbit-figure">
-  		      		<div class="grid-container">
-  			        	<div class="grid-x grid-padding-x grid-padding-y grid-margin-y align-middle">
-  			        		<div class="medium-6 cell text-center">
-  			        			{% image block.image fill-350x350 %}
-  			        		</div>
-  			        		<div class="medium-6 cell caption">
-  					            <h3>{{ block.title}}</h3>
-  					            {{ block.content|richtext }}
-  					            <a href="{{ block.link }}" class="button secondary" target="_blank"><strong>Learn More</strong></a>
-  					        </div>
-  					    </div>
-  					</div>
-  		        </figure>
-  		      </li>
-  		      {% endfor %}
-  		    </ul>
-  		  </div>
+
+  <div id="intro">
+
+      <div class="orbit clean-hero-slider pad" role="region" aria-label="Homepage Slider" data-orbit>
+        <div class="orbit-wrapper">
+          <div class="orbit-controls">
+            <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
+            <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
+          </div>
+          <ul class="orbit-container">
+            {% for block in self.content_items.all %}
+            <li class="orbit-slide">
+              <figure class="orbit-figure">
+                <div class="grid-container">
+                  <div class="grid-x grid-padding-x grid-padding-y grid-margin-y align-middle">
+                    <div class="medium-6 cell text-center">
+                      {% image block.image fill-350x350 %}
+                    </div>
+                    <div class="medium-6 cell caption">
+                        <h3>{{ block.title}}</h3>
+                        {{ block.content|richtext }}
+                        <a href="{{ block.link }}" class="button secondary" target="_blank"><strong>Learn More</strong></a>
+                    </div>
+                </div>
+            </div>
+              </figure>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
       <nav class="orbit-bullets">
         {% for block in self.content_items.all %}
           <button {% if forloop.first %}class="is-active"{% endif %} data-slide="{{forloop.counter0}}">
@@ -38,18 +42,19 @@
           </button>
         {% endfor %}
       </nav>
-  		</div>
-  		
-  		<div class="grid-x grid-padding-x align-center">
-  			<div class="medium-9 cells">
-				<center>
-	  				<h3>{{ self.title_text|richtext }}</h3>
-	  				{{ self.body|richtext }}
-				</center>
-  			</div>
-  		</div>
-	</div>
+      </div>
 
-	{% adverts %}
+  </div>
+
+    <div class="grid-x grid-padding-x align-center">
+      <div class="medium-9 cells">
+      <center>
+          <h3>{{ self.title_text|richtext }}</h3>
+          {{ self.body|richtext }}
+      </center>
+      </div>
+    </div>
+
+  {% adverts %}
 
 {% endblock %}
