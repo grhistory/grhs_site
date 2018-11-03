@@ -29,6 +29,7 @@
   		      {% endfor %}
   		    </ul>
   		  </div>
+
       <nav class="orbit-bullets">
         {% for block in self.content_items.all %}
           <button {% if forloop.first %}class="is-active"{% endif %} data-slide="{{forloop.counter0}}">
@@ -37,18 +38,19 @@
           </button>
         {% endfor %}
       </nav>
-  		</div>
-  		
-  		<div class="grid-x grid-padding-x align-center">
-  			<div class="medium-9 cells">
-				<center>
-	  				<h3>{{ self.title_text|richtext }}</h3>
-	  				{{ self.body|richtext }}
-				</center>
-  			</div>
-  		</div>
-	</div>
+      </div>
 
-	{% adverts %}
+  </div>
+
+    <div class="grid-x grid-padding-x align-center">
+      <div class="medium-9 cells">
+      <center>
+          <h3>{{ self.title_text|richtext }}</h3>
+          {{ self.body|richtext }}
+      </center>
+      </div>
+    </div>
+
+  {% adverts %}
 
 {% endblock %}

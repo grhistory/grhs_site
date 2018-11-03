@@ -14,7 +14,7 @@ from modelcluster.fields import ParentalKey
 from modelcluster.tags import ClusterTaggableManager
 from taggit.models import Tag, TaggedItemBase
 from utils.models import RelatedLink
-
+from wagtail.contrib.settings.models import BaseSetting, register_setting
 
 # Product page
 class ProductIndexPageRelatedLink(Orderable, RelatedLink):
@@ -100,6 +100,7 @@ class ProductPageTag(TaggedItemBase):
 
 class ProductPage(Page):
     price = models.CharField(max_length=255, blank=True)
+    member_price = models.CharField(max_length=255, blank=True)
     description = RichTextField(blank=True)
     intro = models.CharField(max_length=255, blank=True)
     link_demo = models.URLField("Demo link", blank=True)
@@ -125,6 +126,7 @@ ProductPage.content_panels = [
     FieldPanel('title', classname="title"),
     FieldPanel('intro', classname="full"),
     FieldPanel('price', classname="full"),
+    FieldPanel('member_price', classname="full"),
     FieldPanel('description', classname="full"),
     ImageChooserPanel('image'),
     FieldPanel('link_demo'),
@@ -136,3 +138,10 @@ ProductPage.promote_panels = [
     MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
+
+@register_setting
+class SnipcartSettings(BaseSetting):
+    api_key = models.CharField(
+        max_length=255,
+        help_text='Enter your Snap Cart Public API Key'
+    )

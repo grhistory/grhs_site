@@ -11,7 +11,7 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1" />
     	<link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}"/>
     	{% block canonical_url %}{% endblock %}
-	
+
 		{% block cdn_css %}
 			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" />
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.min.css" />
@@ -19,7 +19,7 @@
 
       <link href="https://fonts.googleapis.com/css?family=Eczar|IBM+Plex+Sans" rel="stylesheet">
 		{% endblock %}
-	
+
 		{% compress css %}
 			<link rel="stylesheet" type="text/x-scss" href="{% static 'css/app.scss' %}">
 		{% endcompress %}
@@ -63,7 +63,6 @@
   	            		{% get_contact_fields as contact %}
   	            		{% include "contact/includes/contact_card.html" with contact=contact only %}
   	          		</div>
-  	
   	          		<div id="sitemap" class="medium-4 cell hide-for-small-only">
 	            		<h5><strong>Show Your Support</strong></h5>
                     <div class="clearfix">
@@ -94,7 +93,7 @@
   			<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.min.js"></script>
   			<script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/5.1.0/what-input.min.js"></script>
   		{% endblock %}
-  
+
   		{% compress js %}
   			<script src="{% static 'node_modules/foundation-sites/dist/js/foundation.min.js' %}"></script>
   			<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
@@ -105,7 +104,13 @@
     			$(document).foundation();
   			</script>
   		{% endblock %}
-  
+
+        {# Snipcart #}
+        {% if settings.products.SnipcartSettings.api_key %}
+            <script src="https://cdn.snipcart.com/scripts/2.0/snipcart.js" id="snipcart" data-api-key="{{ settings.products.SnipcartSettings.api_key }}"></script>
+            <link href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css" type="text/css" rel="stylesheet" />
+        {% endif %}
+
   		{% block extra_js %}{% endblock %}
 	</body>
 </html>
