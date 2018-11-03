@@ -1,6 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.core.models import Page
+
+from django.db import models
+from django.shortcuts import render
+
+
+from wagtail.core.fields import RichTextField
+from wagtail.admin.edit_handlers import FieldPanel
+
 # Create your models here.
 class Membership(models.Model):
     REGULAR = "R"
@@ -15,8 +26,8 @@ class Membership(models.Model):
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    first_name = models.CharField(max_length=25, blank=True, null=True)
-    last_name = models.CharField(max_length=25, blank=True, null=True)
+    first_name = models.CharField(max_length=25)
+    last_name = models.CharField(max_length=25)
     initial = models.CharField(max_length=25, blank=True, null=True)
     email = models.EmailField(blank=True,null=True)
     title = models.CharField(max_length=25, blank=True, null=True)
@@ -40,3 +51,52 @@ class Membership(models.Model):
     notes = models.TextField(blank=True, null=True)
 
 
+    def save(self, *args, **kwargs):
+        if not self.user:
+            if self.email:
+                obj, created = User.objects.get_or_create(
+                    email=self.email,
+                )
+                if created:
+                    obj.first_name = self.first_name
+                    obj.last_name = self.last_name
+                    obj.username = "{} {}".format(self.first_name, self.last_name)
+                    obj.save()
+                self.user = obj
+
+        super(Membership, self).save(*args, **kwargs)
+
+class MembershipRegistrationPage(Page):
+    intro = RichTextField(blank=True)
+    thankyou_page_title = models.CharField(
+        max_length=255, help_text="Title text to use for the 'thank you' page")
+    thank_you_text = RichTextField(blank=True, help_text="Text for the user to see on registration confirmation")
+
+    # Note that there's nothing here for specifying the actual form fields -
+    # those are still defined in forms.py. There's no benefit to making these
+    # editable within the Wagtail admin, since you'd need to make changes to
+    # the code to make them work anyway.
+
+    content_panels = Page.content_panels + [
+        FieldPanel('intro', classname="full"),
+        FieldPanel('thankyou_page_title'),
+        FieldPanel('thank_you_text'),
+    ]
+    def serve(self, request):
+        from membership.forms import MembershipForm
+
+        if request.method == 'POST':
+            form = MembershipForm(request.POST)
+            if form.is_valid():
+                registration = form.save()
+                return render(request, 'membership/registration-confirmation.html', {
+                    'page': self,
+                    'registration': registration,
+                })
+        else:
+            form = MembershipForm()
+
+        return render(request, 'membership/membership_registration.html', {
+            'page': self,
+            'form': form,
+        })
