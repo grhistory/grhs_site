@@ -131,12 +131,20 @@ hr {border-color: $light-gray;}
         a:hover {color: $white;}
         li {font-size: 13px;}
         li a:hover{background-color:$secondary;}
-        li.menu-text{
+        li.menu-text{ // this is the logo & site name
           font-size: 18px;
-          color: $white;
-          max-width: 14em;
-          text-transform: uppercase;
+          font-family: $header-font-family;
           a:hover{background: transparent;}
+          a {
+            display: flex;
+            align-items: center;
+            line-height: 1.5;
+            color: $yellow-dark;
+            img {
+              margin-right: 10px;
+              flex-shrink: 0;
+            }
+          }
         }
         .menu li:not(.menu-text) a {padding: 1rem;}
         .menu .is-active > a {
