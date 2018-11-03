@@ -68,7 +68,7 @@ class Membership(models.Model):
 
         super(Membership, self).save(*args, **kwargs)
 
-class MembershipApplicationPage(Page):
+class MembershipApplication(Page):
     intro = RichTextField(blank=True)
     thankyou_page_title = models.CharField(
         max_length=255, help_text="Title text to use for the 'thank you' page")
