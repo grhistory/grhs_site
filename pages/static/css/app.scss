@@ -79,7 +79,6 @@ $static: static;
 
 $body-font-color: $emperor;
 
-body {background: $white;}
 .grid-container {max-width: 70rem;}
 .pad {padding: 20px 0;}
 a {color: $primary;}
@@ -215,7 +214,14 @@ hr {border-color: $light-gray;}
 
 .list-style {li{list-style: none;}}
 
-#content {padding-top: 25px; padding-bottom: 25px; min-height: 100vh;}
+#content {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  min-height: 100vh;
+  h1 {
+    color: nth($colors-dark, random(length($colors-dark)));
+  }
+}
 
 .card {
   box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);

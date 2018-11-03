@@ -75,6 +75,14 @@ $green-dark: #339863;
 $green-light: #6ac07a;
 $gray-dark: #373d4a;
 $gray-light: #727d83;
+$cream: #FFFDF3;
+
+$colors-dark: (
+  $blue-dark,
+  $yellow-dark,
+  $red-dark,
+  $green-dark,
+);
 
 
 // 1. Global
@@ -95,8 +103,8 @@ $medium-gray: $gray-light;
 $dark-gray: $gray-dark;
 $black: #0a0a0a;
 $white: #fefefe;
-$body-background: $white;
-$body-font-color: $black;
+$body-background: $cream;
+$body-font-color: $gray-dark;
 $body-font-family: 'IBM Plex Sans', Arial, sans-serif;
 $body-antialiased: true;
 $global-margin: 1rem;
@@ -341,7 +349,7 @@ $callout-link-tint: 30%;
 // 14. Card
 // --------
 
-$card-background: $white;
+$card-background: $body-background;
 $card-font-color: $body-font-color;
 $card-divider-background: $light-gray;
 $card-border: 1px solid $light-gray;
