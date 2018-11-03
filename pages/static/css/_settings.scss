@@ -62,6 +62,21 @@
 
 @import 'node_modules/foundation-sites/scss/util/util';
 
+
+// GR History color palette:
+
+$blue-dark: #1d2a57;
+$blue-light: #1e4497;
+$yellow-dark: #e49f24;
+$yellow-light: #ffcb4e;
+$red-dark: #ee4023;
+$red-light: #f2704a;
+$green-dark: #339863;
+$green-light: #6ac07a;
+$gray-dark: #373d4a;
+$gray-light: #727d83;
+
+
 // 1. Global
 // ---------
 
@@ -69,20 +84,20 @@ $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #3E50B4,
-  secondary: #FF3F80,
+  primary: $blue-dark,
+  secondary: $yellow-dark,
   success: #3adb76,
   warning: #ffae00,
   alert: #cc4b37,
 );
 $light-gray: #e6e6e6;
-$medium-gray: #cacaca;
-$dark-gray: #8a8a8a;
+$medium-gray: $gray-light;
+$dark-gray: $gray-dark;
 $black: #0a0a0a;
 $white: #fefefe;
 $body-background: $white;
 $body-font-color: $black;
-$body-font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+$body-font-family: 'IBM Plex Sans', Arial, sans-serif;
 $body-antialiased: true;
 $global-margin: 1rem;
 $global-padding: 1rem;
@@ -130,7 +145,7 @@ $block-grid-max: 8;
 // 4. Base Typography
 // ------------------
 
-$header-font-family: $body-font-family;
+$header-font-family: 'Eczar', Arial, sans-serif;;
 $header-font-weight: $global-weight-normal;
 $header-font-style: normal;
 $font-family-monospace: Consolas, 'Liberation Mono', Courier, monospace;
@@ -397,7 +412,7 @@ $dropdownmenu-padding: $global-menu-padding;
 $dropdownmenu-nested-margin: 0;
 $dropdownmenu-submenu-padding: $dropdownmenu-padding;
 $dropdownmenu-border: 1px solid $medium-gray;
-$dropdown-menu-item-color-active: get-color(primary);
+$dropdown-menu-item-color-active: $yellow-light;
 $dropdown-menu-item-background-active: transparent;
 
 // 19. Flexbox Utilities
