@@ -45,26 +45,6 @@
     	{% get_site_root as site_root %}
     	{% top_menu parent=site_root calling_page=self %}
 
-        {% if settings.products.SnipcartSettings.api_key %}
-        <header class="navbar">
-            <section class="navbar-section">
-                <a href="/" class="navbar-brand mr-2">
-                    Products
-                </a>
-            </section>
-
-            <!-- Snipcart summary and View cart button -->
-            <section class="navbar-section snipcart-summary">
-                <div class="input-group input-line">
-                    <a href="" class="btn btn-primary snipcart-checkout">
-                        <i class="icon icon-apps"></i>
-                        View cart (<span class="snipcart-total-items">0</span>)
-                    </a>
-                </div>
-            </section>
-        </header>
-        {% endif %}
-
     	<div class="off-canvas-content" data-off-canvas-content>
 
       	{% block breadcrumbs %}
