@@ -3,105 +3,131 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  	<head>
-    	<meta charset="utf-8" />
-    	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    	<title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
-    	<meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}">
-    	<meta name="viewport" content="width=device-width, initial-scale=1" />
-    	<link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}"/>
-    	{% block canonical_url %}{% endblock %}
-	
-		{% block cdn_css %}
-			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" />
-			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.min.css" />
-			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/2.0.3/motion-ui.min.css" />
-		{% endblock %}
-	
-		{% compress css %}
-			<link rel="stylesheet" type="text/x-scss" href="{% static 'css/app.scss' %}">
-		{% endcompress %}
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
+        <meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}"/>
+        {% block canonical_url %}{% endblock %}
 
-    	{% block extra_css %}{% endblock %}
+        {% block cdn_css %}
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.min.css" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/2.0.3/motion-ui.min.css" />
+        {% endblock %}
 
-    	{% block facebook_og %}
-    		{% include "utils/includes/facebook_opengraph.html" %}
-    	{% endblock %}
+        {% compress css %}
+            <link rel="stylesheet" type="text/x-scss" href="{% static 'css/app.scss' %}">
+        {% endcompress %}
 
-    	{% block twitter_og %}
-    		{% include "utils/includes/twitter_cards.html" %}
-    	{% endblock %}
+        {% block extra_css %}{% endblock %}
 
-		{% block google_analytics %}
-    		{% include "utils/includes/google_analytics.html" %}
-    	{% endblock %}
-	</head>
+        {% block facebook_og %}
+            {% include "utils/includes/facebook_opengraph.html" %}
+        {% endblock %}
 
-  	<body class="{% block body_class %}{% endblock %}">
-    	{% wagtailuserbar %}
+        {% block twitter_og %}
+            {% include "utils/includes/twitter_cards.html" %}
+        {% endblock %}
 
-    	{% get_site_root as site_root %}
-    	{% top_menu parent=site_root calling_page=self %}
+        {% block google_analytics %}
+            {% include "utils/includes/google_analytics.html" %}
+        {% endblock %}
+    </head>
 
-    	<div class="off-canvas-content" data-off-canvas-content>
+    <body class="{% block body_class %}{% endblock %}">
+        {% wagtailuserbar %}
 
-      	{% block breadcrumbs %}
-      		{% breadcrumbs %}
-      	{% endblock %}
+        {% get_site_root as site_root %}
+        {% top_menu parent=site_root calling_page=self %}
 
-      	{% block content %}{% endblock %}
+        <div class="off-canvas-content" data-off-canvas-content>
 
-      	<a href="#" class="scrollup"><img src="{% static 'img/top.png' %}"></i></a>
+        {% block breadcrumbs %}
+            {% breadcrumbs %}
+        {% endblock %}
 
-      	<footer class="hide-for-print">
-  	  		<div class="grid-container">
-  	        	<div class="grid-x grid-padding-x align-spaced">
-  	          		<div id="contact-us" class="medium-3 cell">
-  	            		<h5><strong>Get in Contact</strong></h5>
-  	            		{% get_contact_fields as contact %}
-  	            		{% include "contact/includes/contact_card.html" with contact=contact only %}
-  	
-  	            		<br>
-  	
-  	            		<h5><strong>Follow Us</strong></h5>
-  	            		<div class="social">
-  	            			{% include "contact/includes/social.html" %}
-  	            		</div>
-  	          		</div>
-  	
-  	          		<div id="sitemap" class="medium-3 cell hide-for-small-only">
-	            		<h5><strong>Explore Our Site</strong></h5>
-	            		{% site_menu parent=site_root calling_page=self %}
-	          		</div>
-	
-	          		<div class="medium-4 cell text-center hide-for-small-only">
-	            		<a href="https://www.google.com/maps/place/chrisdev/" target="_blank">
-	            			<img src="{% static 'img/map.png' %}" alt="" style="border: 5px solid #fff;" />
-	            		</a>
-	          		</div>
-  	        	</div>
-  	        </div>
-  	  	</footer>
+        <header class="navbar">
+
+            <section class="navbar-section">
+                <a href="/" class="navbar-brand mr-2">
+                    Products
+                </a>
+            </section>
+
+            <!-- Snipcart summary and View cart button -->
+            <section class="navbar-section snipcart-summary">
+                <div class="input-group input-line">
+                    <a href="" class="btn btn-primary snipcart-checkout">
+                        <i class="icon icon-apps"></i>
+                        View cart (<span class="snipcart-total-items">0</span>)
+                    </a>
+                </div>
+            </section>
+
+        </header>
+
+        {% block content %}{% endblock %}
+
+        <a href="#" class="scrollup"><img src="{% static 'img/top.png' %}"></i></a>
+
+        <footer class="hide-for-print">
+            <div class="grid-container">
+                <div class="grid-x grid-padding-x align-spaced">
+                    <div id="contact-us" class="medium-3 cell">
+                        <h5><strong>Get in Contact</strong></h5>
+                        {% get_contact_fields as contact %}
+                        {% include "contact/includes/contact_card.html" with contact=contact only %}
+
+                        <br>
+
+                        <h5><strong>Follow Us</strong></h5>
+                        <div class="social">
+                            {% include "contact/includes/social.html" %}
+                        </div>
+                    </div>
+
+                    <div id="sitemap" class="medium-3 cell hide-for-small-only">
+                        <h5><strong>Explore Our Site</strong></h5>
+                        {% site_menu parent=site_root calling_page=self %}
+                    </div>
+
+                    <div class="medium-4 cell text-center hide-for-small-only">
+                        <a href="https://www.google.com/maps/place/chrisdev/" target="_blank">
+                            <img src="{% static 'img/map.png' %}" alt="" style="border: 5px solid #fff;" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
   </div>
 
-		{% block cdn_js %}
-  			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  			<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.min.js"></script>
-  			<script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/5.1.0/what-input.min.js"></script>
-  		{% endblock %}
-  
-  		{% compress js %}
-  			<script src="{% static 'node_modules/foundation-sites/dist/js/foundation.min.js' %}"></script>
-  			<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
-  		{% endcompress %}
+        {% block cdn_js %}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/5.1.0/what-input.min.js"></script>
+        {% endblock %}
 
-  		{% block site_js %}
-  			<script>
-    			$(document).foundation();
-  			</script>
-  		{% endblock %}
-  
-  		{% block extra_js %}{% endblock %}
-	</body>
+        {% compress js %}
+            <script src="{% static 'node_modules/foundation-sites/dist/js/foundation.min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+        {% endcompress %}
+
+        {% block site_js %}
+            <script>
+                $(document).foundation();
+            </script>
+        {% endblock %}
+
+        {# Snipcart #}
+        {% if settings.products.SnipcartSettings.api_key %}
+            <script src="https://cdn.snipcart.com/scripts/2.0/snipcart.js" id="snipcart" data-api-key="{{ settings.products.SnipcartSettings.api_key }}"></script>
+            <link href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css" type="text/css" rel="stylesheet" />
+        {% endif %}
+
+        {% block extra_js %}{% endblock %}
+    </body>
 </html>
