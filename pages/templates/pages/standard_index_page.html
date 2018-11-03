@@ -3,18 +3,19 @@
 
 {% block breadcrumbs %}{% endblock %}
 
+{% block header %}
+  {% if self.feed_image %}
+  {% else %}
+      {{ self.title }}
+  {% endif %}
+{% endblock %}
+
 {% block content %}
 
   {% include "pages/includes/feed_image_title.html" %}
 
   <div id="content" class="grid-container">
     <div class="grid-x grid-padding-x">
-        {% if self.feed_image %}
-        {% else %}
-          <div class="cell">
-            <h1>{{ self.title }}</h1>
-          </div>
-        {% endif %}
         <div id="standard_page" class="medium-9 cell">
 
             {% include "pages/includes/intro.html" with intro=self.intro only %}
