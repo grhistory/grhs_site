@@ -14,14 +14,16 @@ from wagtail.admin.edit_handlers import FieldPanel
 
 # Create your models here.
 class Membership(models.Model):
-    REGULAR = "R"
-    STUDENT = "S"
-    LIFETIME = "L"
+    INDIVIDUAL = "I"
+    STUDENT = "St"
+    LEGACY = "L"
     COMPLIMENTARY = "C"
+    SENIOR = "Se"
     MEMBER_TYPES = (
-        (REGULAR, 'Regular'),
-        (STUDENT, 'Student'),
-        (LIFETIME, 'Lifetime'),
+        (INDIVIDUAL, 'Individual'),
+        (SENIOR, 'Senior'),
+        (STUDENT, "Student"),
+        (LEGACY, 'Legacy'),
         (COMPLIMENTARY, "Complimentary")
     )
 
@@ -33,7 +35,7 @@ class Membership(models.Model):
     title = models.CharField(max_length=25, blank=True, null=True)
     start_date = models.DateTimeField(blank=True, null=True)
     end_date = models.DateTimeField(blank=True, null=True)
-    member_type = models.CharField(max_length=25, choices=MEMBER_TYPES, default=REGULAR)
+    member_type = models.CharField(max_length=25, choices=MEMBER_TYPES, default=INDIVIDUAL)
     agency = models.CharField(max_length=124, blank=True, null=True)
     address1 = models.CharField(max_length=124)
     address2 = models.CharField(max_length=124, blank=True, null=True)
