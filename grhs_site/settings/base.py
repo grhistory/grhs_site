@@ -58,6 +58,7 @@ INSTALLED_APPS = (
     'foundation_formtags',
     'wagtail_feeds',
 
+    'board',
     'blog',
     'contact',
     'documents_gallery',
