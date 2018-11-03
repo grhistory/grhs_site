@@ -11,7 +11,7 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1" />
     	<link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}"/>
     	{% block canonical_url %}{% endblock %}
-	
+
 		{% block cdn_css %}
 			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" />
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.min.css" />
@@ -19,7 +19,7 @@
 
       <link href="https://fonts.googleapis.com/css?family=Eczar|IBM+Plex+Sans" rel="stylesheet">
 		{% endblock %}
-	
+
 		{% compress css %}
 			<link rel="stylesheet" type="text/x-scss" href="{% static 'css/app.scss' %}">
 		{% endcompress %}
@@ -45,6 +45,26 @@
     	{% get_site_root as site_root %}
     	{% top_menu parent=site_root calling_page=self %}
 
+        {% if settings.products.SnipcartSettings.api_key %}
+        <header class="navbar">
+            <section class="navbar-section">
+                <a href="/" class="navbar-brand mr-2">
+                    Products
+                </a>
+            </section>
+
+            <!-- Snipcart summary and View cart button -->
+            <section class="navbar-section snipcart-summary">
+                <div class="input-group input-line">
+                    <a href="" class="btn btn-primary snipcart-checkout">
+                        <i class="icon icon-apps"></i>
+                        View cart (<span class="snipcart-total-items">0</span>)
+                    </a>
+                </div>
+            </section>
+        </header>
+        {% endif %}
+
     	<div class="off-canvas-content" data-off-canvas-content>
 
       	{% block breadcrumbs %}
@@ -63,7 +83,7 @@
   	            		{% get_contact_fields as contact %}
   	            		{% include "contact/includes/contact_card.html" with contact=contact only %}
   	          		</div>
-  	
+
   	          		<div id="sitemap" class="medium-3 cell hide-for-small-only">
 	            		  <h5><strong>Show Your Support</strong></h5>
                     <div>
@@ -76,7 +96,7 @@
                       <input class="button secondary" type="submit" value="Search">
                     </form>
 	          		  </div>
-	
+
 	          		<div class="medium-4 cell text-center">
   	            		<h5><strong>Follow Us</strong></h5>
   	            		<div class="social">
@@ -94,7 +114,7 @@
   			<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.min.js"></script>
   			<script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/5.1.0/what-input.min.js"></script>
   		{% endblock %}
-  
+
   		{% compress js %}
   			<script src="{% static 'node_modules/foundation-sites/dist/js/foundation.min.js' %}"></script>
   			<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
@@ -105,7 +125,13 @@
     			$(document).foundation();
   			</script>
   		{% endblock %}
-  
+
+        {# Snipcart #}
+        {% if settings.products.SnipcartSettings.api_key %}
+            <script src="https://cdn.snipcart.com/scripts/2.0/snipcart.js" id="snipcart" data-api-key="{{ settings.products.SnipcartSettings.api_key }}"></script>
+            <link href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css" type="text/css" rel="stylesheet" />
+        {% endif %}
+
   		{% block extra_js %}{% endblock %}
 	</body>
 </html>
