@@ -1,6 +1,7 @@
 {% extends "events/event_base.html" %}
 {% load static  wagtailcore_tags wagtailimages_tags %}
 {% block cdn_css %}
+{{ block.super }}
   <link rel="stylesheet" href="{% static 'css/fullcalendar.min.css' %}" type="text/css" />
   <style>
 .fc-day-grid-event > .fc-content {
