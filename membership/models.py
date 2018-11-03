@@ -6,7 +6,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.core.models import Page
 
 from django.db import models
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 from wagtail.core.fields import RichTextField
@@ -89,10 +89,7 @@ class MembershipRegistrationPage(Page):
             form = MembershipForm(request.POST)
             if form.is_valid():
                 registration = form.save()
-                return render(request, 'membership/registration-confirmation.html', {
-                    'page': self,
-                    'registration': registration,
-                })
+                return redirect('/payment/membership/{}'.format(registration.id))
         else:
             form = MembershipForm()
 

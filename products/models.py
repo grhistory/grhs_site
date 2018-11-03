@@ -145,3 +145,11 @@ class SnipcartSettings(BaseSetting):
         max_length=255,
         help_text='Enter your Snap Cart Public API Key'
     )
+
+@register_setting
+class PaypalSettings(BaseSetting):
+    identity_token = models.CharField(
+        max_length=255,
+        help_text='Enter your Paypal payment data transfer identity token'
+    )
+
