@@ -16,7 +16,8 @@
 			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" />
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.min.css" />
 			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/2.0.3/motion-ui.min.css" />
-      <link href="https://fonts.googleapis.com/css?family=Eczar" rel="stylesheet">
+
+      <link href="https://fonts.googleapis.com/css?family=Eczar|IBM+Plex+Sans" rel="stylesheet">
 		{% endblock %}
 	
 		{% compress css %}
@@ -61,24 +62,26 @@
   	            		<h5><strong>Get in Contact</strong></h5>
   	            		{% get_contact_fields as contact %}
   	            		{% include "contact/includes/contact_card.html" with contact=contact only %}
+  	          		</div>
   	
-  	            		<br>
-  	
+  	          		<div id="sitemap" class="medium-3 cell hide-for-small-only">
+	            		  <h5><strong>Show Your Support</strong></h5>
+                    <div>
+                        <a href="/donate" class="button secondary">Donate</a>
+                        <a href="/join" class="button secondary">Join</a>
+                    </div>
+	            		  <h5><strong>Search</strong></h5>
+                    <form action="/search/">
+                      <input type=search name="q" value="">
+                      <input class="button secondary" type="submit" value="Search">
+                    </form>
+	          		  </div>
+	
+	          		<div class="medium-4 cell text-center">
   	            		<h5><strong>Follow Us</strong></h5>
   	            		<div class="social">
   	            			{% include "contact/includes/social.html" %}
   	            		</div>
-  	          		</div>
-  	
-  	          		<div id="sitemap" class="medium-3 cell hide-for-small-only">
-	            		<h5><strong>Explore Our Site</strong></h5>
-	            		{% site_menu parent=site_root calling_page=self %}
-	          		</div>
-	
-	          		<div class="medium-4 cell text-center hide-for-small-only">
-	            		<a href="https://www.google.com/maps/place/chrisdev/" target="_blank">
-	            			<img src="{% static 'img/map.png' %}" alt="" style="border: 5px solid #fff;" />
-	            		</a>
 	          		</div>
   	        	</div>
   	        </div>

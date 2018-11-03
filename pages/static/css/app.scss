@@ -106,7 +106,13 @@ hr {border-color: $light-gray;}
         a:hover {color: $white;}
         li {font-size: 13px;}
         li a:hover{background-color:$secondary;}
-        li.menu-text{font-size: 18px; color: $white;a:hover{background: transparent;}}
+        li.menu-text{
+          font-size: 18px;
+          color: $white;
+          max-width: 14em;
+          text-transform: uppercase;
+          a:hover{background: transparent;}
+        }
         .menu li:not(.menu-text) a {padding: 1rem;}
         .menu .is-active > a {
             background: $secondary;
@@ -114,6 +120,14 @@ hr {border-color: $light-gray;}
         }
         ul, .dropdown.menu a {background: $primary; border: 0px;}
         .dropdown.menu .submenu {border-top: 3px solid $secondary;}
+        .top-bar-right {
+          ul, .dropdown.menu a {
+            color: $yellow-dark;
+            &:hover {
+              color: $yellow-light;
+            }
+          }
+        }
         .dropdown.menu .is-dropdown-submenu-parent a::after {border-color: transparent $white transparent transparent; border-style: solid;}
         .dropdown.menu.medium-horizontal li.is-dropdown-submenu-parent a {padding: 1rem;}
         .dropdown.menu.medium-horizontal li.is-dropdown-submenu-parent a::after {border: 0;}
@@ -371,7 +385,7 @@ hr {border-color: $light-gray;}
 
 
 footer {
-  background-color: red;
+  background-color: get-color(primary);
   color: $white;
   padding: 20px 0 0;
 
