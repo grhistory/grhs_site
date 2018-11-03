@@ -1,0 +1,11 @@
+{% load wagtailimages_tags %}
+
+<div class="board-members">
+  {% for item in self %}
+    <div class="board-member">
+      <h2>{{ item.name }}</h2>
+      <h5>{{ item.role }}</h5>
+      <h5>{{ item.joined_date }}</h5>
+    </div>
+  {% endfor %}
+</div>
