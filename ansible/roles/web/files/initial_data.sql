@@ -3359,7 +3359,7 @@ COPY public.contact_contactformfield (id, sort_order, label, field_type, require
 --
 
 COPY public.contact_contactpage (page_ptr_id, to_address, from_address, subject, name_organization, telephone, email, address_1, address_2, city, country, post_code, intro, thank_you_text, telephone_2, email_2, feed_image_id) FROM stdin;
-24				Grand Rapids Historical Society	(616) 988-5497 GRPL		  c/o Grand Rapids Public Library		111 Library St NE FL 4	 Grand Rapids MI 49503-3268	tunapuna	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam et mauris eu nibh elementum blandit varius sit amet enim. Quisque massa leo, ornare in mattis vitae, vehicula vestibulum diam. Phasellus id leo placerat, vehicula diam nec, interdum mi.	<p>Thank you for submitting.</p>			\N
+24				Grand Rapids Historical Society	(616) 988-5497 GRPL	grhs.local@gmail.com	c/o Grand Rapids Public Library	111 Library St NE FL 4	Grand Rapids MI	  	49503-3268	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam et mauris eu nibh elementum blandit varius sit amet enim. Quisque massa leo, ornare in mattis vitae, vehicula vestibulum diam. Phasellus id leo placerat, vehicula diam nec, interdum mi.	<p>Thank you for submitting.</p>			\N
 \.
 
 

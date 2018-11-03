@@ -10,11 +10,10 @@
 	{% endif %}
 	
 	{% if contact.city %}
-		<li class="p-locallity locality">{{ contact.city }}</li>
-	{% endif %}
-	
-	{% if contact.state %}
-		<li class="p-region region">{{ contact.city }}</li>
+		<li class="p-locallity locality">{{ contact.city }}
+    {% if contact.post_code %}
+      {{ contact.post_code }}
+    {% endif %}</li>
 	{% endif %}
 	
 	{% if contact.country %}
@@ -23,7 +22,7 @@
 	
 	{% if contact.telephone %}
 		<li class="p-tel tel">
-		    <a href="tel:{{ contact.telephone }}"><i class="fa fa-phone"></i>&nbsp;{{ contact.telephone }}</a>
+		    <i class="fa fa-phone"></i>&nbsp;{{ contact.telephone }}
 		</li>
 	{% endif %}
 	
