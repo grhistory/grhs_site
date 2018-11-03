@@ -10,6 +10,7 @@ from wagtail.images.views.serve import ServeView
 from wagtail.contrib.sitemaps.views import sitemap
 
 from search import views as search_views
+from products import views as paypal_views
 
 from wagtail_feeds.feeds import (
     BasicFeed, BasicJsonFeed, ExtendedFeed, ExtendedJsonFeed
@@ -22,6 +23,8 @@ urlpatterns = [
     url(r'^django-admin/', (admin.site.urls)),
 
     url(r'^admin/', include(wagtailadmin_urls)),
+    url(r'^payment', paypal_views.membership),
+    url(r'^paypal', paypal_views.paypal),
     url(r'^search/$', search_views.search, name='search'),
     url(r'^documents/', include(wagtaildocs_urls)),
 
