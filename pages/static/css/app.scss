@@ -215,6 +215,8 @@ hr {border-color: $light-gray;}
 	background: url('/#{$static}/img/bg.jpg') 100% no-repeat;
 	background-attachment: fixed;
 	background-size: cover;
+  padding-top: 0;
+  padding-bottom: 0;
 	
 	@include breakpoint(small only) {
 		padding-top: 10px;
