@@ -1,9 +1,13 @@
 from django import forms
-from django.forms import forms, ModelForm
+from django.forms import  ModelForm
 from .models import Membership
 
 class MembershipForm(ModelForm):
-
+    MEMBER_STATUS = (
+        ("new", "New"),
+        ("renew", "Renew"),
+    )
+    membership_status = forms.ChoiceField(choices=MEMBER_STATUS)
     class Meta:
         model = Membership
         fields = [
@@ -18,5 +22,6 @@ class MembershipForm(ModelForm):
             'email',
             'telephone',
             'member_type',
+            'membership_status'
 
         ]

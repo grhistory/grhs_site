@@ -1,16 +1,119 @@
 {% extends "membership/membership_base.html" %}
 {% load wagtailcore_tags foundation_formtags %}
 {% block contact_content %}
-	<div class="card" style="border-radius: 3px;">
-		<div class="card-section form-panel">
-                {{ page.intro | richtext }}
-   			<form class="registration-form" action="." method="POST">
-     			{% csrf_token %}
-     			{{ form|as_foundation }}
-     			<input class="button radius float-right" name="Send" type="submit" value="Send" style="border-radius: 5px;">
-     			<br>
-     			<br>
-   			</form>
- 		</div>
+<div class="card" style="border-radius: 3px;">
+	<div class="card-section ">
+		{{ page.intro | richtext }}
+		<form class="registration-form" action="." method="POST">
+			{% csrf_token %}
+			<div class="row">
+				<div class="medium-6 columns">
+					<label for="id_first_name" class="">
+						First name
+						<span class="required">*</span>
+					</label>
+					<input type="text" name="first_name" required="" id="id_first_name" maxlength="25">
+				</div>
+				<div class="medium-6 columns">
+
+					<label for="id_last_name" class="">
+						Last name
+						<span class="required">*</span>
+					</label>
+					<input type="text" name="last_name" required="" id="id_last_name" maxlength="25">
+				</div>
+			</div>
+			<div class="row">
+				<div class="medium-9 columns">
+					<label for="id_address1" class="">
+						Address1
+						<span class="required">*</span>
+					</label>
+					<input type="text" name="address1" required="" id="id_address1" maxlength="124">
+					<label for="id_address2" class="">
+						Address2
+					</label>
+					<input type="text" name="address2" id="id_address2" maxlength="124">
+				</div>
+			</div>
+			<div class="row">
+				<div class="medium-4 columns">
+					<label for="id_city" class="">
+						City
+						<span class="required">*</span>
+					</label>
+					<input type="text" name="city" required="" id="id_city" maxlength="124">
+				</div>
+				<div class="medium-2 columns">
+					<label for="id_state" class="">
+						State
+						<span class="required">*</span>
+					</label>
+
+					<input type="text" name="state" required="" id="id_state" maxlength="25">
+				</div>
+
+
+				<div class="medium-3 columns">
+					<label for="id_country" class="">
+						Country
+						<span class="required">*</span>
+					</label>
+					<input type="text" name="country" required="" id="id_country" maxlength="25">
+				</div>
+				<div class="medium-3 columns">
+
+
+					<label for="id_zip_code" class="">
+						Zip code
+						<span class="required">*</span>
+					</label>
+					<input type="text" name="zip_code" required="" id="id_zip_code" maxlength="12">
+				</div>
+			</div>
+			<div class="row">
+				<div class="medium-6 columns">
+					<label for="id_email" class="">
+						Email
+					</label>
+					<input type="email" name="email" id="id_email" maxlength="254">
+				</div>
+				<div class="medium-6 columns">
+					<label for="id_telephone" class="">
+						Telephone
+					</label>
+					<input type="text" name="telephone" id="id_telephone" maxlength="25">
+				</div>
+			</div>
+			<div class="row">
+				<div class="medium-6 columns">
+					<label for="id_member_type" class="">
+						Member type
+						<span class="required">*</span>
+					</label>
+					<select name="member_type" id="id_member_type">
+						<option value="I" selected="">Individual $30.00 per year</option>
+						<option value="SE">Senior $20.00 per year</option>
+						<option value="St">Student $20.00 per year</option>
+						<option value="L">Legacy $400.00 one time fee</option>
+					</select>
+				</div>
+				<div class="medium-6 columns">
+					<label for="id_membership_status" class="">
+						Membership status
+						<span class="required">*</span>
+					</label>
+					<select name="membership_status" id="id_membership_status">
+						<option value="new">New</option>
+						<option value="renew">Renew</option>
+					</select>
+				</div>
+			</div>
+			<input class="button radius float-right" name="Send" type="submit" value="Send" style="border-radius: 5px;">
+			<br>
+			<br>
+		</form>
+
 	</div>
+</div>
 {% endblock %}
