@@ -68,7 +68,7 @@ class Membership(models.Model):
 
         super(Membership, self).save(*args, **kwargs)
 
-class MembershipRegistrationPage(Page):
+class MembershipApplicationPage(Page):
     intro = RichTextField(blank=True)
     thankyou_page_title = models.CharField(
         max_length=255, help_text="Title text to use for the 'thank you' page")
@@ -98,7 +98,7 @@ class MembershipRegistrationPage(Page):
         else:
             form = MembershipForm()
 
-        return render(request, 'membership/membership_registration.html', {
+        return render(request, 'membership/membership_application.html', {
             'page': self,
             'form': form,
         })
