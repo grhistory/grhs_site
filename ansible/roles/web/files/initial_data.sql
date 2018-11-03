@@ -3359,7 +3359,7 @@ COPY public.contact_contactformfield (id, sort_order, label, field_type, require
 --
 
 COPY public.contact_contactpage (page_ptr_id, to_address, from_address, subject, name_organization, telephone, email, address_1, address_2, city, country, post_code, intro, thank_you_text, telephone_2, email_2, feed_image_id) FROM stdin;
-24				ChrisDev	+1 868-773-4644		A3 St Benedicts Gardens,		Tunapuna,	Trinidad & Tobago	tunapuna	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam et mauris eu nibh elementum blandit varius sit amet enim. Quisque massa leo, ornare in mattis vitae, vehicula vestibulum diam. Phasellus id leo placerat, vehicula diam nec, interdum mi.	<p>Thank you for submitting.</p>			\N
+24				Grand Rapids Historical Society	(616) 988-5497 GRPL		  c/o Grand Rapids Public Library		111 Library St NE FL 4	 Grand Rapids MI 49503-3268	tunapuna	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam et mauris eu nibh elementum blandit varius sit amet enim. Quisque massa leo, ornare in mattis vitae, vehicula vestibulum diam. Phasellus id leo placerat, vehicula diam nec, interdum mi.	<p>Thank you for submitting.</p>			\N
 \.
 
 
@@ -3911,7 +3911,7 @@ COPY public.pages_homepagerelatedlink (id, sort_order, link_external, title, lin
 --
 
 COPY public.pages_sitebranding (id, site_name, logo_id, site_id) FROM stdin;
-1	ChrisDev Wagtail Project	12	2
+1	Grand Rapids Historical Society	12	2
 \.
 
 
@@ -3920,7 +3920,7 @@ COPY public.pages_sitebranding (id, site_name, logo_id, site_id) FROM stdin;
 --
 
 COPY public.pages_socialmediasettings (id, facebook, instagram, youtube, linkedin, github, facebook_appid, site_id, twitter) FROM stdin;
-1	https://www.facebook.com/bot.chrisdev?fref=ts	\N	\N	\N	https://www.github.com/chrisdev	\N	2	https://www.twitter.com/realchrisdev
+1	https://www.facebook.com/GrandRapidsHistoricalSociety/	\N	\N	\N	\N	\N	2	https://twitter.com/GR_History
 \.
 
 

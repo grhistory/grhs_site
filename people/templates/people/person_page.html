@@ -2,7 +2,6 @@
 {% load wagtailimages_tags %}
 
 {% block people_content %}
-    {% include "utils/includes/social_share.html" %}
 
     {% if self.image %}
         {% image self.image width-180 as photo %}

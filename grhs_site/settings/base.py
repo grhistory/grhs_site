@@ -54,7 +54,7 @@ INSTALLED_APPS = (
     'compressor',
     'taggit',
     'modelcluster',
-    
+
     'foundation_formtags',
     'wagtail_feeds',
 
@@ -69,7 +69,8 @@ INSTALLED_APPS = (
     'products',
     'search',
     'utils',
-    
+    'membership',
+
     'wagtail.contrib.routable_page',
     'wagtail.contrib.sitemaps',
     'wagtail.contrib.search_promotions',
@@ -88,7 +89,7 @@ INSTALLED_APPS = (
     'wagtail.core',
     'wagtailfontawesome',
     'wagtailmarkdown',
-    
+
 )
 
 MIDDLEWARE = (
@@ -101,7 +102,7 @@ MIDDLEWARE = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'wagtail.core.middleware.SiteMiddleware',
-    'wagtail.contrib.redirects.middleware.RedirectMiddleware',   
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 )
 
 
