@@ -5,7 +5,7 @@ from .models import Membership
 class MembershipForm(ModelForm):
     MEMBER_STATUS = (
         ("new", "New"),
-        ("renew", "Renew"),
+        ("renew", "Renewal"),
     )
     membership_status = forms.ChoiceField(choices=MEMBER_STATUS)
     class Meta:
