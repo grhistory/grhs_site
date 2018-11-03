@@ -79,7 +79,6 @@ $static: static;
 
 $body-font-color: $emperor;
 
-body {background: $white;}
 .grid-container {max-width: 70rem;}
 .pad {padding: 20px 0;}
 a {color: $primary;}
@@ -223,7 +222,34 @@ hr {border-color: $light-gray;}
 
 .list-style {li{list-style: none;}}
 
-#content {padding-top: 25px; padding-bottom: 25px; min-height: 100vh;}
+header {
+  margin-top: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  @include breakpoint(medium) {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin-bottom: 10px;
+    background-color: $gray-light;  // FIXME an image
+  }
+  @include breakpoint(large) {
+    padding-top: 45px;
+    padding-bottom: 45px;
+    margin-bottom: 20px;
+  }
+  h1 {
+    color: nth($colors-dark, random(length($colors-dark)));
+  }
+}
+header + #content {
+  padding-top: 0;
+}
+#content {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  min-height: 100vh;
+}
 
 .card {
   box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
