@@ -4,37 +4,65 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block header %}
-  {% if self.feed_image %}
-  {% else %}
-      {{ self.title }}
-  {% endif %}
+{% if self.feed_image %}
+{% else %}
+{{ self.title }}
+{% endif %}
 {% endblock %}
 
 {% block content %}
 
-  {% include "pages/includes/feed_image_title.html" %}
+{% include "pages/includes/feed_image_title.html" %}
 
-  <div id="content" class="grid-container">
-    <div class="grid-x grid-padding-x">
-        <div id="standard_page" class="{% if self.sidebar_text %}medium-9{% else %}medium-12{% endif %} cell">
-          {% include "pages/includes/intro.html" with intro=self.intro only %}
+<div id="content" class="grid-container">
+  <div class="grid-x grid-padding-x">
+    <div id="standard_page" class="{% if self.sidebar_text %}medium-9{% else %}medium-12{% endif %} cell">
+      {% include "pages/includes/intro.html" with intro=self.intro only %}
 
-          {% include "pages/includes/orbit_carousel.html" with image_items=self.image_items.all only %}
+      {% if self.midpage_subtitle %}
+    </div>
+    {% if self.sidebar_text %}
+    <div id="sidebar" class="hide-for-print hide-for-small-only medium-3 cell">
+      <div class="card">
 
-          {% include "pages/includes/body.html" with body=self.body only %}
+        <div class="card-section" style="padding: 12px;">
+          {{ self.sidebar_text|richtext }}
+
         </div>
-        {% if self.sidebar_text %}
-        <div id="sidebar" class="hide-for-print hide-for-small-only medium-3 cell">
-          <div class="card">
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+<!-- closing content from base -->
+</div>
 
-            <div class="card-section" style="padding: 12px;">
-              {{ self.sidebar_text|richtext }}
+<header class="num-{% random_int 1 12 %}">{# corresponds to static/img/sections-bgs/* choices #}
+  <h1 class="grid-container">{{ self.midpage_subtitle }}</h1>
+</header>
 
-            </div>
+
+<div id="content" class="grid-container">
+  <div class="grid-x grid-padding-x">
+    <div id="standard_page" class="{% if self.sidebar_text %}medium-9{% else %}medium-12{% endif %} cell">
+      {% endif %}
+
+      {% include "pages/includes/body.html" with body=self.body only %}
+    </div>
+    {% if not self.midpage_subtitle %}
+      {% if self.sidebar_text %}
+      <div id="sidebar" class="hide-for-print hide-for-small-only medium-3 cell">
+        <div class="card">
+
+          <div class="card-section" style="padding: 12px;">
+            {{ self.sidebar_text|richtext }}
+
           </div>
         </div>
-        {% endif %}
-
       </div>
+      {% endif %}
+    {% endif %}
+
   </div>
+</div>
 {% endblock %}

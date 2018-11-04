@@ -237,6 +237,7 @@ class StandardPage(Page):
     ]
     subtitle = models.CharField(max_length=255, blank=True)
     intro = RichTextField(blank=True)
+    midpage_subtitle = models.CharField(max_length=255, blank=True)
     body = StreamField([
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
@@ -254,7 +255,7 @@ class StandardPage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    sidebar_text = RichTextField(blank=True)
+    sidebar_text = RichTextField(blank=True, help_text="only include text/images in here if you want the side bar, otherwise it will render full page")
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
@@ -271,6 +272,7 @@ StandardPage.content_panels = [
     FieldPanel('subtitle', classname="full title"),
     FieldPanel('intro', classname="full"),
     FieldPanel('sidebar_text', classname="sidebar-content"),
+    FieldPanel('midpage_subtitle'),
     StreamFieldPanel('body'),
     FieldPanel('template_string'),
     InlinePanel('carousel_items', label="Carousel items"),
