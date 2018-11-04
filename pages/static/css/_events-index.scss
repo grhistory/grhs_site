@@ -1,0 +1,38 @@
+@import "./settings";
+
+
+
+#events-index {
+  .past-future {
+    float: right;
+  }
+
+  .event-link {
+    text-decoration: none;
+    display: block;
+    border: 1px solid #ddd;
+
+    &:hover {
+      text-decoration: none;
+      border: 1px solid $blue-light;
+      color: $black;
+    }
+  }
+
+  .event {
+    display: flex;
+
+    h4 {
+      color: $blue-light;
+    }
+
+    .event-image {
+      width: 300px;
+      background-position: center;
+    }
+
+    .event-summary {
+      padding: 30px;
+    }
+  }
+}
