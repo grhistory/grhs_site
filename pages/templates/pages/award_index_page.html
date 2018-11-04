@@ -5,11 +5,14 @@
 
 {% block body_class %}template-blogindexpage{% endblock %}
 
+{% block header %}
+  {{ page.title }}
+{% endblock %}
+
 {% block content %}
 <div id="content" class="grid-container">
     <div class="grid-x grid-padding-x">
         <div id="standard_page" class="medium-9 cell">
-          <h1>{{ page.title }}</h1>
           <div class="award-description">{{ page.description|richtext }}</div>
           <a href="{% pageurl most_recent_winner %}"><h3>{{ most_recent_winner.title }} Winner</h3></a>
           <div style="margin: 10px">
