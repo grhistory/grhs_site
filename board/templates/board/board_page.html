@@ -10,8 +10,14 @@
 
 
 {% block content %}
-    <div class="intro">{{ page.description|richtext }}</div>
-
-    {% include_block page.body %}
-
+  <div id="content" class="grid-container">
+    <div class="grid-x grid-padding-x">
+        <div class="intro cell">
+          {{ page.description|richtext }}
+        </div>
+        <div class="cell">
+          {% include_block page.body %}
+        </div>
+      </div>
+  </div>
 {% endblock %}
