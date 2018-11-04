@@ -11,7 +11,7 @@ services:
   app:
     build:
       context: ../app
-      dockerfile: ../devops/Dockerfile
+      dockerfile: ../devops/dockerfiles/app-runner/Dockerfile
     networks:
       - frontend
       - backend

@@ -9,26 +9,14 @@ WORKDIR /opt/app
 
 RUN npm i
 
-FROM python:3.7.1-alpine
+FROM grhistory/app_deps:latest
 
-COPY ./src /opt/app
+COPY ./src/ /opt/app/
 COPY ./config/.env /opt/app/.env
 COPY --from=0 /opt/app/node_modules /opt/app/pages/static/node_modules
 
-WORKDIR /opt/app
-
 RUN addgroup uwsgi && adduser -D -G uwsgi uwsgi
 RUN chown -R uwsgi:uwsgi .
-
-# See https://stackoverflow.com/a/47871121/1324851 for why we need the extra packages
-# jpeg-dev and zlib-dev are needed for Pillow
-# g++ is needed for gcc to compile libsass
-# linux-headers is needed for uWSGI to use linux/limits.h
-RUN apk update && \
-    apk add postgresql-libs && \
-    apk add --virtual .build-deps gcc postgresql-dev jpeg-dev zlib-dev g++ linux-headers && \
-    python3 -m pip install -r requirements.txt --no-cache-dir && \
-    apk --purge del .build-deps
 
 CMD [ "uwsgi", "--socket", "0.0.0.0:8080", \
     "--uid", "uwsgi", \
