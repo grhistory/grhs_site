@@ -48,16 +48,15 @@
 @include foundation-flex-classes;
 // @include foundation-prototype-classes;
 
-
-// Colors
+@import './home_page';
 
 $primary: map-get($foundation-palette, primary);
 $secondary: map-get($foundation-palette, secondary);
+$secondary-foreground: map-get($foundation-palette, secondary);
 $off-white : #F8F8FA;
 $emperor: #777777;
 $dark-metal: #222222;
 $static: static;
-
 
 // Responsive image/video classes
 .rich-text img {
@@ -257,11 +256,7 @@ header + #content {
   transition: box-shadow 0.2s cubic-bezier(0, 0.2, 0.4, 1) 0s;
 }
 
-#carousel {
-  margin-top: 30px;
-}
-
-#intro, #testimonials {
+#testimonials {
   padding: 40px 0 30px;
   background: #5E9CD1;
 
@@ -270,19 +265,6 @@ header + #content {
   h3 {font-weight: 500;line-height: 1;}
 }
 
-#intro {
-	background: url('/#{$static}/img/bg.jpg') 100% no-repeat;
-	background-attachment: fixed;
-	background-size: cover;
-  padding-top: 0;
-  padding-bottom: 0;
-	
-	@include breakpoint(small only) {
-		padding-top: 10px;
-	    background-attachment: unset;
-	    img{max-height: 200px; max-width: 200px;}
-	}
-}
 
 #testimonials, #media {
     padding: 50px 0;
