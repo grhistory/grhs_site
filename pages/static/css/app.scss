@@ -485,3 +485,14 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
 }
+
+
+.home-announcement {
+  background-color: $red-dark;
+  color: $white;
+  h3 {
+    color: $white;
+    padding-top: 10px;
+    margin-bottom: -15px;
+  }
+}

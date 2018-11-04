@@ -3870,7 +3870,7 @@ COPY public.pages_faqspage (page_ptr_id, body) FROM stdin;
 --
 
 COPY public.pages_homepage (page_ptr_id, title_text, body, feed_image_id) FROM stdin;
-3	<h3>Welcome to Wagtail Cookiecutter Foundation</h3>	<p>A cookiecutter template for Wagtail CMS featuring Zurb Foundation front-end framework.</p>	\N
+3			\N
 \.
 
 
