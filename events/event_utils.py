@@ -52,7 +52,7 @@ def export_event(event, format='ical'):
             return string
 
         # Make a uid
-        uid = hashlib.sha1(event.url + str(start_datetime)).hexdigest() \
+        uid = hashlib.sha1(event.url.encode('utf-8') + str(start_datetime).encode('utf-8')).hexdigest() \
             + '@grhs_site'
 
         # Make event

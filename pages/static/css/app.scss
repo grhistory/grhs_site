@@ -9,6 +9,7 @@
 
 @import './home_page';
 @import './contact-page';
+@import './events-index';
 @import './footer';
 
 @include foundation-global-styles;
@@ -483,4 +484,15 @@ select {
   // make dropdowns look better.  Not all browsers support Foundation's `appearance: none`
   -webkit-appearance: none;
   -moz-appearance: none;
+}
+
+
+.home-announcement {
+  background-color: $red-dark;
+  color: $white;
+  h3 {
+    color: $white;
+    padding-top: 10px;
+    margin-bottom: -15px;
+  }
 }
