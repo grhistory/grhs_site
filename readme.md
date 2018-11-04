@@ -36,6 +36,8 @@ A `.env` is used to define configuration variables for the application and for t
 
 To help speeed up the rebuild process on app changes, the app image has been split up into multiple images. Details can be seen within the `./devops/` directory. TODO: Add some scripts for creating supporting image.
 
+Depending in the server setup, the scripts will have to be run under `sudo` in order to access the Docker daemon.
+
 ### Starting the App
 
 Once the `.env` file is set up, and all the supporting images have been created, docker-compose can handle all the rest. Some scripts are available as wrappers around the complexity of app executions.
