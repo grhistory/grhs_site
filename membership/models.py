@@ -19,12 +19,14 @@ class Membership(models.Model):
     LEGACY = "L"
     COMPLIMENTARY = "C"
     SENIOR = "Se"
+    BAXTER = "B"
     MEMBER_TYPES = (
         (INDIVIDUAL, 'Individual'),
         (SENIOR, 'Senior'),
         (STUDENT, "Student"),
         (LEGACY, 'Legacy'),
-        (COMPLIMENTARY, "Complimentary")
+        (COMPLIMENTARY, "Complimentary"),
+        (BAXTER, "Baxter"),
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
