@@ -10,7 +10,7 @@ DEBUG = env.bool('DJANGO_DEBUG', default=True)
 TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 
 INSTALLED_APPS += (
-    'debug_toolbar',
+    #'debug_toolbar',
     'django_extensions',
 )
 
@@ -19,7 +19,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # See: https://github.com/django-debug-toolbar/django-debug-toolbar#installation
 MIDDLEWARE += (
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 SECRET_KEY = env('DJANGO_SECRET_KEY',
