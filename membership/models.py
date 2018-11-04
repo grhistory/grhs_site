@@ -18,7 +18,7 @@ class Membership(models.Model):
     STUDENT = "St"
     LEGACY = "L"
     COMPLIMENTARY = "C"
-    SENIOR = "Se"
+    SENIOR = "SE"
     BAXTER = "B"
     MEMBER_TYPES = (
         (INDIVIDUAL, 'Individual'),
@@ -94,6 +94,7 @@ class MembershipApplication(Page):
             form = MembershipForm(request.POST)
             if form.is_valid():
                 registration = form.save()
+                request.session['registration_id'] = registration.id
                 return redirect('/payment/membership/{}'.format(registration.id))
         else:
             form = MembershipForm()
