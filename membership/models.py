@@ -51,6 +51,7 @@ class Membership(models.Model):
     newsletter = models.BooleanField(default=False)
     create_date = models.DateField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
+    is_active = models.BooleanField(default=True)
 
 
     def save(self, *args, **kwargs):

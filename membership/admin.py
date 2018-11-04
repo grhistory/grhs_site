@@ -8,9 +8,10 @@ from django.http import HttpResponse
 
 class MembershipAdmin(admin.ModelAdmin):
 
-    list_display = ["user", "first_name", "last_name", "email", "get_member_type", "start_date", "end_date"]
+    list_display = ["user", "first_name", "last_name", "email", "get_member_type", "start_date", "end_date", "is_active"]
     search_fields = ['first_name', 'last_name', 'email']
     list_filter = ['member_type', 'start_date', 'end_date']
+    list_editable = ('is_active', )
     actions = ['export_to_csv']
     def get_member_type(self, obj):
         return obj.get_member_type_display()
