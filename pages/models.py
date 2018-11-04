@@ -1,3 +1,5 @@
+from datetime import datetime, date
+
 from django.db import models
 
 from wagtail.core import blocks
@@ -13,6 +15,9 @@ from wagtail.admin.edit_handlers import (
     FieldPanel, MultiFieldPanel, InlinePanel, PageChooserPanel,
     StreamFieldPanel)
 from wagtail.search import index
+
+from blog.models import BlogPage
+from events.models import EventPage
 from utils.models import LinkFields, RelatedLink, CarouselItem
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 
@@ -99,6 +104,16 @@ class HomePage(Page):
 
     class Meta:
         verbose_name = "Homepage"
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        events = EventPage.objects.filter(tags__name='historical-society',
+                                          date_from__gte=date.today()
+                                          ).order_by('date_from')[:3]
+        context['events'] = events
+        news = BlogPage.objects.filter().order_by('-date')[:1]
+        context['news'] = news
+        return context
 
 HomePage.content_panels = [
     FieldPanel('title', classname="full title"),
