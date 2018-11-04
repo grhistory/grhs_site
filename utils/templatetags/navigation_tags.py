@@ -91,7 +91,7 @@ def secondary_menu(context, calling_page=None):
     if calling_page:
         pages = calling_page.get_children().filter(
             live=True,
-            show_in_menus=True
+            #show_in_menus=True
         )
 
         # If no children, get siblings instead

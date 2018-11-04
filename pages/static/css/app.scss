@@ -6,7 +6,9 @@
 @import 'css/building-blocks';
 @import 'css/print';
 @import './buttons';
+
 @import './home_page';
+@import './contact-page';
 @import './footer';
 
 @include foundation-global-styles;
@@ -59,9 +61,6 @@ div.snip-layout {
 $primary: map-get($foundation-palette, primary);
 $secondary: map-get($foundation-palette, secondary);
 $secondary-foreground: map-get($foundation-palette, secondary);
-$off-white : #F8F8FA;
-$emperor: #777777;
-$dark-metal: #222222;
 $static: static;
 
 // Responsive image/video classes
@@ -436,13 +435,6 @@ header + #content {
 #search {
   input[type="text"]{border-top-left-radius: 5px; border-bottom-left-radius: 5px; font-size: 1.2rem;padding-left: 15px;}
   input.button{border-top-right-radius: 5px; border-bottom-right-radius: 5px;color: $white;padding-top: 11px;}
-}
-
-
-.contact-form {
-  [type="text"], [type="password"], [type="date"], [type="datetime"], [type="datetime-local"], [type="month"], [type="week"], [type="email"], [type="number"], [type="search"], [type="tel"], [type="time"], [type="url"], [type="color"], textarea {border-radius: 4px;}
-
-  textarea {max-height: 60px;}
 }
 
 .vcard {

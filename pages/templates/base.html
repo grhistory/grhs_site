@@ -1,4 +1,4 @@
-{% load compress static wagtailuserbar wagtailsettings_tags navigation_tags settings_tags grhs_site_utils %}
+{% load compress static wagtailuserbar wagtailsettings_tags navigation_tags settings_tags grhs_site_utils wagtailcore_tags %}
 {% get_settings %}
 
 <!DOCTYPE html>
@@ -68,8 +68,8 @@
   	          		<div id="sitemap" class="medium-4 cell hide-for-small-only">
 	            		<h5>Show Your Support</h5>
                     <div class="button-row">
-                        <a href="/donate" class="button blue">Donate</a>
-                        <a href="/membership" class="button blue">View Membership</a>
+                        <a href="{% slugurl 'donate' %}" class="button blue">Donate</a>
+                        <a href="{% slugurl 'membership' %}" class="button blue">View Membership</a>
                     </div>
 	            		<h5>Search</h5>
 									<form class="button-row" action="/search/">
