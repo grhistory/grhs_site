@@ -16,24 +16,18 @@
 
   <div id="content" class="grid-container">
     <div class="grid-x grid-padding-x">
-        <div id="standard_page" class="{% if self.sidebar_text %}medium-9{% else %}medium-12{% endif %} cell">
+        <div id="standard_page" class="medium-9 cell">
           {% include "pages/includes/intro.html" with intro=self.intro only %}
 
           {% include "pages/includes/orbit_carousel.html" with image_items=self.image_items.all only %}
 
           {% include "pages/includes/body.html" with body=self.body only %}
         </div>
-        {% if self.sidebar_text %}
         <div id="sidebar" class="hide-for-print hide-for-small-only medium-3 cell">
-          <div class="card">
+          {% secondary_menu calling_page=self %}
 
-            <div class="card-section" style="padding: 12px;">
-              {{ self.sidebar_text|richtext }}
-
-            </div>
-          </div>
+          {% news_feed %}
         </div>
-        {% endif %}
       </div>
   </div>
 {% endblock %}

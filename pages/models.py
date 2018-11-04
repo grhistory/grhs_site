@@ -122,14 +122,14 @@ class StandardIndexPageRelatedLink(Orderable, RelatedLink):
 class StandardIndexPage(Page):
     TEMPLATE_CHOICES = [
         ('pages/standard_index_page.html', 'Standard page with sibling pages in sidebar'),
-        ('pages/standard_page.html', 'Standard Page, customized sidebar optional')
+        ('pages/standard_page_full.html', 'Standard Page, customized sidebar optional')
 
     ]
     subtitle = models.CharField(max_length=255, blank=True)
     intro = RichTextField(blank=True)
     template_string = models.CharField(
         max_length=255, choices=TEMPLATE_CHOICES,
-        default='pages/standard_page.html'
+        default='pages/standard_page_full.html'
     )
     feed_image = models.ForeignKey(
         Image,
@@ -217,7 +217,8 @@ class StandardPageRelatedLink(Orderable, RelatedLink):
 
 class StandardPage(Page):
     TEMPLATE_CHOICES = [
-        ('pages/standard_page.html', 'Default Template, optional sidebar'),
+        ('pages/standard_page_full.html', 'Default Template, optional custom sidebar'),
+        ('pages/standard_page.html', 'Default Template, newsfeed sidebar'),
     ]
     subtitle = models.CharField(max_length=255, blank=True)
     intro = RichTextField(blank=True)
@@ -229,7 +230,7 @@ class StandardPage(Page):
     ])
     template_string = models.CharField(
         max_length=255, choices=TEMPLATE_CHOICES,
-        default='pages/standard_page.html'
+        default='standard_page_full.html'
     )
     feed_image = models.ForeignKey(
         Image,
