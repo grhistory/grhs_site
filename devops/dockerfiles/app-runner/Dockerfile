@@ -18,6 +18,8 @@ COPY --from=0 /opt/app/node_modules /opt/app/pages/static/node_modules
 RUN addgroup uwsgi && adduser -D -G uwsgi uwsgi
 RUN chown -R uwsgi:uwsgi .
 
+USER uwsgi
+
 CMD [ "uwsgi", "--socket", "0.0.0.0:8080", \
     "--uid", "uwsgi", \
     "--protocol", "uwsgi", \
