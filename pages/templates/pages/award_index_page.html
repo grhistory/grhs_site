@@ -1,17 +1,31 @@
 {% extends "base.html" %}
 
 {% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
 
 {% block body_class %}template-blogindexpage{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
-
-    <div class="award-description">{{ page.description|richtext }}</div>
-
-    {% for award in awardpages %}
-        <h2><a href="{% pageurl award %}">{{ award.title }}</a></h2>
-        <h4>{{ award.specific.winner }}</h4>
-    {% endfor %}
+<div id="content" class="grid-container">
+    <div class="grid-x grid-padding-x">
+        <div id="standard_page" class="medium-9 cell">
+          <h1>{{ page.title }}</h1>
+          <div class="award-description">{{ page.description|richtext }}</div>
+          <a href="{% pageurl most_recent_winner %}"><h3>{{ most_recent_winner.title }} Winner</h3></a>
+          <div style="margin: 10px">
+            {% image most_recent_winner.image max-1000x500 %}
+          </div>
+          <h5>{{ most_recent_winner.winner }}</h5>
+          <div class="award-body">{{ most_recent_winner.body|richtext }}</div>
+        </div>
+        <div id="side-nav" class="medium-3 cell">
+          <ul>
+            {% for award in previous_winners %}
+                <li><a href="{% pageurl award %}">{{ award.title }}</a> {{ award.specific.winner }} </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+  </div>
 
 {% endblock %}
