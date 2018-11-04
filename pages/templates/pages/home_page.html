@@ -40,16 +40,49 @@
 
 	</div>
 
-	<div class="grid-x grid-padding-x align-center">
-		<div class="medium-9 cells">
-			<center>
-				<h3>{{ self.title_text|richtext }}</h3>
-				{{ self.body|richtext }}
-			</center>
-		</div>
-	</div>
-</div>
+    <div class="grid-x grid-padding-x align-center">
+      <div class="medium-9 cells">
+          <h3>Explore our Upcoming Events</h3>
+      </div>
+      {% for event in events %}
+        <div>
+          {{ event.title }}
+        </div>
+      {% endfor %}
 
+      View All Events
+    </div>
+
+
+    <div class="grid-x grid-padding-x align-center">
+      <div class="medium-9 cells">
+          <h3>Are you a student?  Love History?</h3>
+      </div>
+      <a class="button" href="">View Membership</a>
+    </div>
+
+    <div class="grid-x grid-padding-x align-center">
+      <div class="medium-9 cells">
+          <h3>History in the News</h3>
+      </div>
+      {% for news_item in news %}
+        <div>
+          {{ news_item.title }}
+        </div>
+      {% endfor %}
+
+      View All Events
+    </div>
+
+    <div class="grid-x grid-padding-x align-center">
+      <div class="medium-9 cells">
+      <center>
+          <h3>{{ self.title_text|richtext }}</h3>
+          {{ self.body|richtext }}
+      </center>
+      </div>
+    </div>
+</div>
 {% adverts %}
 
 {% endblock %}
