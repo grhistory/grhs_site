@@ -6,7 +6,7 @@ from wagtail.documents.models import Document
 from contact.models import ContactPage
 from blog.models import BlogPage
 from events.models import EventPage
-from pages.models import Advert
+from pages.models import Testimonial, Advert
 
 register = template.Library()
 

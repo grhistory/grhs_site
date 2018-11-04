@@ -320,6 +320,31 @@ VideoGalleryPage.promote_panels = Page.promote_panels + [
 ]
 
 
+class TestimonialPage(Page):
+    intro = RichTextField(blank=True)
+    feed_image = models.ForeignKey(
+        Image,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    search_fields = Page.search_fields + [
+        index.SearchField('intro'),
+    ]
+
+
+TestimonialPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    FieldPanel('intro', classname="full"),
+]
+
+TestimonialPage.promote_panels = Page.promote_panels + [
+    ImageChooserPanel('feed_image'),
+]
+
+
 class ContentBlock(LinkFields):
     page = models.ForeignKey(
         Page,
@@ -345,6 +370,34 @@ class ContentBlock(LinkFields):
         return u"{0}[{1}]".format(self.title, self.slug)
 
 register_snippet(ContentBlock)
+
+
+class Testimonial(LinkFields):
+    page = models.ForeignKey(
+        Page,
+        related_name='testimonials',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL
+    )
+    name = models.CharField(max_length=150)
+    photo = models.ForeignKey(
+        Image, null=True, blank=True, on_delete=models.SET_NULL
+    )
+    text = RichTextField(blank=True)
+
+    panels = [
+        PageChooserPanel('page'),
+        FieldPanel('name'),
+        ImageChooserPanel('photo'),
+        FieldPanel('text'),
+        MultiFieldPanel(LinkFields.panels, "Link"),
+    ]
+
+    def __str__(self):
+        return self.name
+
+register_snippet(Testimonial)
 
 
 class Advert(LinkFields):

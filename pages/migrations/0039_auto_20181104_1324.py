@@ -13,42 +13,4 @@ class Migration(migrations.Migration):
         ('pages', '0038_auto_20181104_1318'),
     ]
 
-    operations = [
-        migrations.RemoveField(
-            model_name='faqspage',
-            name='page_ptr',
-        ),
-        migrations.RemoveField(
-            model_name='testimonial',
-            name='link_document',
-        ),
-        migrations.RemoveField(
-            model_name='testimonial',
-            name='link_page',
-        ),
-        migrations.RemoveField(
-            model_name='testimonial',
-            name='page',
-        ),
-        migrations.RemoveField(
-            model_name='testimonial',
-            name='photo',
-        ),
-        migrations.RemoveField(
-            model_name='testimonialpage',
-            name='feed_image',
-        ),
-        migrations.RemoveField(
-            model_name='testimonialpage',
-            name='page_ptr',
-        ),
-        migrations.DeleteModel(
-            name='FaqsPage',
-        ),
-        migrations.DeleteModel(
-            name='Testimonial',
-        ),
-        migrations.DeleteModel(
-            name='TestimonialPage',
-        ),
-    ]
+    
