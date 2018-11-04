@@ -1,14 +1,12 @@
-grhs_site
-==================
-
+# grhs_site
 
 Run postgresql:
 
-* Mac: `brew services start postgresql`
+- Mac: `brew services start postgresql`
 
 ```
 make develop_env
-# after server is running, ctrl-c 
+# after server is running, ctrl-c
 
 source venv/bin/activate
 make superuser
@@ -17,12 +15,11 @@ make runserver
 ```
 
 Login:
-* superuser
-* pass
 
+- superuser
+- pass
 
 Docs: https://wagtail-cookiecutter-foundation.readthedocs.io/en/latest/
-
 
 Redo initial_data.sql:
 
@@ -30,3 +27,5 @@ Redo initial_data.sql:
 dropdb grhs_site
 make db initial_data migrate extra_data superuser
 ```
+
+## TODO Add details about Docker usage
