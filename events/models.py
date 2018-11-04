@@ -45,7 +45,7 @@ class EventIndexPage(Page):
 
     @property
     def future_events(self):
-        events = EventPage.objects #.live().descendant_of(self)
+        events = EventPage.objects.live()
         events = events.filter(date_from__gte=date.today())
         events = events.order_by('date_from')
 
@@ -53,7 +53,7 @@ class EventIndexPage(Page):
 
     @property
     def past_events(self):
-        events = EventPage.objects #.live().descendant_of(self)
+        events = EventPage.objects.live()
         events = events.filter(date_from__lte=date.today())
         events = events.order_by('-date_from')
 
@@ -66,7 +66,6 @@ class EventIndexPage(Page):
 
         if past:
             events = self.past_events
-        print(events.count)
         # Filter by tag
         tag = request.GET.get('tag')
         if tag:
