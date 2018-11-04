@@ -16,9 +16,7 @@ services:
       - frontend
       - backend
   db:
-    image: postgres:11.0-alpine
-    ports:
-      - "9001:5432"
+    image: postgres:10.5-alpine
     volumes:
       - database:/var/lib/postgresql
       - ../app/src/ansible/roles/web/files/initial_data.sql:/docker-entrypoint-initdb.d/initital_data.sql:ro
