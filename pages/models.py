@@ -369,3 +369,28 @@ class Advert(LinkFields):
         return self.title
 
 register_snippet(Advert)
+
+
+# Faqs Page
+
+class FaqsPage(Page):
+    body = StreamField([
+        ('faq_question', blocks.CharBlock(classname="full title")),
+        ('faq_answer', blocks.RichTextBlock()),
+    ])
+
+FaqsPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    StreamFieldPanel('body'),
+]
+
+
+class StoreFrontPage(Page):
+
+    intro = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('intro', classname='full'),
+    ]
+
+    subpage_types = ['products.ProductIndexPage']

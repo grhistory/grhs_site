@@ -36,6 +36,8 @@ class ProductIndexPage(Page):
 
     indexed_fields = ('intro', )
 
+    subpage_types = ['ProductPage']
+
     @property
     def products(self):
         # Get list of live blog pages that are descendants of this page
