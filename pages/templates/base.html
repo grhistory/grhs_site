@@ -69,7 +69,7 @@
 	            		<h5>Show Your Support</h5>
                     <div class="button-row">
                         <a href="/donate" class="button blue">Donate</a>
-                        <a href="/join" class="button blue">View Membership</a>
+                        <a href="/membership" class="button blue">View Membership</a>
                     </div>
 	            		<h5>Search</h5>
 									<form class="button-row" action="/search/">
@@ -116,7 +116,7 @@
 		  {% block extra_js %}
 		  <script type="text/javascript">
 				$(document).ready(function () {
-					if (window.location.href.indexOf("storefront") != -1 | $(".snipcart-total-items").text() != 0 ) {
+					if (window.location.href.indexOf("store") != -1 | $(".snipcart-total-items").text() != 0 ) {
 						$(".snipcart-summary").show();
 					} else {
 						$(".snipcart-summary").hide();
