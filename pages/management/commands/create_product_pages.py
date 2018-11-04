@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
     def handle(self, **options):
         data_src = os.path.join(settings.PROJECT_ROOT, 'data')
-        product_images_directory = Path(settings.PROJECT_ROOT) / 'data' / 'store-images' / 'cover'
+        product_images_directory = os.path.join(settings.PROJECT_ROOT, 'data', 'store-images', 'cover')
 
         StoreFrontPage.objects.all().delete()
         root_page = HomePage.objects.filter().get()
@@ -53,7 +53,7 @@ class Command(BaseCommand):
 
     def get_product_image(self, product_images_directory, image_name):
         try:
-            with open(product_images_directory / image_name, 'rb') as f:
+            with open( os.path.join(product_images_directory, image_name) , 'rb') as f:
                 image_file = ImageFile(f, name='{}.jpg'.format(image_name))
                 image = Image.objects.create(file=image_file)
                 return image
