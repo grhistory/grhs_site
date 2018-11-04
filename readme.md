@@ -27,6 +27,5 @@ Docs: https://wagtail-cookiecutter-foundation.readthedocs.io/en/latest/
 Redo initial_data.sql:
 
 ```
-dropdb grhs_site
-make db initial_data migrate extra_data superuser
+dropdb grhs_site && make db initial_data migrate extra_data superuser
 ```
