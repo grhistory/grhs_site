@@ -7,7 +7,7 @@ from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
 class BoardMemberBlock(blocks.StructBlock):
     name = blocks.CharBlock()
     role = blocks.CharBlock()
-    joined_date = blocks.DateBlock()
+    joined_date = blocks.DateBlock(required=False)
 
 
 class BoardPage(Page):
