@@ -19,7 +19,12 @@
         <div id="standard_page" class="{% if self.sidebar_text %}medium-9{% else %}medium-12{% endif %} cell">
           {% include "pages/includes/intro.html" with intro=self.intro only %}
 
-          {% include "pages/includes/orbit_carousel.html" with image_items=self.image_items.all only %}
+          {% if self.pagebreak_image %}
+          {% image page.pagebreak_image width-1200 as tmp_photo %}
+
+            <img src="{{ tmp_photo.url }}" width="{{ tmp_photo.width }}"
+                height="{{ tmp_photo.height }}" alt="{{ tmp_photo.alt }}" class="my-custom-class" />
+          {% endif %}
 
           {% include "pages/includes/body.html" with body=self.body only %}
         </div>
