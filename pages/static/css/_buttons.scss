@@ -1,35 +1,40 @@
 @import "./settings";
 
 a.button, button.button {
+  background-color: transparent;
   box-sizing: border-box;
-  border: 3px solid $white;
+  border: 3px solid $blue-light;
+  color: $blue-light;
   padding: .6em 1em;
   transition: background-color .25s;
   font-size: .9em;
+  font-weight: bold;
   text-decoration: none;
 
   &:hover,
   &:focus {
-    background-color: $blue-light;
-  }
-
-  &.transparent-whiteblue {
-    background-color: transparent;
-    &:hover,
-    &:focus {
-      background-color: $white;
-      color: $blue-dark;
-    }
+    border: 3px solid $blue-light;
+    color: $white;
+    background-color: $blue-light
   }
 
   &.blue {
-    // this is the same as the default
+    color: $white;
+    border: 3px solid $white;
+    &:hover,
+    &:focus {
+      color: $blue-dark;
+      background-color: $white;
+    }
   }
 
   &.yellow {
+    color: $white;
+    border: 3px solid $white;
     &:hover,
     &:focus {
       color: $yellow-dark;
+      background-color: $white;
     }
   }
 }
