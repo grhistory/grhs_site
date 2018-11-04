@@ -5,7 +5,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ../app/config/nginx.conf:/etc/nginx/conf.d/app.conf
+      - ../app/config/nginx.conf:/etc/nginx/conf.d/app.conf:ro
     networks:
       - frontend
   app:
@@ -21,7 +21,7 @@ services:
       - "9001:5432"
     volumes:
       - database:/var/lib/postgresql
-      - ../app/src/ansible/roles/web/files/initial_data.sql:/docker-entrypoint-initdb.d/initital_data.sql
+      - ../app/src/ansible/roles/web/files/initial_data.sql:/docker-entrypoint-initdb.d/initital_data.sql:ro
     env_file:
       - ../app/config/.env
     networks:
