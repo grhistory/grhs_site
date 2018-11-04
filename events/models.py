@@ -30,6 +30,7 @@ class EventIndexPageRelatedLink(Orderable, RelatedLink):
 
 
 class EventIndexPage(Page):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     intro = RichTextField(blank=True)
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -93,6 +94,7 @@ class EventIndexPage(Page):
 
 EventIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('subtitle', classname="subtitle"),
     FieldPanel('intro', classname="full"),
     InlinePanel('related_links', label="Related links"),
 ]
@@ -140,6 +142,7 @@ class EventPageTag(TaggedItemBase):
 
 
 class EventPage(Page):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     date_from = models.DateField("Start date")
     date_to = models.DateField(
         "End date",
@@ -200,6 +203,7 @@ class EventPage(Page):
 
 EventPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('subtitle', classname="subtitle"),
     FieldPanel('date_from'),
     FieldPanel('date_to'),
     FieldPanel('time_from'),

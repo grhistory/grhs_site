@@ -8,7 +8,7 @@
         <img src="{{ photo.url }}" width="{{ photo.width }}" height="{{ photo.height }}" alt="{{ photo.alt }}" class="img-thumbnail" style="float: left; margin-right: 15px; border-radius: 5px;" />
     {% endif %}
 
-    <h3>{{ self.title }}</h3>
+    <h3>{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}</h3>
 
     {% if self.role %}
         <h4>( {{ self.role }} )</h4>

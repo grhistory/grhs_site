@@ -1,3 +1,5 @@
+
+from django.db import models
 from wagtail.core import blocks
 from wagtail.core.models import Page
 from wagtail.core.fields import RichTextField, StreamField
@@ -11,6 +13,7 @@ class BoardMemberBlock(blocks.StructBlock):
 
 
 class BoardPage(Page):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     description = RichTextField(blank=True)
     body = StreamField([
         ('board_members', blocks.ListBlock(BoardMemberBlock, label='Board Member',
@@ -18,6 +21,7 @@ class BoardPage(Page):
     ])
 
     content_panels = Page.content_panels + [
+        FieldPanel('subtitle', classname="subtitle"),
         FieldPanel('description', classname="full"),
         StreamFieldPanel('body')
     ]

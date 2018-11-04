@@ -6,13 +6,13 @@
 		<div class="grid-x grid-padding-x grid-padding-y centered">
 	  		<div class="medium-11 cell">
 	    		<center>
-	    			<h3>{{ self.title }}</h3>
+	    			<h3>{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}</h3>
 	    			{% include "people/includes/intro.html" with intro=self.intro only %}
 	    		</center>
 			</div>
-	    	
+
 	    	<br>
-	    	
+
   			{% for person in persons %}
   				<div class="medium-3 cell" data-equalizer-watch>
     				{% if person.biography %}<a href="{% pageurl person %}">{% endif %}
@@ -27,7 +27,7 @@
   				</div>
   			{% endfor %}
   		</div>
-  
+
   		{% if persons.has_other_pages %}
   			<div class="hide-for-print medium-12 cell">
     			<ul class="pagination text-center" role="navigation" aria-label="Pagination">
@@ -38,9 +38,9 @@
         			{% else %}
       					<li class="pagination-previous disabled">Previous</li>
       				{% endif %}
-      				
+
       				<li class="unavailable">Page {{ persons.number }} of {{ persons.paginator.num_pages }}</li>
-      				
+
       				{% if persons.has_next %}
       					<li class="pagination-next">
         					<a href="?page={{ persons.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}" aria-label="Next page">Next</a>

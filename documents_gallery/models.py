@@ -21,7 +21,7 @@ class DocumentsIndexPage(Page):
     Gallery pages.  Gallery Page displays the gallery documents according to
     tags defined.
     """
-
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     intro = RichTextField(blank=True)
 
     search_fields = Page.search_fields + [
@@ -56,6 +56,7 @@ class DocumentsIndexPage(Page):
 
 DocumentsIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('subtitle', classname="subtitle"),
     FieldPanel('intro', classname="full")
 ]
 
@@ -77,6 +78,7 @@ class DocumentsPage(Page):
     your documents. It gets the document objects according to tags defined by
     you. Your document gallery will be created as per tags.
     """
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
 
     tags = ClusterTaggableManager(through=DocumentsPageTag, blank=True)
 
@@ -128,6 +130,7 @@ class DocumentsPage(Page):
 
 DocumentsPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('subtitle', classname="subtitle"),
     FieldPanel('tags'),
 ]
 

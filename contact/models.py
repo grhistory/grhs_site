@@ -17,6 +17,7 @@ class FormField(AbstractFormField):
 
 
 class FormPage(AbstractEmailForm):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     intro = RichTextField(blank=True)
     thank_you_text = RichTextField(blank=True)
     feed_image = models.ForeignKey(
@@ -30,6 +31,7 @@ class FormPage(AbstractEmailForm):
 
 FormPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('subtitle', classname="subtitle"),
     FieldPanel('intro', classname="full"),
     InlinePanel('form_fields', label="Form fields"),
     FieldPanel('thank_you_text', classname="full"),
@@ -52,6 +54,7 @@ class ContactFormField(AbstractFormField):
 
 
 class ContactPage(AbstractEmailForm, ContactFields):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     intro = models.CharField(max_length=255, blank=True)
     thank_you_text = RichTextField(blank=True)
     feed_image = models.ForeignKey(
@@ -65,6 +68,7 @@ class ContactPage(AbstractEmailForm, ContactFields):
 
 ContactPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('subtitle', classname="subtitle"),
     FieldPanel('intro', classname="full"),
     InlinePanel('form_fields', label="Contact Form fields"),
     FieldPanel('thank_you_text', classname="full"),

@@ -10,7 +10,7 @@
 		<a class="past-future" href="{{ request.path }}?past=true">Show Past Events</a>
 		{% endif %}
 
-		<h3>{{ self.title }}</h3>
+		<h3>{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}</h3>
 
 		{% include "events/includes/tags.html" %}
 

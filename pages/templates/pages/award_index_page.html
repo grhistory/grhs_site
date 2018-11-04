@@ -5,7 +5,7 @@
 {% block body_class %}template-blogindexpage{% endblock %}
 
 {% block header %}
-  {{ page.title }}
+{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}
 {% endblock %}
 
 {% block content %}
