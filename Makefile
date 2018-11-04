@@ -184,6 +184,7 @@ shell:
 extra_data:
 	( \
 	. $(VIRTUALENV_NAME)/bin/activate; \
+	$(MANAGE_CMD) setup_basic_pages; \
 	$(MANAGE_CMD) create_baxter_award_pages; \
 	$(MANAGE_CMD) create_product_pages; \
 	)

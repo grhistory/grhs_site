@@ -245,7 +245,7 @@ class StandardPage(Page):
     ])
     template_string = models.CharField(
         max_length=255, choices=TEMPLATE_CHOICES,
-        default='standard_page_full.html'
+        default=TEMPLATE_CHOICES[0][0]
     )
     feed_image = models.ForeignKey(
         Image,

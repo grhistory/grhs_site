@@ -11,7 +11,7 @@ from pages.models import HomePage, StoreFrontPage
 
 
 class Command(BaseCommand):
-    help = 'Create Baxter Award Pages'
+    help = 'Create Store Pages'
 
     def handle(self, **options):
         data_src = os.path.join(settings.PROJECT_ROOT, 'data')
@@ -26,7 +26,8 @@ class Command(BaseCommand):
             for row in products:
                 categories.add(row['category'])
 
-            storefront_index_page = StoreFrontPage(title='Storefront', intro='Please peruse at your leisure')
+            storefront_index_page = StoreFrontPage(title='Store', intro='Please peruse at your leisure',
+                                                   show_in_menus=True)
             root_page.add_child(instance=storefront_index_page)
 
             index_category_map = {category: ProductIndexPage(title=category) for category in categories}
