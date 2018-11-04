@@ -27,7 +27,7 @@ class Command(BaseCommand):
         AwardIndexPage.objects.all().delete()
         root_page = HomePage.objects.filter().get()
 
-        index_page = AwardIndexPage(title=DEFAULT_AWARD_TITLE, description=DEFAULT_DESCRIPTION)
+        index_page = AwardIndexPage(title=DEFAULT_AWARD_TITLE, description=DEFAULT_DESCRIPTION, show_in_menus=True)
         root_page.add_child(instance=index_page)
         index_page.save_revision().publish()
 
@@ -49,7 +49,7 @@ class Command(BaseCommand):
                                  winner=row.get('name'),
                                  year=row.get('year'),
                                  body=row.get('description'),
-                                 image=image if image else None)
+                                 image=image)
                 index_page.add_child(instance=page)
 
         index_page.save_revision().publish()
