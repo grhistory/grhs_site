@@ -23,11 +23,17 @@
 
           {% include "pages/includes/body.html" with body=self.body only %}
         </div>
+        {% if self.sidebar_text %}
         <div id="sidebar" class="hide-for-print hide-for-small-only medium-3 cell">
-          {% secondary_menu calling_page=self %}
+          <div class="card">
 
-          {% news_feed %}
+            <div class="card-section" style="padding: 12px;">
+              {{ self.sidebar_text|richtext }}
+
+            </div>
+          </div>
         </div>
+        {% endif %}
       </div>
   </div>
 {% endblock %}
