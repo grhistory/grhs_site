@@ -6,6 +6,8 @@ LABEL maintainer="CJ Davis <cj@cjdavis.me>"
 # jpeg-dev and zlib-dev are needed for Pillow
 # g++ is needed for gcc to compile libsass
 # linux-headers is needed for uWSGI to use linux/limits.h
+# TODO: Figure out which packages need to be kept in order for Pillow (and potentially
+# other Python app dependencies) to run
 RUN apk update && \
     apk add postgresql-libs && \
     apk add --virtual .build-deps gcc postgresql-dev jpeg-dev zlib-dev g++ linux-headers
