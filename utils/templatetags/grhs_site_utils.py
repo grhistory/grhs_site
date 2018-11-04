@@ -15,7 +15,7 @@ register = template.Library()
 def random_int(a, b=None):
     if b is None:
         a, b = 0, a
-    return random.randint(a, b+1)
+    return random.randint(a, b)
 
 @register.simple_tag(takes_context=True)
 def get_contact_fields(context):
