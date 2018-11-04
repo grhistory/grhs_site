@@ -27,7 +27,7 @@ class Command(BaseCommand):
         AwardIndexPage.objects.all().delete()
         root_page = HomePage.objects.filter().get()
 
-        index_page = AwardIndexPage(title=DEFAULT_AWARD_TITLE, description=DEFAULT_DESCRIPTION, show_in_menus=True)
+        index_page = AwardIndexPage(title=DEFAULT_AWARD_TITLE, description=DEFAULT_DESCRIPTION)
         root_page.add_child(instance=index_page)
         index_page.save_revision().publish()
 
