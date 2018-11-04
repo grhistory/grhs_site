@@ -15,14 +15,14 @@
 					{% for block in self.content_items.all %}
 					{% image block.image width-400 as carousel_background %}
 					<li class="orbit-slide carousel-slide" style="background-image: url('{{carousel_background.url}}')">
-							<div class="carousel-sidebar">
-								<div class="caption">
-									<h3>{{ block.title}}</h3>
-									<hr />
-									{{ block.content|richtext }}
-									<a href="{{ block.link }}" class="button transparent-whiteblue" target="_blank">Learn More</a>
-								</div>
+						<div class="carousel-sidebar">
+							<div class="caption">
+								<h3>{{ block.title}}</h3>
+								<hr />
+								{{ block.content|richtext }}
+								<a href="{{ block.link }}" class="button blue" target="_blank">Learn More</a>
 							</div>
+						</div>
 					</li>
 					{% endfor %}
 				</ul>
@@ -40,49 +40,35 @@
 
 	</div>
 
-    <div class="grid-x grid-padding-x align-center">
-      <div class="medium-9 cells">
-          <h3>Explore our Upcoming Events</h3>
-      </div>
-      {% for event in events %}
-        <div>
-          {{ event.title }}
-        </div>
-      {% endfor %}
+	<section class="events">
+		<h3>Explore our Upcoming Events</h3>
+		<hr />
+		{% for event in events %}
+		<div>
+			{{ event.title }}
+			{{ event.date_from }}
+			{{ event.promote_panels }}
+		</div>
+		{% endfor %}
 
-      View All Events
-    </div>
+		<a href="TODO">View All Events</a>
+	</section>
 
 
-    <div class="grid-x grid-padding-x align-center">
-      <div class="medium-9 cells">
-          <h3>Are you a student?  Love History?</h3>
-      </div>
-      <a class="button" href="">View Membership</a>
-    </div>
+	<div class="yellow-banner">
+		<h3>Are&nbsp;you&nbsp;a&nbsp;student? Love&nbsp;History?</h3>
+		<a class="button yellow" href="">View Membership</a>
+	</div>
 
-    <div class="grid-x grid-padding-x align-center">
-      <div class="medium-9 cells">
-          <h3>History in the News</h3>
-      </div>
-      {% for news_item in news %}
-        <div>
-          {{ news_item.title }}
-        </div>
-      {% endfor %}
-
-      View All Events
-    </div>
-
-    <div class="grid-x grid-padding-x align-center">
-      <div class="medium-9 cells">
-      <center>
-          <h3>{{ self.title_text|richtext }}</h3>
-          {{ self.body|richtext }}
-      </center>
-      </div>
-    </div>
-</div>
-{% adverts %}
+	<section class="news">
+		<button class="button">OK WOoe</button>
+		<h3>History in the News</h3>
+		<hr />
+		{% for news_item in news %}
+		<div>
+			{{ news_item.title }}
+		</div>
+		{% endfor %}
+	</section>
 
 {% endblock %}
