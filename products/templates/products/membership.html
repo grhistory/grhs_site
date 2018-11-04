@@ -1,29 +1,25 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailsettings_tags %}
+{% get_settings %}
 
 {% block content %}
     <div id="content" class="grid-container">
         <div class="grid-x grid-padding-x align-center">
             <div id="people" class="medium-10 cell">
+                <p>Please wait while you are redirected for payment.</p>
                 <div style="display:none;">
-                    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top" id="payment_form">
+                    <form action="https://{{ settings.products.PaypalSettings.url }}/cgi-bin/webscr" method="post" target="_top" id="payment_form">
                     <input type="hidden" name="cmd" value="_s-xclick">
-                    <input type="hidden" name="hosted_button_id" value="XW2DH7UFFEXW4">
-                    <table>
-                    <tr><td><input type="hidden" name="on0" value="Membership Types">Membership Types</td></tr><tr><td><select name="os0">
-                        <option value="Individual">Individual $30.00 USD</option>
-                        <option value="Senior (65+)">Senior (65+) $20.00 USD</option>
-                        <option value="Student">Student $20.00 USD</option>
-                        <option value="Lifetime">Lifetime $400.00 USD</option>
-                    </select> </td></tr>
-                    </table>
+                    <input type="hidden" name="hosted_button_id" value="{{ settings.products.PaypalSettings.membership_button_id }}">
+                    <input type="hidden" value="{{ member_type }}" name="os0" id="os0"/>
+                    <input type="hidden" name="on0" value="Membership Types">
                     <input type="hidden" name="currency_code" value="USD">
-                    <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                    <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
                     </form>
                 </div>
                 <script charset="utf-8">
-                    document.getElementById('payment_form').submit();
+                    document.addEventListener('DOMContentLoaded', function() {
+                        document.getElementById('payment_form').submit();
+                    });
                 </script>
             </div>
         </div>

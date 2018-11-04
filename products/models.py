@@ -152,4 +152,19 @@ class PaypalSettings(BaseSetting):
         max_length=255,
         help_text='Enter your Paypal payment data transfer identity token'
     )
+    url = models.CharField(
+        max_length=255,
+        help_text='Enter the Paypal URL',
+        default='www.sandbox.paypal.com'
+    )
+    membership_button_id = models.CharField(
+            max_length=255,
+            help_text='Enter the membership payment button ID',
+            default=''
+    )
+    donation_button_id = models.CharField(
+            max_length=255,
+            help_text='Enter the donation payment button ID',
+            default=''
+    )
 
