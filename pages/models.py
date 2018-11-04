@@ -121,14 +121,15 @@ class StandardIndexPageRelatedLink(Orderable, RelatedLink):
 
 class StandardIndexPage(Page):
     TEMPLATE_CHOICES = [
-        ('pages/standard_index_page.html', 'Default Template'),
-        ('pages/standard_index_page_grid.html', 'Grid Also In This Section'),
+        ('pages/standard_index_page.html', 'Standard page with sibling pages in sidebar'),
+        ('pages/standard_page_full.html', 'Standard Page, customized sidebar optional')
+
     ]
     subtitle = models.CharField(max_length=255, blank=True)
     intro = RichTextField(blank=True)
     template_string = models.CharField(
         max_length=255, choices=TEMPLATE_CHOICES,
-        default='pages/standard_index_page.html'
+        default='pages/standard_page_full.html'
     )
     feed_image = models.ForeignKey(
         Image,
@@ -138,6 +139,7 @@ class StandardIndexPage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    sidebar_text = RichTextField(blank=True)
 
     indexed_fields = ('intro', )
 
@@ -149,6 +151,7 @@ StandardIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('subtitle', classname="full title"),
     FieldPanel('intro', classname="full"),
+    FieldPanel('sidebar_text', classname="sidebar-content"),
     FieldPanel('template_string'),
     InlinePanel('related_links', label="Related links"),
 ]
@@ -214,8 +217,8 @@ class StandardPageRelatedLink(Orderable, RelatedLink):
 
 class StandardPage(Page):
     TEMPLATE_CHOICES = [
-        ('pages/standard_page.html', 'Default Template'),
-        ('pages/standard_page_full.html', 'Standard Page Full'),
+        ('pages/standard_page_full.html', 'Default Template, optional custom sidebar'),
+        ('pages/standard_page.html', 'Default Template, newsfeed sidebar'),
     ]
     subtitle = models.CharField(max_length=255, blank=True)
     intro = RichTextField(blank=True)
@@ -227,7 +230,7 @@ class StandardPage(Page):
     ])
     template_string = models.CharField(
         max_length=255, choices=TEMPLATE_CHOICES,
-        default='pages/standard_page.html'
+        default='standard_page_full.html'
     )
     feed_image = models.ForeignKey(
         Image,
@@ -236,6 +239,7 @@ class StandardPage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    sidebar_text = RichTextField(blank=True)
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
@@ -251,6 +255,7 @@ StandardPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('subtitle', classname="full title"),
     FieldPanel('intro', classname="full"),
+    FieldPanel('sidebar_text', classname="sidebar-content"),
     StreamFieldPanel('body'),
     FieldPanel('template_string'),
     InlinePanel('carousel_items', label="Carousel items"),
