@@ -5,7 +5,9 @@
     <div class="board-member">
       <h2>{{ item.name }}</h2>
       <h5>{{ item.role }}</h5>
-      <h5>{{ item.joined_date }}</h5>
+      {% if item.joined_date %}
+        <h5>{{ item.joined_date }}</h5>
+      {% endif %}
     </div>
   {% endfor %}
 </div>
