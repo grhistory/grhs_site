@@ -10,6 +10,7 @@ from blog.models import BlogPage, BlogIndexPage
 from board.models import BoardPage
 from contact.models import FormPage, ContactPage
 from documents_gallery.models import DocumentsIndexPage, DocumentsPage
+from donation.models import DonationPage
 from events.models import EventPage, EventIndexPage
 from membership.models import MembershipApplication
 from pages.models import HomePage, StandardIndexPage, StandardPage, SiteBranding
@@ -42,6 +43,10 @@ class Command(BaseCommand):
         news_index.show_in_menus = False
         news_index.save()
 
+        contact = ContactPage.objects.filter().get()
+        contact.title = 'Contact'
+        contact.save()
+
         # set logo
         branding = SiteBranding.objects.filter().get()
         with open(os.path.join(settings.PROJECT_ROOT, 'media', 'original_images', 'grhs_logo.png'), 'rb') as f:
@@ -52,23 +57,23 @@ class Command(BaseCommand):
 
         # add some new pages
         root_page = HomePage.objects.filter().get()
+        root_page.show_in_menus = False
+        root_page.save()
 
-        about_us = StandardPage(title='About Us', slug='about-us', show_in_menus=True)
+        about_us = StandardPage(title='About', slug='about', show_in_menus=True)
         root_page.add_child(instance=about_us)
 
         board = BoardPage(title='Board of Trustees', show_in_menus=True)
         about_us.add_child(instance=board)
 
-        history_gr = StandardPage(title='History of GR', slug='history-of-gr', show_in_menus=True)
+        history_gr = StandardPage(title='GR History', slug='history', show_in_menus=True)
         root_page.add_child(instance=history_gr)
 
-        support = StandardPage(title='Support', slug='support', show_in_menus=True)
-        root_page.add_child(instance=support)
+        donate = DonationPage(title='Donate', slug='donate', show_in_menus=True)
+        root_page.add_child(instance=donate)
 
-        membership = MembershipApplication(title='Membership', slug='membership', show_in_menus=True,
+        join = MembershipApplication(title='Join', slug='membership', show_in_menus=True,
                                            thankyou_page_title='Thanks!')
-        support.add_child(instance=membership)
+        root_page.add_child(instance=join)
 
-        #donate = ...
-        #support.add_child(instance=donate)
 
