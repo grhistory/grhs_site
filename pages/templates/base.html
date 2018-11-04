@@ -113,6 +113,16 @@
             <link href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css" type="text/css" rel="stylesheet" />
         {% endif %}
 
-  		{% block extra_js %}{% endblock %}
+		  {% block extra_js %}
+		  <script type="text/javascript">
+				$(document).ready(function () {
+					if (window.location.href.indexOf("storefront") != -1 | $(".snipcart-total-items").text() != 0 ) {
+						$(".snipcart-summary").show();
+					} else {
+						$(".snipcart-summary").hide();
+					}
+				})
+			</script>
+		  {% endblock %}
 	</body>
 </html>
