@@ -1,5 +1,6 @@
 import csv
 import os
+import json
 
 from django.conf import settings
 from django.core.files.images import ImageFile
@@ -7,7 +8,7 @@ from django.core.management.base import BaseCommand
 from wagtail.images.models import Image
 
 from blog.models import BlogPage, BlogIndexPage
-from board.models import BoardPage
+from board.models import BoardPage, BoardMemberBlock
 from contact.models import FormPage, ContactPage
 from documents_gallery.models import DocumentsIndexPage, DocumentsPage
 from donation.models import DonationPage
@@ -64,7 +65,12 @@ class Command(BaseCommand):
                                      title='About', slug='about', show_in_menus=True)
         root_page.add_child(instance=about_us)
 
-        board = BoardPage(title='Board of Trustees', show_in_menus=True)
+        board_members = self.get_board_members()
+        board = BoardPage(title='Board of Trustees',
+                          body=json.dumps([
+                                {'type': 'board_members', 'value': board_members}
+                          ]),
+                          show_in_menus=True)
         about_us.add_child(instance=board)
 
         history_gr = StandardPage(title='GR History', slug='history', show_in_menus=True)
@@ -77,4 +83,17 @@ class Command(BaseCommand):
                                            thankyou_page_title='Thanks!')
         root_page.add_child(instance=join)
 
+    def get_board_members(self):
+        board_members_csv = os.path.join(settings.PROJECT_ROOT, 'data', 'grhistorysociety_board.csv')
 
+        board_members_list = []
+        with open(board_members_csv, 'r') as f:
+            board_members = csv.DictReader(f)
+            for member in board_members:
+                # The fields we add here need to match the fields on BoardMemberBlock, or else it will fail silently :(
+                board_members_list.append({
+                    'name': member['name'],
+                    'role': member['position']
+                })
+
+        return board_members_list
