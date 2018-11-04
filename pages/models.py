@@ -107,9 +107,15 @@ class HomePage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        events = EventPage.objects.filter(tags__name='historical-society').order_by('date_from')[:3]
-        context['events'] = events
-        news = BlogPage.objects.order_by('-date')[:1]
+        upcoming_events = EventPage.objects.filter(tags__name='historical-society',
+                                                   date_from__gte=date.today()
+                                                   ).live().order_by('date_from')[:3]
+        need_past_events_count = 3 - len(upcoming_events)
+        past_events = EventPage.objects.filter(tags__name='historical-society',
+                                               date_from__lt=date.today()
+                                               ).live().order_by('-date_from')[:need_past_events_count]
+        context['events'] = list(upcoming_events) + list(past_events)
+        news = BlogPage.objects.filter().live().order_by('-date')[:1]
         context['news'] = news
         return context
 
