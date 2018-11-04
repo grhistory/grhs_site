@@ -482,3 +482,9 @@ header + #content {
   }
 }
 
+
+select {
+  // make dropdowns look better.  Not all browsers support Foundation's `appearance: none`
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
