@@ -48,7 +48,7 @@
     	<div class="off-canvas-content" data-off-canvas-content>
 
         {% block header_area %}
-        <header>
+        <header class="num-{% random_int 1 12 %}">{# corresponds to static/img/sections-bgs/* choices #}
           <h1 class="grid-container">{% block header %}{% endblock %}</h1>
         </header>
         {% endblock %}
