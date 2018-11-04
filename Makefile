@@ -180,3 +180,9 @@ shell:
 		. $(VIRTUALENV_NAME)/bin/activate; \
 		$(MANAGE_CMD) shell; \
 	)
+
+extra_data:
+	( \
+	. $(VIRTUALENV_NAME)/bin/activate; \
+	$(MANAGE_CMD) create_baxter_award_pages; \
+	)

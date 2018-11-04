@@ -170,8 +170,13 @@ class AwardIndexPage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
-        awardpages = self.get_children().live().order_by('-slug')
-        context['awardpages'] = awardpages
+        award_pages = self.get_children().live().order_by('-slug')
+        award_pages = list(award_pages)
+
+        currentwinner = award_pages.pop(0)
+        currentwinner = AwardPage.objects.get(slug=currentwinner.slug)
+        context['most_recent_winner'] = currentwinner
+        context['previous_winners'] = award_pages
         return context
 
 
