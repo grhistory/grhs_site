@@ -51,6 +51,10 @@
 @include foundation-flex-classes;
 // @include foundation-prototype-classes;
 
+// snipcart
+div.snip-layout {
+	z-index: 20000;
+}
 
 $primary: map-get($foundation-palette, primary);
 $secondary: map-get($foundation-palette, secondary);
