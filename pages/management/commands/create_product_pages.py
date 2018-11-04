@@ -1,5 +1,6 @@
 import csv
 import os
+from pathlib import Path
 
 from django.conf import settings
 from django.core.files.images import ImageFile
@@ -15,6 +16,7 @@ class Command(BaseCommand):
 
     def handle(self, **options):
         data_src = os.path.join(settings.PROJECT_ROOT, 'data')
+        product_images_directory = Path(settings.PROJECT_ROOT) / 'data' / 'store-images' / 'cover'
 
         StoreFrontPage.objects.all().delete()
         root_page = HomePage.objects.filter().get()
@@ -34,15 +36,26 @@ class Command(BaseCommand):
             for index in index_category_map.values():
                 storefront_index_page.add_child(instance=index)
 
-            print('mapping', index_category_map)
             for row in products:
                 c = row['category']
-                print('got', type(index_category_map[c]))
+                image_file_name = row['cover_image']
+                image = self.get_product_image(product_images_directory, image_file_name)
+
                 index_category_map[c].add_child(instance=ProductPage(
                     title=row['title'],
                     price=row['price'],
                     member_price='10000',  #TODO: calculate actual price based on member_discount percent
-                    description=row['description']
+                    description=row['description'],
+                    image=image
                 ))
 
             storefront_index_page.save_revision().publish()
+
+    def get_product_image(self, product_images_directory, image_name):
+        try:
+            with open(product_images_directory / image_name, 'rb') as f:
+                image_file = ImageFile(f, name='{}.jpg'.format(image_name))
+                image = Image.objects.create(file=image_file)
+                return image
+        except (FileNotFoundError, IsADirectoryError):
+            return None
