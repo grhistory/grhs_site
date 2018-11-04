@@ -19,12 +19,14 @@ class Membership(models.Model):
     LEGACY = "L"
     COMPLIMENTARY = "C"
     SENIOR = "SE"
+    BAXTER = "B"
     MEMBER_TYPES = (
         (INDIVIDUAL, 'Individual'),
         (SENIOR, 'Senior'),
         (STUDENT, "Student"),
         (LEGACY, 'Legacy'),
-        (COMPLIMENTARY, "Complimentary")
+        (COMPLIMENTARY, "Complimentary"),
+        (BAXTER, "Baxter"),
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
@@ -51,6 +53,7 @@ class Membership(models.Model):
     newsletter = models.BooleanField(default=False)
     create_date = models.DateField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
+    is_active = models.BooleanField(default=True)
 
 
     def save(self, *args, **kwargs):
@@ -68,7 +71,7 @@ class Membership(models.Model):
 
         super(Membership, self).save(*args, **kwargs)
 
-class MembershipRegistrationPage(Page):
+class MembershipApplication(Page):
     intro = RichTextField(blank=True)
     thankyou_page_title = models.CharField(
         max_length=255, help_text="Title text to use for the 'thank you' page")
@@ -96,7 +99,7 @@ class MembershipRegistrationPage(Page):
         else:
             form = MembershipForm()
 
-        return render(request, 'membership/membership_registration.html', {
+        return render(request, 'membership/membership_application.html', {
             'page': self,
             'form': form,
         })

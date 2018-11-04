@@ -3,357 +3,11 @@ $secondary: map-get($foundation-palette, secondary);
 $emperor: #777;
 $static: static;
 
-// SOCIAL BAR
-
-$social-bar-position: left; 
-$social-bar-transformation: rem-calc(140);
-$social-bar-width: rem-calc(180);
-$social-bar-background: #333333;
-$social-icon-color: $white;
-$social-icon-transition: all 0.3s ease-in-out;
-$social-icon-font-size: 1.1rem;
-$social-icon-padding: 0.5rem;
-
-$social-brand-facebook: #3b5998;
-$social-brand-twitter: #55acee;
-$social-brand-whatsapp: #43d854;
-$social-brand-linkedin: #007bb5;
-$social-brand-google: #3cba54;
-$social-brand-pinterest: #cb2027;
-$social-brand-mail: $primary;
-$social-brand-print: #777;
-
-.sticky-social-bar {
-  padding: 0;
-  margin: 0; 
-  top: 50%;
-  z-index: 9999;
-  transform: translateY(-50%);
-  width: $social-bar-width;
-  background-color: $social-bar-background;
-  position: fixed;
-	
-  @if $social-bar-position == left {
-	  left: $social-bar-transformation * -1;
-  }
-  @if $social-bar-position == right {
-	  right: $social-bar-transformation * -1;
-  }
-
-  .social-icon {
-    list-style-type: none;
-    color: $social-icon-color;
-    background-color: inherit;
-    margin: 0;
-    transition: $social-icon-transition;
-    cursor: pointer;
-    font-size: $social-icon-font-size;
-    padding: 0.25rem 0.25rem 0.5rem;
-
-    &:first-of-type {
-	    padding-top: 0.375rem;
-    }
-    &:last-of-type {
-	    padding-bottom: 0.625rem;
-    }
-
-    > a {
-      color: inherit;
-      background-color: inherit;
-
-      > .fab, .fa {
-        padding: $social-icon-padding;
-        width: 2rem;
-        height: 2rem;
-
-        @if $social-bar-position == left {
-          float: right;
-          margin-left: 0.5rem;
-        }
-        @if $social-bar-position == right {
-          float: left;
-          margin-right: 0.5rem;
-        }
-
-        &.fa-facebook-f {
-          background-color: $social-brand-facebook;
-        }
-        &.fa-twitter {
-          background-color: $social-brand-twitter;
-        }
-        &.fa-linkedin-in {
-          background-color: $social-brand-linkedin;
-        }
-        &.fa-google-plus-g {
-          background-color: $social-brand-google;
-        }
-        &.fa-pinterest-p {
-          background-color: $social-brand-pinterest;
-        }
-        &.fa-envelope {
-          background-color: $social-brand-mail;
-        }
-        &.fa-print {
-          background-color: $social-brand-print;
-        }
-      }
-
-      > .social-icon-text {
-        font-size: 80%;
-        color: $social-icon-color;
-        text-transform: uppercase;
-
-        @if $social-bar-position == left {
-          margin-right: 0.5rem;
-        }
-        @if $social-bar-position == right {
-          margin-left: 0.5rem;
-        }
-      }
-    }
-
-    &:hover {
-
-      @if $social-bar-position == left {
-        transform:translateX($social-bar-transformation * 1);
-      }
-      @if $social-bar-position == right {
-        transform:translateX($social-bar-transformation * -1);
-      }
-
-      > a {
-        color: inherit;
-        background-color: inherit;
-      }
-    }
-  }
-}
-
-$social-button-size: 1.8rem;
-$social-button-border-width: 0.125rem;
-$social-button-font-size: 1rem;
-$social-button-line-height: 1.6em;
-$social-button-border-radius: 1.6875rem;
-$social-button-transition: all 0.5s ease;
-$social-button-margin: 0.25rem;
-
-@mixin social-button($brand-color, $brand-icon) {
-  background: $brand-color;
-
-  &:before {
-    font-family: "FontAwesome";
-    content: $brand-icon;
-  }
-  &:hover,
-  &:focus {
-    color: $brand-color;
-    background: $white;
-    border-color: $brand-color;
-  }
-}
-
-.rounded-social-buttons {
-  padding: 10px 0;
-  text-align: center;
-
-  .social-button {
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-    width: $social-button-size;
-    height: $social-button-size;
-    border: $social-button-border-width solid transparent;
-    padding: 0;
-    text-decoration: none;
-    text-align: center;
-    color: $white;
-    font-size: $social-button-font-size;
-    font-weight: normal;
-    line-height: $social-button-line-height;
-    border-radius: $social-button-border-radius;
-    transition: $social-button-transition;
-    margin-right: $social-button-margin;
-    margin-bottom: $social-button-margin;
-
-    &:hover,
-    &:focus {
-      transform: rotate(360deg);
-    }
-
-    &.facebook {
-      @include social-button($social-brand-facebook, "\f09a")
-    }
-
-    &.twitter {
-      @include social-button($social-brand-twitter, "\f099")
-    }
-
-    &.linkedin {
-      @include social-button($social-brand-linkedin, "\f0e1")
-    }
-
-    &.whatsapp {
-      @include social-button($social-brand-whatsapp, "\f232")
-    }
-
-    &.pinterest {
-      @include social-button($social-brand-pinterest, "\f231")
-    }
-
-    &.mail {
-      @include social-button($social-brand-mail, "\f0e0")
-    }
-  }
-}
-
-
-// END SOCIAL BAR
-
-
-
-
-// HOMEPAGE SLIDER
-
-
-.fullscreen-image-slider {
-  border: 5px solid $white;
-  margin-bottom: 40px;
-  
-  .orbit-image {
-    width: 100%;
-  }
-
-  .orbit-caption {
-    bottom: 12px;
-    transform: translateY(50%);
-    background: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    text-align: center;
-    color: $white;
-  }
-  
-  button, .button {background: rgba(0, 0, 0, 0.7);}
-}
-
-
-// END HOMEPAGE SLIDER
-
-
-
-
-// CONTENT BLOCK SLIDER
-
-$off-white: #f8f8f8;
-$medium-height: 400px;
-$small-height: 80vh;
-
-.orbit-image {
-	padding: 10px 50px;
-}
-
-.clean-hero-slider {
-  .caption {
-    .rich-text p {
-      font-size: 1.6rem;
-      line-height: 1.25;
-      font-weight: 300;
-      
-      @include breakpoint(small only) {
-        font-size: 1.1rem;
-      }
-    }
-
-    h3 {
-      color: $primary;
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 10px;
-
-      @include breakpoint(medium) {
-        font-size: 2.5rem;
-        font-weight: normal;
-      }
-    }
-    
-    .button {border-radius: 3px; color: $white;}
-    
-    @include breakpoint(small only) {
-      padding: 1rem ;
-      text-align: center;
-    }
-  }
-  
-  .orbit-slide {
-
-    @include breakpoint(medium) {
-      padding-bottom: 0;
-    }
-    
-    @media screen and (min-width:40.063em) and (max-width:60em) {
-    	height: $medium-height;
-    }
-    
-    @include breakpoint(small only) {
-      height: $small-height;
-    }
-    
-    height: $medium-height;
-  }
-
-  .orbit-controls {
-   i {font-size: 24px;}
-    button {
-      background: $primary;
-      padding: 0.5rem;
-
-      &:hover {
-        background: $primary;
-        color: $white;
-      }
-    }
-
-    .orbit-previous {
-      @include breakpoint(medium) {
-        left: 0;
-        border-top-right-radius: 8px;
-        border-bottom-right-radius: 8px;
-      }
-    }
-
-    .orbit-next {
-      @include breakpoint(medium) {
-        right: 0;
-        border-top-left-radius: 8px;
-        border-bottom-left-radius: 8px;
-      }
-    }
-  }
-
-  ul.orbit-container {
-    max-height: $medium-height;
-    
-    @include breakpoint(small only) {
-      max-height: $small-height;
-    }
-  }
-
-  li.orbit-slide {
-    max-height: none !important;
-  }
-}
-
-
-
-// END CONTENT BLOCK SLIDER
-
-
-
-
 // PAGE HERO
 
 .hero-section {
   background: linear-gradient(
-    rgba(0, 0, 0, 0.3), 
+    rgba(0, 0, 0, 0.3),
     rgba(0, 0, 0, 0.4)
   );
   background-position: top center;
@@ -374,7 +28,7 @@ $small-height: 80vh;
 .hero-section.page {
 	.hero-content {
 		background: linear-gradient(
-		  rgba(0, 0, 0, 0.7), 
+		  rgba(0, 0, 0, 0.7),
 		  rgba(0, 0, 0, 0.8)
 		);
 		width: 100%;
@@ -494,7 +148,7 @@ $small-height: 80vh;
 
 
 .neat-article-container {
-  margin-top: 1.5rem;
+  margin-top: 0;
 
   .neat-article-header {
     width: 100%;
@@ -528,7 +182,7 @@ $small-height: 80vh;
   }
 
   .neat-article-image {
-    margin-top: 1.5rem;
+    margin-top: 0;
 
     .article-image {
       width: 100%;
@@ -599,7 +253,7 @@ $tag-cloud-section-width: 800px;
 
 
 
-// CALLOUT NOTIFICATION 
+// CALLOUT NOTIFICATION
 
 .notification-callout-alert {
  display:-ms-flexbox;
@@ -618,7 +272,7 @@ $tag-cloud-section-width: 800px;
  box-shadow:0 2px 20px 0 rgba(0,0,0,.13);
  border-radius:8px;
  transition:all .5s ease-in-out;
- 
+
  .button {border-radius: 5px;}
 }
 
@@ -654,14 +308,14 @@ $tag-cloud-section-width: 800px;
      p {margin-bottom: 0;}
      }
 }
- 
- // END CALLOUT NOTIFICATION
- 
- 
- 
 
-// TESTIMONIAL 
- 
+ // END CALLOUT NOTIFICATION
+
+
+
+
+// TESTIMONIAL
+
 $full-width-testimonial-quote-color: $white;
 $full-width-testimonial-vertical-padding: 1rem;
 
@@ -680,7 +334,7 @@ $full-width-testimonial-vertical-padding: 1rem;
 }
 .full-width-testimonial-section {
   padding-top: $full-width-testimonial-vertical-padding;
-  
+
   .full-width-testimonial-text {
     font-weight: 300;
     color: #ffffff;
@@ -688,31 +342,31 @@ $full-width-testimonial-vertical-padding: 1rem;
     padding-right: 30px;
     // Adjust margin-top for line spacing
     margin-top: -5px;
-    
+
     @include breakpoint(small) {
       padding-left: 50px;
       padding-right: 50px;
       font-size: 1.3em;
     }
-    
+
     @include breakpoint(medium) {
       padding-left: 100px;
       padding-right: 100px;
     }
-    
+
     @include breakpoint(large) {
       padding-left: 180px;
       padding-right: 180px;
       font-size: 1.6em;
     }
-    
+
     @include breakpoint(xlarge) {
       padding-left: 200px;
       padding-right: 200px;
       font-size: 1.6em;
     }
   }
-  
+
   .full-width-testimonial-source {
     font-size: 1.2em;
     font-weight: 600;
@@ -721,12 +375,12 @@ $full-width-testimonial-vertical-padding: 1rem;
     letter-spacing: 1.5px;
     padding-bottom: 0;
     margin-bottom: 0.2em;
-    
+
     @include breakpoint(small) {
       font-size: 1.0em;
     }
   }
-  
+
   .full-width-testimonial-source-context {
     display: block;
     font-size: 0.9em;
@@ -734,12 +388,12 @@ $full-width-testimonial-vertical-padding: 1rem;
     color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-  
+
     @include breakpoint(small) {
       font-size: 0.8em;
     }
   }
-  
+
   .slick-slider {
     margin-bottom: 0px;
   }
@@ -755,50 +409,50 @@ $full-width-testimonial-vertical-padding: 1rem;
 .full-width-testimonial-content {
   width: 100%;
 }
- 
+
 // END TESTIMONIAL
 
 
 
 
 // TESTIMONIAL LIST
-  
+
   .featured-testimonials-section {
     padding: 1rem;
-  
+
     .featured-testimonials-container {
       .orbit-previous {
         color: $black;
         left: -1rem;
       }
-  
+
       .orbit-next {
         color: $black;
         right: -1rem;
       }
   }
-  
+
     .testimonial {
       display: flex;
       align-items: center;
       margin: 2.5rem 1rem;
     }
-  
+
     .profile-pic {
       max-width: 100px;
       border-radius: 50%;
-  
+
     }
-    
+
     h6 {color: $white;}
-  
+
     p {
       margin-left: 2rem;
       margin-bottom: 0rem;
       padding: .5rem;
       position: relative;
       color: $emperor;
-  
+
       &::before {
         content: "“";
         font-size: 4rem;
@@ -807,7 +461,7 @@ $full-width-testimonial-vertical-padding: 1rem;
         top: -2.5rem;
         left: -1.5rem;
       }
-  
+
       &::after {
         content: "”";
         font-size: 4rem;
@@ -816,13 +470,13 @@ $full-width-testimonial-vertical-padding: 1rem;
         bottom: -4rem;
         right: -.5rem;
       }
-  
+
       @include breakpoint(small only){
         margin-left: 0;
       }
     }
   }
-  
+
   .reveal.testimonial {
       padding: 2rem;
       border-radius: 5px;
@@ -833,7 +487,7 @@ $full-width-testimonial-vertical-padding: 1rem;
           padding: .5rem;
           position: relative;
           color: $secondary;
-      
+
           &::before {
             content: "“";
             font-size: 4rem;
@@ -842,7 +496,7 @@ $full-width-testimonial-vertical-padding: 1rem;
             top: -2.5rem;
             left: -1.5rem;
           }
-      
+
           &::after {
             content: "”";
             font-size: 4rem;
@@ -851,14 +505,14 @@ $full-width-testimonial-vertical-padding: 1rem;
             bottom: -4rem;
             right: -.5rem;
           }
-      
+
           @include breakpoint(small only){
             margin-left: 0;
           }
         }
   }
-  
-// END TESTIMONIAL LIST 
+
+// END TESTIMONIAL LIST
 
 
 

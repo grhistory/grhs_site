@@ -28,5 +28,5 @@ Redo initial_data.sql:
 
 ```
 dropdb grhs_site
-make db initial_data migrate superuser
+make db initial_data migrate extra_data superuser
 ```

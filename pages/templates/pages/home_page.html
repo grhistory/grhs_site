@@ -6,53 +6,50 @@
 {% block header_area %}{% endblock %}
 
 {% block content %}
-	
+
+<div id="home-page">
 	<div id="intro">
-  		<div class="orbit clean-hero-slider pad" role="region" aria-label="Homepage Slider" data-orbit>
-  		  <div class="orbit-wrapper">
-  		    <ul class="orbit-container">
-  		      {% for block in self.content_items.all %}
-  		      <li class="orbit-slide">
-  		      	<figure class="orbit-figure">
-  		      		<div class="grid-container">
-  			        	<div class="grid-x grid-padding-x grid-padding-y grid-margin-y align-middle">
-  			        		<div class="medium-6 cell text-center">
-  			        			{% image block.image fill-350x350 %}
-  			        		</div>
-  			        		<div class="medium-6 cell caption">
-  					            <h3>{{ block.title}}</h3>
-  					            {{ block.content|richtext }}
-  					            <a href="{{ block.link }}" class="button secondary" target="_blank"><strong>Learn More</strong></a>
-  					        </div>
-  					    </div>
-  					</div>
-  		        </figure>
-  		      </li>
-  		      {% endfor %}
-  		    </ul>
-  		  </div>
+		<div class="orbit clean-hero-slider" role="region" aria-label="Homepage Slider" data-orbit data-options="animInFromLeft:fade-in; animInFromRight:fade-in; animOutToLeft:fade-out; animOutToRight:fade-out;">
+			<div class="orbit-wrapper">
+				<ul class="orbit-container">
+					{% for block in self.content_items.all %}
+					{% image block.image width-400 as carousel_background %}
+					<li class="orbit-slide carousel-slide" style="background-image: url('{{carousel_background.url}}')">
+							<div class="carousel-sidebar">
+								<div class="caption">
+									<h3>{{ block.title}}</h3>
+									<hr />
+									{{ block.content|richtext }}
+									<a href="{{ block.link }}" class="button blue" target="_blank">Learn More</a>
+								</div>
+							</div>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
 
-      <nav class="orbit-bullets">
-        {% for block in self.content_items.all %}
-          <button {% if forloop.first %}class="is-active"{% endif %} data-slide="{{forloop.counter0}}">
-            <span class="show-for-sr">Slide {{ forloop.counter }} details.</span>
-            {% if forloop.first %}<span class="show-for-sr">Current Slide</span>{% endif %}
-          </button>
-        {% endfor %}
-      </nav>
-      </div>
+			<nav class="orbit-bullets">
+				{% for block in self.content_items.all %}
+				<button {% if forloop.first %}class="is-active" {% endif %} data-slide="{{forloop.counter0}}">
+					<span class="show-for-sr">Slide {{ forloop.counter }} details.</span>
+					{% if forloop.first %}<span class="show-for-sr">Current Slide</span>{% endif %}
+				</button>
+				{% endfor %}
+			</nav>
+		</div>
 
-  </div>
+	</div>
 
-    <div class="grid-x grid-padding-x align-center">
-      <div class="medium-9 cells">
-      <center>
-          <h3>{{ self.title_text|richtext }}</h3>
-          {{ self.body|richtext }}
-      </center>
-      </div>
-    </div>
+	<div class="grid-x grid-padding-x align-center">
+		<div class="medium-9 cells">
+			<center>
+				<h3>{{ self.title_text|richtext }}</h3>
+				{{ self.body|richtext }}
+			</center>
+		</div>
+	</div>
+</div>
 
-  {% adverts %}
+{% adverts %}
 
 {% endblock %}
