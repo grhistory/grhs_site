@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailsettings_tags %}
+{% get_settings %}
+
+{% block header %}
+    Payment
+{% endblock %}
+
+{% block content %}
+    <div id="content" class="grid-container">
+        <div class="grid-x grid-padding-x align-center">
+            <div id="people" class="medium-10 cell">
+                <p>Please wait while you are redirected for payment.</p>
+                <div style="display:block;">
+                    <form action="https://{{ settings.products.PaypalSettings.url }}/cgi-bin/webscr" method="post">
+                    <input type="text" name="cmd" value="_xclick">
+                    <input type="text" name="amount" value="{{ amount }}">
+                    <input type="text" name="business" id="business" value="{{ settings.products.PaypalSettings.email }}"/>
+                    <input type="text" name="item_name" value="{{ item_name }}">
+                    <input type="text" name="return" value="{{ request.site.root_url }}/paypal"/>
+                    <input type="text" name="cancel_return" value="{{ request.site.root_url }}/paypal/cancel"/>
+                    <input type="text" name="currency_code" value="USD">
+                    <input type="hidden" name="lc" value="US">
+                    <input type="image" name="submit" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" alt="Buy Now">
+                    <img alt="" border="0" width="1" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
+                    </form>
+                </div>
+                <script charset="utf-8">
+                    document.addEventListener('DOMContentLoaded', function() {
+                        //document.getElementById('payment_form').submit();
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

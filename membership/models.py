@@ -54,6 +54,7 @@ class Membership(models.Model):
     create_date = models.DateField(blank=True, null=True)
     notes = models.TextField(blank=True, null=True)
     is_active = models.BooleanField(default=True)
+    amount = models.DecimalField(max_digits=6, decimal_places=2, default=0.0)
 
 
     def save(self, *args, **kwargs):
@@ -94,7 +95,7 @@ class MembershipApplication(Page):
             form = MembershipForm(request.POST)
             if form.is_valid():
                 registration = form.save()
-                request.session['registration_id'] = registration.id
+                request.session['payment'] = {'type': 'membership', 'id': registration.id}
                 return redirect('/payment/membership/{}'.format(registration.id))
         else:
             form = MembershipForm()
