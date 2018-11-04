@@ -89,8 +89,9 @@ class HomePageRelatedLink(Orderable, RelatedLink):
 
 
 class HomePage(Page):
-    title_text = RichTextField(null=True, blank=True)
-    body = RichTextField(null=True, blank=True)
+    show_announcement = models.BooleanField(default=False)
+    title_text = RichTextField(null=True, blank=True, verbose_name='Special announcement title')
+    body = RichTextField(null=True, blank=True, verbose_name='Special announcement text')
     feed_image = models.ForeignKey(
         Image,
         help_text="An optional image to represent the page",
@@ -121,6 +122,7 @@ class HomePage(Page):
 
 HomePage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('show_announcement'),
     FieldPanel('title_text', classname="full"),
     FieldPanel('body', classname="full"),
     InlinePanel('carousel_items', label="Carousel items"),
@@ -149,7 +151,7 @@ class StandardIndexPage(Page):
     template_string = models.CharField(
         max_length=255, choices=TEMPLATE_CHOICES,
         default='pages/standard_page_full.html',
-        help_text='Which layout for this page?'
+        verbose_name='Page Layout'
     )
     feed_image = models.ForeignKey(
         Image,
@@ -252,7 +254,7 @@ class StandardPage(Page):
     template_string = models.CharField(
         max_length=255, choices=TEMPLATE_CHOICES,
         default=TEMPLATE_CHOICES[0][0],
-        help_text='Which layout for this page?'
+        verbose_name='Page Layout'
     )
     feed_image = models.ForeignKey(
         Image,
