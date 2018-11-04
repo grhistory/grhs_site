@@ -222,14 +222,7 @@ class StandardPage(Page):
     ]
     subtitle = models.CharField(max_length=255, blank=True)
     intro = RichTextField(blank=True)
-    pagebreak_image = models.ForeignKey(
-        Image,
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-        help_text="If this image exists for this page, there will be a page break 100 image in the template"
-    )
+    midpage_subtitle = models.CharField(max_length=255, blank=True)
     body = StreamField([
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
@@ -264,7 +257,7 @@ StandardPage.content_panels = [
     FieldPanel('subtitle', classname="full title"),
     FieldPanel('intro', classname="full"),
     FieldPanel('sidebar_text', classname="sidebar-content"),
-    ImageChooserPanel('pagebreak_image'),
+    FieldPanel('midpage_subtitle'),
     StreamFieldPanel('body'),
     FieldPanel('template_string'),
     InlinePanel('carousel_items', label="Carousel items"),
