@@ -222,6 +222,24 @@ hr {border-color: $light-gray;}
 
 .list-style {li{list-style: none;}}
 
+
+// these correspond to pages/static/img/section-bgs/*.jpg files
+$section_textures_colors: (
+  ('1', $red-dark),
+  ('2', $red-dark),
+  ('3', $yellow-light),
+  ('4', $white), // ?
+  ('5', $yellow-light),
+  ('6', $yellow-light),
+  ('7', $white),
+  ('8', $yellow-light),  // ?
+  ('9', $white),
+  ('10', $white),
+  ('11', $yellow-light),
+  ('12', $yellow-light),
+);
+
+
 header {
   margin-top: 0;
   padding-top: 5px;
@@ -231,17 +249,30 @@ header {
     padding-top: 25px;
     padding-bottom: 25px;
     margin-bottom: 10px;
-    background-color: $gray-light;  // FIXME an image
   }
   @include breakpoint(large) {
     padding-top: 45px;
     padding-bottom: 45px;
     margin-bottom: 20px;
   }
-  h1 {
-    color: nth($colors-dark, random(length($colors-dark)));
+
+  @each $num, $fg-color in $section_textures_colors {
+    &.num-#{$num} {
+      h1 {
+        color: $red-dark;
+      }
+      @include breakpoint(medium) {
+        background-image: url('/#{$static}/img/section-bgs/#{$num}.jpg');
+        h1 {
+          color: $fg-color;
+        }
+      }
+    }
   }
 }
+
+
+
 header + #content {
   padding-top: 0;
 }
