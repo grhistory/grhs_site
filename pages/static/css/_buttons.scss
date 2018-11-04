@@ -3,7 +3,6 @@
 a.button, button.button {
   box-sizing: border-box;
   border: 3px solid $white;
-  background-color: transparent;
   padding: .6em 1em;
   transition: background-color .25s;
   font-size: .9em;
@@ -11,14 +10,20 @@ a.button, button.button {
 
   &:hover,
   &:focus {
-    background-color: $white;
+    background-color: $blue-light;
+  }
+
+  &.transparent-whiteblue {
+    background-color: transparent;
+    &:hover,
+    &:focus {
+      background-color: $white;
+      color: $blue-dark;
+    }
   }
 
   &.blue {
-    &:hover,
-    &:focus {
-      color: $blue-dark;
-    }
+    // this is the same as the default
   }
 
   &.yellow {
