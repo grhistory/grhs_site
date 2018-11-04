@@ -4,11 +4,12 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block header %}
-{% if self.feed_image %}
-{% else %}
-{{ self.title }}
-{% endif %}
+	{% if self.feed_image %}
+	{% else %}
+	{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}
+	{% endif %}
 {% endblock %}
+
 
 {% block content %}
 

@@ -73,6 +73,7 @@ class Membership(models.Model):
         super(Membership, self).save(*args, **kwargs)
 
 class MembershipApplication(Page):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     intro = RichTextField(blank=True)
     thankyou_page_title = models.CharField(
         max_length=255, help_text="Title text to use for the 'thank you' page")
@@ -84,6 +85,7 @@ class MembershipApplication(Page):
     # the code to make them work anyway.
 
     content_panels = Page.content_panels + [
+        FieldPanel('subtitle', classname="subtitle"),
         FieldPanel('intro', classname="full"),
         FieldPanel('thankyou_page_title'),
         FieldPanel('thank_you_text'),

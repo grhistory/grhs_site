@@ -28,6 +28,7 @@ class BlogIndexPageRelatedLink(Orderable, RelatedLink):
 
 
 class BlogIndexPage(Page):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     intro = RichTextField(blank=True)
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -77,6 +78,7 @@ class BlogIndexPage(Page):
 
 BlogIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('subtitle', classname="subtitle"),
     FieldPanel('intro', classname="full"),
     InlinePanel('related_links', label="Related links"),
 ]
@@ -103,6 +105,7 @@ class BlogPageTag(TaggedItemBase):
 
 
 class BlogPage(RoutablePageMixin, Page):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     intro = RichTextField()
     body = StreamField([
         ('paragraph', blocks.RichTextBlock()),
@@ -167,6 +170,7 @@ class BlogPage(RoutablePageMixin, Page):
 
 BlogPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('subtitle', classname="subtitle"),
     FieldPanel('date'),
     FieldPanel('intro', classname="full"),
     StreamFieldPanel('body'),

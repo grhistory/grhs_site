@@ -6,7 +6,7 @@
         <div class="grid-x grid-padding-x align-center">
             <div class="medium-12 cell">
                 <center>
-                    <h3>{{ self.title }}</h3>
+                    <h3>{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}</h3>
                     {{ self.intro|richtext }}
                 </center>
             </div>

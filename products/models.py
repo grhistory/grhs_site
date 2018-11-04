@@ -24,7 +24,7 @@ class ProductIndexPageRelatedLink(Orderable, RelatedLink):
 
 
 class ProductIndexPage(Page):
-    subtitle = models.CharField(max_length=255, blank=True)
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     intro = RichTextField(blank=True)
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -101,6 +101,7 @@ class ProductPageTag(TaggedItemBase):
 
 
 class ProductPage(Page):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     price = models.CharField(max_length=255, blank=True)
     member_price = models.CharField(max_length=255, blank=True)
     description = RichTextField(blank=True)
@@ -126,6 +127,7 @@ class ProductPage(Page):
 
 ProductPage.content_panels = [
     FieldPanel('title', classname="title"),
+    FieldPanel('subtitle', classname="subtitle"),
     FieldPanel('intro', classname="full"),
     FieldPanel('price', classname="full"),
     FieldPanel('member_price', classname="full"),

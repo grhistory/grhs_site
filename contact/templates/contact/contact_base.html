@@ -4,7 +4,7 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block header %}
-  {{ self.title }}
+{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}
 {% endblock %}
 
 

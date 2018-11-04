@@ -4,10 +4,10 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block header %}
-  {% if self.feed_image %}
-  {% else %}
-      {{ self.title }}
-  {% endif %}
+	{% if self.feed_image %}
+	{% else %}
+		{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}
+	{% endif %}
 {% endblock %}
 
 
@@ -20,9 +20,9 @@
 			<div id="standard_page" class="medium-10 cell">
 
 	      		{% include "pages/includes/intro.html" with intro=self.intro only %}
-	      
+
 	      		<br>
-	      
+
 	      		{% secondary_menu_grid calling_page=self %}
 	      	</div>
   		</div>
