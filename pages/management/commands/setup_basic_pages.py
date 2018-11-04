@@ -60,7 +60,8 @@ class Command(BaseCommand):
         root_page.show_in_menus = False
         root_page.save()
 
-        about_us = StandardPage(title='About', slug='about', show_in_menus=True)
+        about_us = StandardIndexPage(template_string='pages/standard_index_page.html',
+                                     title='About', slug='about', show_in_menus=True)
         root_page.add_child(instance=about_us)
 
         board = BoardPage(title='Board of Trustees', show_in_menus=True)
