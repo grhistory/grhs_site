@@ -15,7 +15,7 @@
                 <div class="medium-12 columns">
             {% endif %}
             {% if self.image %}
-                {% image self.image fill-600x550 as photo %}
+                {% image self.image height-400 as photo %}
                 <img src="{{ photo.url }}" width="{{ photo.width }}" height="{{ photo.height }}" alt="{{ photo.alt }}" class="img-thumbnail" style="float: left;" />
             {% endif %}
 
