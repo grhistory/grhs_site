@@ -96,10 +96,20 @@ hr {border-color: $light-gray;}
   a {color: $white; margin-right: 8px; font-size: 17px;}
 }
 
-.title-bar { // for "small" screens
-	background: $primary;
-	a, a:hover {color: $yellow-dark;}
+.title-bar {
+  background: $primary;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 5px 5px 10px;
+
+  a, a:hover {color: $yellow-light;}
+
+  .menu-button {
+    margin-bottom: 0;
+    align-self: flex-end;
+  }
 }
+
 .top-bar {
     @include breakpoint(medium) {
         background: $primary;
