@@ -1,3 +1,5 @@
+from datetime import datetime, date
+
 from django.db import models
 
 from wagtail.core import blocks
@@ -13,6 +15,9 @@ from wagtail.admin.edit_handlers import (
     FieldPanel, MultiFieldPanel, InlinePanel, PageChooserPanel,
     StreamFieldPanel)
 from wagtail.search import index
+
+from blog.models import BlogPage
+from events.models import EventPage
 from utils.models import LinkFields, RelatedLink, CarouselItem
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 
@@ -100,6 +105,20 @@ class HomePage(Page):
     class Meta:
         verbose_name = "Homepage"
 
+    def get_context(self, request):
+        context = super().get_context(request)
+        upcoming_events = EventPage.objects.filter(tags__name='historical-society',
+                                                   date_from__gte=date.today()
+                                                   ).live().order_by('date_from')[:3]
+        need_past_events_count = 3 - len(upcoming_events)
+        past_events = EventPage.objects.filter(tags__name='historical-society',
+                                               date_from__lt=date.today()
+                                               ).live().order_by('-date_from')[:need_past_events_count]
+        context['events'] = list(upcoming_events) + list(past_events)
+        news = BlogPage.objects.filter().live().order_by('-date')[:1]
+        context['news'] = news
+        return context
+
 HomePage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('title_text', classname="full"),
@@ -121,14 +140,15 @@ class StandardIndexPageRelatedLink(Orderable, RelatedLink):
 
 class StandardIndexPage(Page):
     TEMPLATE_CHOICES = [
-        ('pages/standard_index_page.html', 'Default Template'),
-        ('pages/standard_index_page_grid.html', 'Grid Also In This Section'),
+        ('pages/standard_index_page.html', 'Standard page with sibling pages in sidebar'),
+        ('pages/standard_page_full.html', 'Standard Page, customized sidebar optional')
+
     ]
     subtitle = models.CharField(max_length=255, blank=True)
     intro = RichTextField(blank=True)
     template_string = models.CharField(
         max_length=255, choices=TEMPLATE_CHOICES,
-        default='pages/standard_index_page.html'
+        default='pages/standard_page_full.html'
     )
     feed_image = models.ForeignKey(
         Image,
@@ -138,6 +158,7 @@ class StandardIndexPage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    sidebar_text = RichTextField(blank=True)
 
     indexed_fields = ('intro', )
 
@@ -149,6 +170,7 @@ StandardIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('subtitle', classname="full title"),
     FieldPanel('intro', classname="full"),
+    FieldPanel('sidebar_text', classname="sidebar-content"),
     FieldPanel('template_string'),
     InlinePanel('related_links', label="Related links"),
 ]
@@ -214,11 +236,12 @@ class StandardPageRelatedLink(Orderable, RelatedLink):
 
 class StandardPage(Page):
     TEMPLATE_CHOICES = [
-        ('pages/standard_page.html', 'Default Template'),
-        ('pages/standard_page_full.html', 'Standard Page Full'),
+        ('pages/standard_page_full.html', 'Default Template, optional custom sidebar'),
+        ('pages/standard_page.html', 'Default Template, newsfeed sidebar'),
     ]
     subtitle = models.CharField(max_length=255, blank=True)
     intro = RichTextField(blank=True)
+    midpage_subtitle = models.CharField(max_length=255, blank=True)
     body = StreamField([
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
@@ -227,7 +250,7 @@ class StandardPage(Page):
     ])
     template_string = models.CharField(
         max_length=255, choices=TEMPLATE_CHOICES,
-        default='pages/standard_page.html'
+        default=TEMPLATE_CHOICES[0][0]
     )
     feed_image = models.ForeignKey(
         Image,
@@ -236,6 +259,7 @@ class StandardPage(Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    sidebar_text = RichTextField(blank=True, help_text="only include text/images in here if you want the side bar, otherwise it will render full page")
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
@@ -251,6 +275,8 @@ StandardPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('subtitle', classname="full title"),
     FieldPanel('intro', classname="full"),
+    FieldPanel('sidebar_text', classname="sidebar-content"),
+    FieldPanel('midpage_subtitle'),
     StreamFieldPanel('body'),
     FieldPanel('template_string'),
     InlinePanel('carousel_items', label="Carousel items"),
@@ -416,3 +442,14 @@ FaqsPage.content_panels = [
     FieldPanel('title', classname="full title"),
     StreamFieldPanel('body'),
 ]
+
+
+class StoreFrontPage(Page):
+
+    intro = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('intro', classname='full'),
+    ]
+
+    subpage_types = ['products.ProductIndexPage']

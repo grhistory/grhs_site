@@ -1,3 +1,5 @@
+import random
+
 from django import template
 from datetime import date
 from wagtail.documents.models import Document
@@ -8,6 +10,12 @@ from pages.models import Testimonial, Advert
 
 register = template.Library()
 
+
+@register.simple_tag
+def random_int(a, b=None):
+    if b is None:
+        a, b = 0, a
+    return random.randint(a, b)
 
 @register.simple_tag(takes_context=True)
 def get_contact_fields(context):

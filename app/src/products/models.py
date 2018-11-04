@@ -36,6 +36,8 @@ class ProductIndexPage(Page):
 
     indexed_fields = ('intro', )
 
+    subpage_types = ['ProductPage']
+
     @property
     def products(self):
         # Get list of live blog pages that are descendants of this page
@@ -151,5 +153,15 @@ class PaypalSettings(BaseSetting):
     identity_token = models.CharField(
         max_length=255,
         help_text='Enter your Paypal payment data transfer identity token'
+    )
+    url = models.CharField(
+        max_length=255,
+        help_text='Enter the Paypal URL',
+        default='www.sandbox.paypal.com'
+    )
+    email = models.CharField(
+            max_length=255,
+            help_text='Enter your Paypal email address',
+            default=''
     )
 

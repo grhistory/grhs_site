@@ -23,8 +23,11 @@ urlpatterns = [
     url(r'^django-admin/', (admin.site.urls)),
 
     url(r'^admin/', include(wagtailadmin_urls)),
-    url(r'^payment', paypal_views.membership),
+
+    url(r'^payment/membership/(?P<id>\d+)', paypal_views.membership),
+    url(r'^payment/donation/(?P<id>\d+)', paypal_views.donation),
     url(r'^paypal', paypal_views.paypal),
+
     url(r'^search/$', search_views.search, name='search'),
     url(r'^documents/', include(wagtaildocs_urls)),
 

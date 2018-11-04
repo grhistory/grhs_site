@@ -5,11 +5,14 @@
 
 {% block body_class %}template-blogpage{% endblock %}
 
+{% block header %}
+  {{ page.title }}
+{% endblock %}
+
 {% block content %}
 <div id="content" class="grid-container">
     <div class="grid-x grid-padding-x">
         <div id="standard_page" class="medium-12 cell">
-          <h1>{{ page.title }}</h1>
           <h3>{{ page.winner }}</h3>
           <div class="intro">{{ page.intro }}</div>
 

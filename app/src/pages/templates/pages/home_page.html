@@ -13,16 +13,16 @@
 			<div class="orbit-wrapper">
 				<ul class="orbit-container">
 					{% for block in self.content_items.all %}
-					{% image block.image width-400 as carousel_background %}
+					{% image block.image width-1280 as carousel_background %}
 					<li class="orbit-slide carousel-slide" style="background-image: url('{{carousel_background.url}}')">
-							<div class="carousel-sidebar">
-								<div class="caption">
-									<h3>{{ block.title}}</h3>
-									<hr />
-									{{ block.content|richtext }}
-									<a href="{{ block.link }}" class="button secondary" target="_blank"><strong>Learn More</strong></a>
-								</div>
+						<div class="carousel-sidebar">
+							<div class="caption">
+								<h3>{{ block.title}}</h3>
+								<hr />
+								{{ block.content|richtext }}
+								<a href="{{ block.link }}" class="button blue" target="_blank">Learn More</a>
 							</div>
+						</div>
 					</li>
 					{% endfor %}
 				</ul>
@@ -40,16 +40,51 @@
 
 	</div>
 
-	<div class="grid-x grid-padding-x align-center">
-		<div class="medium-9 cells">
-			<center>
-				<h3>{{ self.title_text|richtext }}</h3>
-				{{ self.body|richtext }}
-			</center>
+	<section class="events">
+		<h3>Explore our Events</h3>
+		<hr />
+		<div class="row">
+			{% for event in events %}
+			{% image event.feed_image width-400 as event_background %}
+			<div class="medium-12 large-4 columns">
+				<a class="event-link" href="{{event.url}}">
+					<div class="event" style="background-image: url('{{event_background.url}}')">
+						<div class="event-blue-block">
+							<h4>{{ event.title }}</h4>
+							<div class="event-date">{{ event.date_from }}</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			{% endfor %}
 		</div>
+
+		<a href="TODO">View All Events</a>
+	</section>
+
+
+	<div class="yellow-banner">
+		<h3>Are&nbsp;you&nbsp;a&nbsp;student? Love&nbsp;History?</h3>
+		<a class="button yellow" href="">View Membership</a>
 	</div>
-</div>
 
-{% adverts %}
+	<section class="news">
+		<h3>History in the News</h3>
+		<hr />
+		{% for news_item in news %}
+		<div>
+			<div class="news-item row">
+				<div class="news-item-image">
+					{% image news_item.feed_image width-400 %}
+				</div>
+				<div class="news-item-summary">
+					<h4>{{ news_item.title }}</h4>
+					<div class="event-date">{{ news_item.intro|richtext }}</div>
+					<a href="{{ news_item.url }}">Read more</a>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</section>
 
-{% endblock %}
+	{% endblock %}

@@ -1,6 +1,15 @@
 @import "./settings";
 
 #home-page {
+  hr {
+    height: 3px;
+    width: 50px;
+    background-color: $red-dark;
+    color: $red-dark;
+    border: 0;
+    margin-bottom: 50px;
+  }
+
   .orbit-wrapper {
     position: relative;
   }
@@ -43,16 +52,15 @@
     }
 
     hr {
-      height: 3px;
-      width: 50px;
-      background-color: $red-dark;
-      color: $red-dark;
-      border: 0;
       margin: 20px 0 30px;
 
       @include breakpoint(small only) {
         margin: 20px auto 30px;
       }
+    }
+
+    .button {
+      margin-top: 20px;
     }
   }
 
@@ -98,6 +106,88 @@
           border-bottom-left-radius: 8px;
         }
       }
+    }
+  }
+
+  section {
+    padding: 50px;
+    text-align: center;
+    @include breakpoint(medium) {
+      padding: 50px 30px;
+    }
+    @include breakpoint(small) {
+      padding: 50px 20px;
+    }
+
+    h4 {
+      color: $blue-light;
+    }
+  }
+
+  .events {
+    .event-link:hover {
+      text-decoration: none;
+      .event-blue-block {
+        background-color: rgba($blue-light, 0.899);
+      }
+    }
+
+    .event {
+      background-color: $blue-light;
+      padding: 30px 0;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-size: cover;
+      margin-bottom: 30px;
+    }
+
+    .event-blue-block {
+      padding: 30px 20px;
+      background-color: rgba($blue-dark, 0.899);
+      color: $white;
+      h4 {
+        color: $yellow-light;
+      }
+    }
+  }
+
+  .news {
+    .news-item {
+      display: flex;
+      max-width: 900px;
+      margin: 50px auto;
+      text-align: left;
+    }
+
+    .news-item-image {
+      max-width: 30%;
+
+      @include breakpoint(small) {
+        width: 100%;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .news-item-summary {
+      flex: 1;
+      padding: 0 30px;
+      h4 {
+        color: $blue-dark;
+      }
+    }
+  }
+
+  .yellow-banner {
+    text-align: center;
+    background-color: $yellow-dark;
+    padding: 50px;
+    color: $white;
+    font-size: 1.3rem;
+    h3 {
+      color: $white;
     }
   }
 }

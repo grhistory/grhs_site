@@ -48,7 +48,7 @@
     	<div class="off-canvas-content" data-off-canvas-content>
 
         {% block header_area %}
-        <header>
+        <header class="num-{% random_int 1 12 %}">{# corresponds to static/img/sections-bgs/* choices #}
           <h1 class="grid-container">{% block header %}{% endblock %}</h1>
         </header>
         {% endblock %}
@@ -57,29 +57,29 @@
 
       	<a href="#" class="scrollup"><img src="{% static 'img/top.png' %}"></i></a>
 
-      	<footer id="site-footer" role="contentinfo" class="hide-for-print">
+      	<footer role="contentinfo" class="hide-for-print site-footer">
   	  		<div class="grid-container">
   	        	<div class="grid-x grid-padding-x align-spaced">
   	          		<div id="contact-us" class="medium-3 cell">
-  	            		<h5><strong>Get in Contact</strong></h5>
+  	            		<h5>Get in Contact</h5>
   	            		{% get_contact_fields as contact %}
   	            		{% include "contact/includes/contact_card.html" with contact=contact only %}
   	          		</div>
   	          		<div id="sitemap" class="medium-4 cell hide-for-small-only">
-	            		<h5><strong>Show Your Support</strong></h5>
-                    <div class="clearfix">
-                        <a href="/donate" class="button secondary float-left">Donate</a>
-                        <a href="/join" class="button secondary float-right">View Membership</a>
+	            		<h5>Show Your Support</h5>
+                    <div class="button-row">
+                        <a href="/donate" class="button blue">Donate</a>
+                        <a href="/membership" class="button blue">View Membership</a>
                     </div>
-	            		<h5><strong>Search</strong></h5>
-						<form class="clearfix" action="/search/">
-							<input class="float-left" type=search name="q" value="">
-							<button class="float-right button secondary" type="submit">Search</button>
-						</form>
+	            		<h5>Search</h5>
+									<form class="button-row" action="/search/">
+										<input class="float-left" type=search name="q" value="">
+										<button class="float-right button blue" type="submit">Search</button>
+									</form>
 	          		</div>
 
-	          		<div class="medium-3 cell text-center">
-  	            		<h5><strong>Follow Us</strong></h5>
+	          		<div class="medium-3 cell">
+  	            		<h5>Follow Us</h5>
   	            		<div class="social">
   	            			{% include "contact/includes/social.html" %}
   	            		</div>
@@ -113,6 +113,16 @@
             <link href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css" type="text/css" rel="stylesheet" />
         {% endif %}
 
-  		{% block extra_js %}{% endblock %}
+		  {% block extra_js %}
+		  <script type="text/javascript">
+				$(document).ready(function () {
+					if (window.location.href.indexOf("store") != -1 | $(".snipcart-total-items").text() != 0 ) {
+						$(".snipcart-summary").show();
+					} else {
+						$(".snipcart-summary").hide();
+					}
+				})
+			</script>
+		  {% endblock %}
 	</body>
 </html>

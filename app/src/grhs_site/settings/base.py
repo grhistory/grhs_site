@@ -70,6 +70,7 @@ INSTALLED_APPS = (
     'search',
     'utils',
     'membership',
+    'donation',
 
     'wagtail.contrib.routable_page',
     'wagtail.contrib.sitemaps',

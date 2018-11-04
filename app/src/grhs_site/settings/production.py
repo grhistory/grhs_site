@@ -23,6 +23,7 @@ DATABASES['default'] = env.db('PROD_DATABASE_URL')
 
 INSTALLED_APPS += (
     "wagtail.contrib.frontend_cache",
+    'gunicorn',
 )
 
 MIDDLEWARE_CLASSES = (

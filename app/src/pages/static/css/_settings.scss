@@ -77,13 +77,6 @@ $gray-dark: #373d4a;
 $gray-light: #727d83;
 $cream: #FFFDF3;
 
-$colors-dark: (
-  $blue-dark,
-  $yellow-dark,
-  $red-dark,
-  $green-dark,
-);
-
 
 // 1. Global
 // ---------
@@ -192,8 +185,8 @@ $code-border: 1px solid $medium-gray;
 $code-padding: rem-calc(2 5 1);
 $anchor-color: $primary-color;
 $anchor-color-hover: scale-color($anchor-color, $lightness: -14%);
-$anchor-text-decoration: none;
-$anchor-text-decoration-hover: none;
+$anchor-text-decoration: underline;
+$anchor-text-decoration-hover: underline;
 $hr-width: $global-width;
 $hr-border: 1px solid $medium-gray;
 $hr-margin: rem-calc(20) auto;
