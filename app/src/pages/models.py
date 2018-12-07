@@ -89,8 +89,9 @@ class HomePageRelatedLink(Orderable, RelatedLink):
 
 
 class HomePage(Page):
-    title_text = RichTextField(null=True, blank=True)
-    body = RichTextField(null=True, blank=True)
+    show_announcement = models.BooleanField(default=False)
+    title_text = RichTextField(null=True, blank=True, verbose_name='Special announcement title')
+    body = RichTextField(null=True, blank=True, verbose_name='Special announcement text')
     feed_image = models.ForeignKey(
         Image,
         help_text="An optional image to represent the page",
@@ -121,6 +122,7 @@ class HomePage(Page):
 
 HomePage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('show_announcement'),
     FieldPanel('title_text', classname="full"),
     FieldPanel('body', classname="full"),
     InlinePanel('carousel_items', label="Carousel items"),
@@ -140,15 +142,16 @@ class StandardIndexPageRelatedLink(Orderable, RelatedLink):
 
 class StandardIndexPage(Page):
     TEMPLATE_CHOICES = [
-        ('pages/standard_index_page.html', 'Standard page with sibling pages in sidebar'),
-        ('pages/standard_page_full.html', 'Standard Page, customized sidebar optional')
+        ('pages/standard_index_page.html', 'Child pages in sidebar'),
+        ('pages/standard_page_full.html', 'Customized sidebar optional')
 
     ]
-    subtitle = models.CharField(max_length=255, blank=True)
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     intro = RichTextField(blank=True)
     template_string = models.CharField(
         max_length=255, choices=TEMPLATE_CHOICES,
-        default='pages/standard_page_full.html'
+        default='pages/standard_page_full.html',
+        verbose_name='Page Layout'
     )
     feed_image = models.ForeignKey(
         Image,
@@ -182,9 +185,11 @@ StandardIndexPage.promote_panels = [
 
 
 class AwardIndexPage(Page):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     description = RichTextField()
 
     content_panels = Page.content_panels + [
+        FieldPanel('subtitle', classname="subtitle"),
         FieldPanel('description')
     ]
 
@@ -203,6 +208,7 @@ class AwardIndexPage(Page):
 
 
 class AwardPage(Page):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     winner = models.CharField(max_length=255)
     year = models.IntegerField()
     body = RichTextField(blank=True)
@@ -215,6 +221,7 @@ class AwardPage(Page):
     ]
 
     content_panels = Page.content_panels + [
+        FieldPanel('subtitle', classname="subtitle"),
         FieldPanel('winner'),
         FieldPanel('year'),
         FieldPanel('body'),
@@ -236,12 +243,12 @@ class StandardPageRelatedLink(Orderable, RelatedLink):
 
 class StandardPage(Page):
     TEMPLATE_CHOICES = [
-        ('pages/standard_page_full.html', 'Default Template, optional custom sidebar'),
-        ('pages/standard_page.html', 'Default Template, newsfeed sidebar'),
+        ('pages/standard_page_full.html', 'Optional custom sidebar'),
+        ('pages/standard_page.html', 'Newsfeed sidebar'),
     ]
-    subtitle = models.CharField(max_length=255, blank=True)
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     intro = RichTextField(blank=True)
-    midpage_subtitle = models.CharField(max_length=255, blank=True)
+    midpage_subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     body = StreamField([
         ('paragraph', blocks.RichTextBlock()),
         ('image', ImageChooserBlock()),
@@ -250,7 +257,8 @@ class StandardPage(Page):
     ])
     template_string = models.CharField(
         max_length=255, choices=TEMPLATE_CHOICES,
-        default=TEMPLATE_CHOICES[0][0]
+        default=TEMPLATE_CHOICES[0][0],
+        verbose_name='Page Layout'
     )
     feed_image = models.ForeignKey(
         Image,
@@ -294,6 +302,7 @@ class VideoGalleryPageCarouselItem(Orderable, CarouselItem):
 
 
 class VideoGalleryPage(Page):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     intro = RichTextField(blank=True)
     feed_image = models.ForeignKey(
         Image,
@@ -310,6 +319,7 @@ class VideoGalleryPage(Page):
 
 VideoGalleryPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('subtitle', classname="subtitle"),
     FieldPanel('intro', classname="full"),
     InlinePanel('carousel_items', label="Carousel items"),
 
@@ -321,6 +331,7 @@ VideoGalleryPage.promote_panels = Page.promote_panels + [
 
 
 class TestimonialPage(Page):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     intro = RichTextField(blank=True)
     feed_image = models.ForeignKey(
         Image,
@@ -337,6 +348,7 @@ class TestimonialPage(Page):
 
 TestimonialPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('subtitle', classname="subtitle"),
     FieldPanel('intro', classname="full"),
 ]
 
@@ -433,6 +445,8 @@ register_snippet(Advert)
 # Faqs Page
 
 class FaqsPage(Page):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
+
     body = StreamField([
         ('faq_question', blocks.CharBlock(classname="full title")),
         ('faq_answer', blocks.RichTextBlock()),
@@ -445,10 +459,11 @@ FaqsPage.content_panels = [
 
 
 class StoreFrontPage(Page):
-
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
+        FieldPanel('subtitle', classname="subtitle"),
         FieldPanel('intro', classname='full'),
     ]
 

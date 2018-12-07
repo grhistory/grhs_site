@@ -6,7 +6,7 @@
 {% block header %}
   {% if self.feed_image %}
   {% else %}
-      {{ page.title }}
+  {% if page.subtitle %} {{ page.subtitle }}{% else %}{{ page.title }}{% endif %}
   {% endif %}
 {% endblock %}
 

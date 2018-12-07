@@ -8,6 +8,17 @@
 {% block content %}
 
 <div id="home-page">
+  {% if self.show_announcement %}
+    <div class="grid-x grid-padding-x align-center home-announcement">
+      <div class="medium-9 cells">
+      <center>
+          <h3>{{ self.title_text|richtext }}</h3>
+          {{ self.body|richtext }}
+      </center>
+      </div>
+    </div>
+  {% endif %}
+
 	<div id="intro">
 		<div class="orbit clean-hero-slider" role="region" aria-label="Homepage Slider" data-orbit data-options="animInFromLeft:fade-in; animInFromRight:fade-in; animOutToLeft:fade-out; animOutToRight:fade-out;">
 			<div class="orbit-wrapper">
@@ -62,10 +73,9 @@
 		<a href="TODO">View All Events</a>
 	</section>
 
-
 	<div class="yellow-banner">
-		<h3>Are&nbsp;you&nbsp;a&nbsp;student? Love&nbsp;History?</h3>
-		<a class="button yellow" href="">View Membership</a>
+		<h3>Are you a student? Love History?</h3>
+		<a class="button yellow" href="{% slugurl 'membership' %}">View Membership</a>
 	</div>
 
 	<section class="news">

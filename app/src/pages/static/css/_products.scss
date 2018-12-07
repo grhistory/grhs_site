@@ -1,0 +1,83 @@
+@import "./settings";
+
+// PRODUCT CARD
+
+$card-product-bg: $card-background;
+$card-product-text-color: $body-font-color;
+$card-padding: 1.5em;
+
+.product-grid {
+  width: 100%;
+}
+
+.card-product {
+  position: relative;
+
+  a {
+    text-decoration: none;
+  }
+
+  &:hover {
+    border-color: $green-light;
+    .card-product-image {
+      opacity: 1;
+    }
+  }
+}
+
+.card-product-actions {
+  @include card-divider;
+  background: $card-product-bg;
+  display: flex;
+}
+
+.card-product-image-wrapper {
+  background-size: 120%;
+  background-position: center;
+  filter: blur(4px);
+  overflow: hidden;
+  margin: -1em -1em 0 -1em;
+  height: 12.5em;
+}
+
+.card-product-image-wrapper-inner {
+  padding: $card-padding;
+  background-color: rgba($blue-dark, 0.4);
+  height: 13.5em;
+}
+
+.card-product-image {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  background-position: top center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 12.5em;
+  width: 100%;
+  opacity: 0.75;
+  transition: all 0.25s ease;
+}
+
+.card-product-name {
+  margin-bottom: 0;
+  font-weight: 300;
+  padding: 20px;
+}
+
+.card-product-button {
+  margin-bottom: 0;
+  flex: 1 0 0;
+
+  + .card-product-button {
+    margin-left: 1rem;
+  }
+}
+
+.card-product-info {
+  font-size: 0.875rem;
+  letter-spacing: 1px;
+  opacity: 0.8;
+}
+
+// END PRODUCT CARD

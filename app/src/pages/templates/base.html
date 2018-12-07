@@ -1,51 +1,51 @@
-{% load compress static wagtailuserbar wagtailsettings_tags navigation_tags settings_tags grhs_site_utils %}
+{% load compress static wagtailuserbar wagtailsettings_tags navigation_tags settings_tags grhs_site_utils wagtailcore_tags %}
 {% get_settings %}
 
 <!DOCTYPE html>
 <html lang="en">
-  	<head>
-    	<meta charset="utf-8" />
-    	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    	<title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}GRHS - {{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
-    	<meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}">
-    	<meta name="viewport" content="width=device-width, initial-scale=1" />
-    	<link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}"/>
-    	{% block canonical_url %}{% endblock %}
+    <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }} - Grand Rapids Historical Society{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
+      <meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}">
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}"/>
+      {% block canonical_url %}{% endblock %}
 
-		{% block cdn_css %}
-			<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" />
-			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.min.css" />
-			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/2.0.3/motion-ui.min.css" />
+    {% block cdn_css %}
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.min.css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/motion-ui/2.0.3/motion-ui.min.css" />
 
       <link href="https://fonts.googleapis.com/css?family=Eczar|IBM+Plex+Sans" rel="stylesheet">
-		{% endblock %}
+    {% endblock %}
 
-		{% compress css %}
-			<link rel="stylesheet" type="text/x-scss" href="{% static 'css/app.scss' %}">
-		{% endcompress %}
+    {% compress css %}
+      <link rel="stylesheet" type="text/x-scss" href="{% static 'css/app.scss' %}">
+    {% endcompress %}
 
-    	{% block extra_css %}{% endblock %}
+      {% block extra_css %}{% endblock %}
 
-    	{% block facebook_og %}
-    		{% include "utils/includes/facebook_opengraph.html" %}
-    	{% endblock %}
+      {% block facebook_og %}
+        {% include "utils/includes/facebook_opengraph.html" %}
+      {% endblock %}
 
-    	{% block twitter_og %}
-    		{% include "utils/includes/twitter_cards.html" %}
-    	{% endblock %}
+      {% block twitter_og %}
+        {% include "utils/includes/twitter_cards.html" %}
+      {% endblock %}
 
-		{% block google_analytics %}
-    		{% include "utils/includes/google_analytics.html" %}
-    	{% endblock %}
-	</head>
+    {% block google_analytics %}
+        {% include "utils/includes/google_analytics.html" %}
+      {% endblock %}
+  </head>
 
-  	<body class="{% block body_class %}{% endblock %}">
-    	{% wagtailuserbar %}
+    <body class="{% block body_class %}{% endblock %}">
+      {% wagtailuserbar %}
 
-    	{% get_site_root as site_root %}
-    	{% top_menu parent=site_root calling_page=self %}
+      {% get_site_root as site_root %}
+      {% top_menu parent=site_root calling_page=self %}
 
-    	<div class="off-canvas-content" data-off-canvas-content>
+      <div class="off-canvas-content" data-off-canvas-content>
 
         {% block header_area %}
         <header class="num-{% random_int 1 12 %}">{# corresponds to static/img/sections-bgs/* choices #}
@@ -53,59 +53,59 @@
         </header>
         {% endblock %}
 
-      	{% block content %}{% endblock %}
+        {% block content %}{% endblock %}
 
-      	<a href="#" class="scrollup"><img src="{% static 'img/top.png' %}"></i></a>
+        <a href="#" class="scrollup"><img src="{% static 'img/top.png' %}"></i></a>
 
-      	<footer role="contentinfo" class="hide-for-print site-footer">
-  	  		<div class="grid-container">
-  	        	<div class="grid-x grid-padding-x align-spaced">
-  	          		<div id="contact-us" class="medium-3 cell">
-  	            		<h5>Get in Contact</h5>
-  	            		{% get_contact_fields as contact %}
-  	            		{% include "contact/includes/contact_card.html" with contact=contact only %}
-  	          		</div>
-  	          		<div id="sitemap" class="medium-4 cell hide-for-small-only">
-	            		<h5>Show Your Support</h5>
+        <footer role="contentinfo" class="hide-for-print site-footer">
+          <div class="grid-container">
+              <div class="grid-x grid-padding-x align-spaced">
+                  <div id="contact-us" class="medium-3 cell">
+                    <h5>Get in Contact</h5>
+                    {% get_contact_fields as contact %}
+                    {% include "contact/includes/contact_card.html" with contact=contact only %}
+                  </div>
+                  <div id="sitemap" class="medium-4 cell hide-for-small-only">
+                  <h5>Show Your Support</h5>
                     <div class="button-row">
-                        <a href="/donate" class="button blue">Donate</a>
-                        <a href="/membership" class="button blue">View Membership</a>
+                        <a href="{% slugurl 'donate' %}" class="button blue">Donate</a>
+                        <a href="{% slugurl 'membership' %}" class="button blue">Join</a>
                     </div>
-	            		<h5>Search</h5>
-									<form class="button-row" action="/search/">
-										<input class="float-left" type=search name="q" value="">
-										<button class="float-right button blue" type="submit">Search</button>
-									</form>
-	          		</div>
+                  <h5>Search</h5>
+                  <form class="button-row" action="/search/">
+                    <input class="float-left" type=search name="q" value="">
+                    <button class="float-right button blue" type="submit">Search</button>
+                  </form>
+                </div>
 
-	          		<div class="medium-3 cell">
-  	            		<h5>Follow Us</h5>
-  	            		<div class="social">
-  	            			{% include "contact/includes/social.html" %}
-  	            		</div>
-	          		</div>
-  	        	</div>
-  	        </div>
-  	  	</footer>
+                <div class="medium-3 cell">
+                    <h5>Follow Us</h5>
+                    <div class="social">
+                      {% include "contact/includes/social.html" %}
+                    </div>
+                </div>
+              </div>
+            </div>
+        </footer>
     </div>
   </div>
 
-		{% block cdn_js %}
-  			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  			<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.min.js"></script>
-  			<script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/5.1.0/what-input.min.js"></script>
-  		{% endblock %}
+    {% block cdn_js %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/js/lightbox.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/5.1.0/what-input.min.js"></script>
+      {% endblock %}
 
-  		{% compress js %}
-  			<script src="{% static 'node_modules/foundation-sites/dist/js/foundation.min.js' %}"></script>
-  			<script type="text/javascript" src="{% static 'js/app.js' %}"></script>
-  		{% endcompress %}
+      {% compress js %}
+        <script src="{% static 'node_modules/foundation-sites/dist/js/foundation.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+      {% endcompress %}
 
-  		{% block site_js %}
-  			<script>
-    			$(document).foundation();
-  			</script>
-  		{% endblock %}
+      {% block site_js %}
+        <script>
+          $(document).foundation();
+        </script>
+      {% endblock %}
 
         {# Snipcart #}
         {% if settings.products.SnipcartSettings.api_key %}
@@ -113,16 +113,16 @@
             <link href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css" type="text/css" rel="stylesheet" />
         {% endif %}
 
-		  {% block extra_js %}
-		  <script type="text/javascript">
-				$(document).ready(function () {
-					if (window.location.href.indexOf("store") != -1 | $(".snipcart-total-items").text() != 0 ) {
-						$(".snipcart-summary").show();
-					} else {
-						$(".snipcart-summary").hide();
-					}
-				})
-			</script>
-		  {% endblock %}
-	</body>
+      {% block extra_js %}
+      <script type="text/javascript">
+        $(document).ready(function () {
+          if (window.location.href.indexOf("store") != -1 | $(".snipcart-total-items").text() != 0 ) {
+            $(".snipcart-summary").show();
+          } else {
+            $(".snipcart-summary").hide();
+          }
+        })
+      </script>
+      {% endblock %}
+  </body>
 </html>

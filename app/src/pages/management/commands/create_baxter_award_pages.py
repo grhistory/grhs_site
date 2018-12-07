@@ -7,7 +7,7 @@ from django.core.management.base import BaseCommand
 from wagtail.images.models import Image
 
 
-from pages.models import AwardPage, AwardIndexPage, HomePage
+from pages.models import AwardPage, AwardIndexPage, HomePage, StandardIndexPage
 
 DEFAULT_AWARD_TITLE = 'Baxter Awards'
 DEFAULT_DESCRIPTION = """
@@ -25,9 +25,9 @@ class Command(BaseCommand):
         data_src = os.path.join(settings.PROJECT_ROOT, 'data')
 
         AwardIndexPage.objects.all().delete()
-        root_page = HomePage.objects.filter().get()
+        root_page = StandardIndexPage.objects.filter(slug='about').get()
 
-        index_page = AwardIndexPage(title=DEFAULT_AWARD_TITLE, description=DEFAULT_DESCRIPTION, show_in_menus=True)
+        index_page = AwardIndexPage(title=DEFAULT_AWARD_TITLE, description=DEFAULT_DESCRIPTION)
         root_page.add_child(instance=index_page)
         index_page.save_revision().publish()
 

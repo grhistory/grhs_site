@@ -4,19 +4,19 @@
 {% block breadcrumbs %}{% endblock %}
 
 {% block header %}
-  {{ self.title }}
+{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}
 {% endblock %}
 
 
 {% block content %}
-	<div id="content" class="grid-container">
-		<div class="grid-x grid-padding-x align-center">
-			<div class="medium-9 cell">
+	<div id="content">
+		<div class="row">
+			<div class="medium-10 cell">
 				<div class="grid-x grid-padding-x">
 		        	<div class="medium-7 cell">
 		        		{% block contact_content %}{% endblock %}
 		    		</div>
-		    		<aside id="sidebar" class="hide-for-print hide-for-small-only medium-5 cell">
+		    		<aside id="sidebar" class="hide-for-small-only medium-5 cell">
 		    			{% include "contact/includes/sidebar.html" %}
 		    		</aside>
 		    	</div>

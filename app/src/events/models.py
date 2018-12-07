@@ -30,6 +30,7 @@ class EventIndexPageRelatedLink(Orderable, RelatedLink):
 
 
 class EventIndexPage(Page):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     intro = RichTextField(blank=True)
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -44,43 +45,56 @@ class EventIndexPage(Page):
     ]
 
     @property
-    def events(self):
-        events = EventPage.objects.live().descendant_of(self)
+    def future_events(self):
+        events = EventPage.objects.live()
         events = events.filter(date_from__gte=date.today())
         events = events.order_by('date_from')
 
         return events
 
+    @property
+    def past_events(self):
+        events = EventPage.objects.live()
+        events = events.filter(date_from__lte=date.today())
+        events = events.order_by('-date_from')
+
+        return events
+
     def get_context(self, request):
-            # Get events
-            events = self.events
-            # Filter by tag
-            tag = request.GET.get('tag')
-            if tag:
-                events = events.filter(tags__name=tag)
+        # Get events
+        events = self.future_events
+        past = request.GET.get('past')
 
-            # Pagination
-            page = request.GET.get('page')
-            paginator = Paginator(events, 9)  # Show 10 events per page
-            try:
-                events = paginator.page(page)
-            except PageNotAnInteger:
-                events = paginator.page(1)
-            except EmptyPage:
-                events = paginator.page(paginator.num_pages)
+        if past:
+            events = self.past_events
+        # Filter by tag
+        tag = request.GET.get('tag')
+        if tag:
+            events = events.filter(tags__name=tag)
 
-            # Update template context
-            context = super(EventIndexPage, self).get_context(request)
-            context['events'] = events
-            context['tags'] = Tag.objects.filter(
-                events_eventpagetag_items__isnull=False,
-                events_eventpagetag_items__content_object__live=True
-            ).distinct().order_by('name')
-            return context
+        # Pagination
+        page = request.GET.get('page')
+        paginator = Paginator(events, 9)  # Show 10 events per page
+        try:
+            events = paginator.page(page)
+        except PageNotAnInteger:
+            events = paginator.page(1)
+        except EmptyPage:
+            events = paginator.page(paginator.num_pages)
+
+        # Update template context
+        context = super(EventIndexPage, self).get_context(request)
+        context['events'] = events
+        context['tags'] = Tag.objects.filter(
+            events_eventpagetag_items__isnull=False,
+            events_eventpagetag_items__content_object__live=True
+        ).distinct().order_by('name')
+        return context
 
 
 EventIndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('subtitle', classname="subtitle"),
     FieldPanel('intro', classname="full"),
     InlinePanel('related_links', label="Related links"),
 ]
@@ -128,6 +142,7 @@ class EventPageTag(TaggedItemBase):
 
 
 class EventPage(Page):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     date_from = models.DateField("Start date")
     date_to = models.DateField(
         "End date",
@@ -188,6 +203,7 @@ class EventPage(Page):
 
 EventPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('subtitle', classname="subtitle"),
     FieldPanel('date_from'),
     FieldPanel('date_to'),
     FieldPanel('time_from'),

@@ -22,6 +22,7 @@ class Donation(models.Model):
     paid_on = models.DateField(blank=True, null=True)
 
 class DonationPage(Page):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     intro = RichTextField(blank=True)
 
     # Note that there's nothing here for specifying the actual form fields -
@@ -30,6 +31,7 @@ class DonationPage(Page):
     # the code to make them work anyway.
 
     content_panels = Page.content_panels + [
+        FieldPanel('subtitle', classname="subtitle"),
         FieldPanel('intro', classname="full"),
     ]
 

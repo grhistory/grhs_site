@@ -6,26 +6,30 @@
         <div class="grid-x grid-padding-x align-center">
             <div class="medium-12 cell">
                 <center>
-                    <h3>{{ self.title }}</h3>
+                    <h3>{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}</h3>
                     {{ self.intro|richtext }}
                 </center>
             </div>
 
-            <div class="product grid-x grid-padding-x medium-up-3" data-equalizer>
+            <div class="product-grid grid-x grid-padding-x medium-up-3" data-equalizer>
                 {% for product in products %}
                     <div class="cell">
-                        <a style="text-decoration:none;" href="{% pageurl product %}">
-                            <div class="card-user-profile card text-center" style="border-radius: 3px;">
-                                {% image product.image fill-500x250 %}
-                                <div class="card-user-profile-content card-section" style="padding: 0;">
-                                    <p class="card-user-profile-name" style="margin-bottom: 0;">{{ product.title }}</p>
+                        <div class="card-product card text-center">
+                            <a href="{% pageurl product %}">
+                                {% image product.image width-400 as product_image %}
+                                <div class="card-product-image-wrapper" style="background-image: url('{{  product_image.url}}')">
+                                    <div class="card-product-image-wrapper-inner"></div>
+                                </div>
+                                <div class="card-product-image" style="background-image: url('{{  product_image.url}}')"></div>
+                                <div class="card-product-content card-section">
+                                    <p class="card-product-name">{{ product.title }}</p>
                                     {% if product.price %}<p>Price: ${{ product.price }}</p>{% endif %}
                                 </div>
-                                <div class="card-user-profile-actions">
-                                    <a href="{% pageurl product %}" class="card-user-profile-button button hollow secondary" style="border-radius: 3px;">More Info</a>
+                                <div class="card-product-actions">
+                                    <a href="{% pageurl product %}" class="card-product-button button hollow secondary">More Info</a>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
                 {% endfor %}
             </div>

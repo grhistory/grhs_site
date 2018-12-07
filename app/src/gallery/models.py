@@ -19,6 +19,7 @@ IMAGE_ORDER_TYPES = (
 
 
 class GalleryIndex(Page):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     intro = RichTextField(
         blank=True,
         verbose_name=_('Intro text'),
@@ -49,6 +50,7 @@ class GalleryIndex(Page):
     )
 
     content_panels = Page.content_panels + [
+        FieldPanel('subtitle', classname="subtitle"),
         FieldPanel('intro', classname='full title'),
         FieldPanel('collection'),
         FieldPanel('images_per_page', classname='full title'),

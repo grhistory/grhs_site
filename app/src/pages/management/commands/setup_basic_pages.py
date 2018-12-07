@@ -1,5 +1,6 @@
 import csv
 import os
+import json
 
 from django.conf import settings
 from django.core.files.images import ImageFile
@@ -7,9 +8,10 @@ from django.core.management.base import BaseCommand
 from wagtail.images.models import Image
 
 from blog.models import BlogPage, BlogIndexPage
-from board.models import BoardPage
+from board.models import BoardPage, BoardMemberBlock
 from contact.models import FormPage, ContactPage
 from documents_gallery.models import DocumentsIndexPage, DocumentsPage
+from donation.models import DonationPage
 from events.models import EventPage, EventIndexPage
 from membership.models import MembershipApplication
 from pages.models import HomePage, StandardIndexPage, StandardPage, SiteBranding
@@ -42,6 +44,10 @@ class Command(BaseCommand):
         news_index.show_in_menus = False
         news_index.save()
 
+        contact = ContactPage.objects.filter().get()
+        contact.title = 'Contact'
+        contact.save()
+
         # set logo
         branding = SiteBranding.objects.filter().get()
         with open(os.path.join(settings.PROJECT_ROOT, 'media', 'original_images', 'grhs_logo.png'), 'rb') as f:
@@ -52,23 +58,42 @@ class Command(BaseCommand):
 
         # add some new pages
         root_page = HomePage.objects.filter().get()
+        root_page.show_in_menus = False
+        root_page.save()
 
-        about_us = StandardPage(title='About Us', slug='about-us', show_in_menus=True)
+        about_us = StandardIndexPage(template_string='pages/standard_index_page.html',
+                                     title='About', slug='about', show_in_menus=True)
         root_page.add_child(instance=about_us)
 
-        board = BoardPage(title='Board of Trustees', show_in_menus=True)
+        board_members = self.get_board_members()
+        board = BoardPage(title='Board of Trustees',
+                          body=json.dumps([
+                                {'type': 'board_members', 'value': board_members}
+                          ]),
+                          show_in_menus=True)
         about_us.add_child(instance=board)
 
-        history_gr = StandardPage(title='History of GR', slug='history-of-gr', show_in_menus=True)
+        history_gr = StandardPage(title='GR History', slug='history', show_in_menus=True)
         root_page.add_child(instance=history_gr)
 
-        support = StandardPage(title='Support', slug='support', show_in_menus=True)
-        root_page.add_child(instance=support)
+        donate = DonationPage(title='Donate', slug='donate', show_in_menus=True)
+        root_page.add_child(instance=donate)
 
-        membership = MembershipApplication(title='Membership', slug='membership', show_in_menus=True,
+        join = MembershipApplication(title='Join', slug='membership', show_in_menus=True,
                                            thankyou_page_title='Thanks!')
-        support.add_child(instance=membership)
+        root_page.add_child(instance=join)
 
-        #donate = ...
-        #support.add_child(instance=donate)
+    def get_board_members(self):
+        board_members_csv = os.path.join(settings.PROJECT_ROOT, 'data', 'grhistorysociety_board.csv')
 
+        board_members_list = []
+        with open(board_members_csv, 'r') as f:
+            board_members = csv.DictReader(f)
+            for member in board_members:
+                # The fields we add here need to match the fields on BoardMemberBlock, or else it will fail silently :(
+                board_members_list.append({
+                    'name': member['name'],
+                    'role': member['position']
+                })
+
+        return board_members_list

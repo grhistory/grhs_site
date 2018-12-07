@@ -3,7 +3,7 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="@{{ settings.pages.SocialMediaSettings.twitter_name }}" />
 <meta name="twitter:creator" content="@{{settings.pages.SocialMediaSettings.twitter_name }}" />
-<meta name="twitter:title" content="{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}"/>
+<meta name="twitter:title" content="{% if self.seo_title %}{{ self.seo_title }}{% else %}{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}{% endif %}"/>
 <meta name="twitter:description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}"/>
 {% if self.feed_image %}
 {% image self.feed_image width-1200 as img %}

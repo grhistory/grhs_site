@@ -4,7 +4,7 @@
 {% block product_content %}
     <div class="medium-12 columns">
         <center>
-            <h3>{{ self.title }}</h3>
+            <h3>{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}</h3>
             <h5>{% include "products/includes/intro.html" with intro=self.intro only %}</h5>
         </center>
 
@@ -15,7 +15,7 @@
                 <div class="medium-12 columns">
             {% endif %}
             {% if self.image %}
-                {% image self.image fill-600x550 as photo %}
+                {% image self.image height-400 as photo %}
                 <img src="{{ photo.url }}" width="{{ photo.width }}" height="{{ photo.height }}" alt="{{ photo.alt }}" class="img-thumbnail" style="float: left;" />
             {% endif %}
 
@@ -30,7 +30,6 @@
                         data-item-id="{{ page.id }}"
                         data-item-url="{{ page.get_full_url }}"
                         data-item-price="{{ page.price }}"
-                        data-item-description="{{ page.description}}"
                         data-item-image="{{ self.image.url }}"
                         <i class="icon icon-plus"></i>
                         Add to cart

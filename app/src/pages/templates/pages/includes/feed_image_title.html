@@ -5,7 +5,7 @@
 	<div class="hero-section page" style="background-image: url('{{ feed_image.url }}');">
 		<div class="hero-content">
 	  		<div class="hero-section-text">
-	    		<center><h1>{{ self.title }}</h1></center>
+	    		<center><h1>{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}</h1></center>
 	  		</div>
 		</div>
 	</div>

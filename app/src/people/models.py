@@ -25,7 +25,7 @@ class PersonIndexPageRelatedLink(Orderable, RelatedLink):
 
 
 class PersonIndexPage(Page):
-    subtitle = models.CharField(max_length=255, blank=True)
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     intro = RichTextField(blank=True)
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -109,6 +109,7 @@ class PersonRole(models.Model):
 
 
 class PersonPage(Page, ContactFields):
+    subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
     role = models.ForeignKey(
         PersonRole, blank=True,
         null=True, related_name='+', on_delete=models.SET_NULL
@@ -135,6 +136,7 @@ class PersonPage(Page, ContactFields):
 
 PersonPage.content_panels = [
     FieldPanel('title', classname="title"),
+    FieldPanel('subtitle', classname="subtitle"),
     SnippetChooserPanel('role'),
     FieldPanel('intro', classname="full"),
     FieldPanel('biography', classname="full"),
