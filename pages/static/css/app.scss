@@ -252,14 +252,9 @@ header {
 
   @each $num, $fg-color in $section_textures_colors {
     &.num-#{$num} {
+      background-image: url('/#{$static}/img/section-bgs/#{$num}.jpg');
       h1 {
-        color: $red-dark;
-      }
-      @include breakpoint(medium) {
-        background-image: url('/#{$static}/img/section-bgs/#{$num}.jpg');
-        h1 {
-          color: $fg-color;
-        }
+        color: $fg-color;
       }
     }
   }

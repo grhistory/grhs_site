@@ -39,11 +39,12 @@ class ProductIndexPage(Page):
     subpage_types = ['ProductPage']
 
     @property
-    def products(self):
-        # Get list of live blog pages that are descendants of this page
-        products = ProductPage.objects.live().descendant_of(self)
+    def categories(self):
+        return ProductIndexPage.objects.all()
 
-        return products
+    @property
+    def products(self):
+        return ProductPage.objects.live().descendant_of(self)
 
     @property
     def tag_list(self):
@@ -71,6 +72,7 @@ class ProductIndexPage(Page):
         # Update template context
         context = super(ProductIndexPage, self).get_context(request)
         context['products'] = products
+        context['categories'] = self.categories
         return context
 
 ProductIndexPage.content_panels = [
@@ -124,6 +126,11 @@ class ProductPage(Page):
     )
 
     indexed_fields = ('title', 'intro', 'biography')
+
+    def get_context(self, request):
+        context = super(ProductPage, self).get_context(request)
+        context['category'] = self.get_parent()
+        return context
 
 ProductPage.content_panels = [
     FieldPanel('title', classname="title"),

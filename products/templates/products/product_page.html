@@ -1,8 +1,13 @@
 {% extends "products/product_base.html" %}
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% block header %} Own a Piece of History {% endblock %}
+
 {% block product_content %}
     <div class="product-show">
+        <h5 class="back">
+          <a href="{% pageurl category %}">← Back to {{category.title}}</a>
+        </h5>
         <center>
             <h3>{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}</h3>
             <h5>{% include "products/includes/intro.html" with intro=self.intro only %}</h5>
