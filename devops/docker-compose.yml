@@ -12,6 +12,8 @@ services:
     build:
       context: ../app
       dockerfile: ../devops/dockerfiles/app-runner/Dockerfile
+    volumes:
+      - uploaded_images:/opt/app/media
     networks:
       - frontend
       - backend
@@ -31,3 +33,4 @@ networks:
     driver: bridge
 volumes:
   database: ~
+  uploaded_images: ~
