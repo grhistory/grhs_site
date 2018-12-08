@@ -12,7 +12,10 @@ echo 'docker-compose is safe to run even if the containers are already running. 
 cd "./devops"
 
 # TODO: Check if containers are already created. If so, run start instead of up
+# This could be a little tricky, as multiple containers are managed by docker-compose
+# so running `up` or `start` on everything might have issues depending on what other
+# commands have been ran on individual containers beforehand
 
-docker-compose up --build -d
+docker-compose up -d
 
 echo 'Wait a moment and run the setup script manually (sorry).'
