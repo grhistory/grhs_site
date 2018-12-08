@@ -36,6 +36,10 @@ class Command(BaseCommand):
         event_index = EventIndexPage.objects.filter().get()
         event_index.slug = 'events'
         event_index.title = 'Events'
+        event_pages = self.create_events_from_csv()
+        for page in event_pages:
+            event_index.add_child(instance=page)
+
         event_index.save()
 
         news_index = BlogIndexPage.objects.filter().get()
@@ -97,3 +101,45 @@ class Command(BaseCommand):
                 })
 
         return board_members_list
+
+    def create_events_from_csv(self):
+        events_csv = os.path.join(settings.PROJECT_ROOT, 'data', 'grhistorysociety_event.csv')
+        event_images_directory = os.path.join(settings.PROJECT_ROOT, 'data', 'event-images')
+
+        event_pages = []
+        with open(events_csv, 'r') as f:
+            events = csv.DictReader(f)
+            for event in events:
+                dates = event['dates'].split(',')
+                if len(dates) == 2:
+                    date_from = dates[0]
+                    date_to = dates[1]
+                else:
+                    # just assume this will work, csv shouldn't change so shouldn't be an issue
+                    date_from = dates[0]
+                    date_to = None
+
+                image = self.get_event_image(event_images_directory, event['image'])
+
+                e = EventPage(
+                    title=event['title'],
+                    time_from=event['time'] if event['time'] else None,
+                    location=event['address'],
+                    body=event['description'],
+                    date_from=date_from,
+                    date_to=date_to,
+                    feed_image=image
+                )
+                e.tags.add(event['category'])
+                event_pages.append(e)
+
+        return event_pages
+
+    def get_event_image(self, event_images_directory, image_name):
+        try:
+            with open( os.path.join(event_images_directory, image_name) , 'rb') as f:
+                image_file = ImageFile(f, name=image_name)
+                image = Image.objects.create(file=image_file)
+                return image
+        except (FileNotFoundError, IsADirectoryError):
+            return None

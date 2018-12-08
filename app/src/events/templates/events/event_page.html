@@ -15,6 +15,18 @@
     	        	<br>
     	        	<h4><strong>{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}</strong></h4>
 
+                {% with self.tags.all as tags %}
+           		  		{% if tags %}
+           			  		<section class="tag-cloud-section">
+           			  			<div class="tag-cloud" style="text-align: left; margin-left: 0; margin-top: 6px;">
+           			  		  		{% for tag in tags.all %}
+           			  		    		{{ tag }}
+           			  		    	{% endfor %}
+           			  			</div>
+           			  		</section>
+           		  		{% endif %}
+           		  	{% endwith %}
+
     	        	<p>Date: <strong>{{ self.date_from|date:"j F Y" }}</strong>
     	          		{% if self.date_to %}
     	          			- <strong>{{ self.date_to|date:"j F Y" }}</strong>

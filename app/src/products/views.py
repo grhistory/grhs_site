@@ -39,7 +39,7 @@ def paypal(request):
     # implement logic for Paypal PDT stuff
     payment = request.session.get('payment', None)
     if payment is None:
-        return redirect('/')
+        return render(request, 'products/paypal.html')
 
     if request.GET.get('tx'):
         if validate(request, PaypalSettings.for_site(request.site)):

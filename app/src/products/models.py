@@ -6,6 +6,8 @@ from wagtail.core.fields import RichTextField
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.models import Image
 
+from decimal import Decimal
+
 
 from wagtail.admin.edit_handlers import (
     FieldPanel, MultiFieldPanel, InlinePanel
@@ -102,7 +104,9 @@ class ProductPageTag(TaggedItemBase):
 
 class ProductPage(Page):
     subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
-    price = models.CharField(max_length=255, blank=True)
+    price = models.DecimalField(default=0.0, decimal_places=2, max_digits=8)
+    shipping_cost = models.DecimalField(default=0.0, decimal_places=2, max_digits=6, help_text="Shipping cost")
+    inventory = models.IntegerField(default=1, help_text="Current inventory on hand. Items with 0 or blank will not be available for purchase.")
     member_price = models.CharField(max_length=255, blank=True)
     description = RichTextField(blank=True)
     intro = models.CharField(max_length=255, blank=True)
@@ -123,6 +127,9 @@ class ProductPage(Page):
         related_name='+'
     )
 
+    def cost(self):
+        return self.price + self.shipping_cost
+
     indexed_fields = ('title', 'intro', 'biography')
 
 ProductPage.content_panels = [
@@ -130,6 +137,8 @@ ProductPage.content_panels = [
     FieldPanel('subtitle', classname="subtitle"),
     FieldPanel('intro', classname="full"),
     FieldPanel('price', classname="full"),
+    FieldPanel('shipping_cost', classname="full"),
+    FieldPanel('inventory', classname="full"),
     FieldPanel('member_price', classname="full"),
     FieldPanel('description', classname="full"),
     ImageChooserPanel('image'),
@@ -142,13 +151,6 @@ ProductPage.promote_panels = [
     MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
-
-@register_setting
-class SnipcartSettings(BaseSetting):
-    api_key = models.CharField(
-        max_length=255,
-        help_text='Enter your Snap Cart Public API Key'
-    )
 
 @register_setting
 class PaypalSettings(BaseSetting):

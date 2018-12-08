@@ -114,15 +114,6 @@
         {% endif %}
 
       {% block extra_js %}
-      <script type="text/javascript">
-        $(document).ready(function () {
-          if (window.location.href.indexOf("store") != -1 | $(".snipcart-total-items").text() != 0 ) {
-            $(".snipcart-summary").show();
-          } else {
-            $(".snipcart-summary").hide();
-          }
-        })
-      </script>
       {% endblock %}
   </body>
 </html>
