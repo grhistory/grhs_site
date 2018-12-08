@@ -37,6 +37,11 @@
                         {% endcomment %}
                     </li>
                 {% endfor %}
+                {% if request.user.is_authenticated %}
+                    <li><a href="/membership/logout">Logout</a></li>
+                {% else %}
+                    <li><a href="/membership/login">Login</a></li>
+                {% endif %}
                 <li class="has-form show-for-small-only" style="background: transparent;">
                     <form action ="{% url 'search' %}" method="get">
                         <div class="row collapse">
