@@ -1,0 +1,4 @@
+/media/
+/static/
+pages/static/node_modules
+pages/static/package-lock.json
