@@ -44,6 +44,8 @@ class EventIndexPage(Page):
         index.SearchField('intro'),
     ]
 
+    subpage_types = ['EventPage']
+
     @property
     def future_events(self):
         events = EventPage.objects.live()
