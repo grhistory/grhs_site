@@ -25,7 +25,7 @@ class EmailFilter(admin.SimpleListFilter):
 
 class MembershipAdmin(admin.ModelAdmin):
 
-    list_display = ["user", "first_name", "last_name", "email", "get_member_type", "start_date", "end_date", "is_active"]
+    list_display = ["user", "agency", "first_name", "last_name", "email", "get_member_type", "start_date", "end_date", "is_active"]
     search_fields = ['first_name', 'last_name', 'email']
     list_filter = ['member_type', 'billing_quarter', 'start_date', 'end_date', 'is_active', EmailFilter]
     list_editable = ('is_active', )
