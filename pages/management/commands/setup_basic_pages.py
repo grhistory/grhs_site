@@ -36,6 +36,10 @@ class Command(BaseCommand):
         event_index = EventIndexPage.objects.filter().get()
         event_index.slug = 'events'
         event_index.title = 'Events'
+        event_pages = self.create_events_from_csv()
+        for page in event_pages:
+            event_index.add_child(instance=page)
+
         event_index.save()
 
         news_index = BlogIndexPage.objects.filter().get()
@@ -97,3 +101,31 @@ class Command(BaseCommand):
                 })
 
         return board_members_list
+
+    def create_events_from_csv(self):
+        events_csv = os.path.join(settings.PROJECT_ROOT, 'data', 'grhistorysociety_event.csv')
+
+        event_pages = []
+        with open(events_csv, 'r') as f:
+            events = csv.DictReader(f)
+            for event in events:
+                dates = event['dates'].split(',')
+                if len(dates) == 2:
+                    date_from = dates[0]
+                    date_to = dates[1]
+                else:
+                    # just assume this will work, csv shouldn't change so shouldn't be an issue
+                    date_from = dates[0]
+                    date_to = None
+
+                e = EventPage(
+                    title=event['title'],
+                    time_from=event['time'] if event['time'] else None,
+                    location=event['address'],
+                    body=event['description'],
+                    date_from=date_from,
+                    date_to=date_to,
+                )
+                event_pages.append(e)
+
+        return event_pages
