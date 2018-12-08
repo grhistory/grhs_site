@@ -15,7 +15,7 @@ def get_decimal(dec, default=0.0):
     try:
         ret = decimal.Decimal(dec)
     except decimal.InvalidOperation:
-        ret = default
+        ret = decimal.Decimal(default)
     return ret
 
 class Command(BaseCommand):
@@ -47,13 +47,15 @@ class Command(BaseCommand):
                 c = row['category']
                 image_file_name = row['cover_image']
                 image = self.get_product_image(product_images_directory, image_file_name)
+                price = get_decimal(row['price'])
+                member_price = round(price * decimal.Decimal(0.8), 2)
 
                 index_category_map[c].add_child(instance=ProductPage(
                     title=row['title'],
-                    price=get_decimal(row['price']),
+                    price=price,
                     inventory=1,
                     shipping_cost=get_decimal(row['shipping_first_item']),
-                    member_price='10000',  #TODO: calculate actual price based on member_discount percent
+                    member_price=member_price,
                     description=row['description'],
                     image=image
                 ))

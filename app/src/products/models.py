@@ -107,7 +107,7 @@ class ProductPage(Page):
     price = models.DecimalField(default=0.0, decimal_places=2, max_digits=8)
     shipping_cost = models.DecimalField(default=0.0, decimal_places=2, max_digits=6, help_text="Shipping cost")
     inventory = models.IntegerField(default=1, help_text="Current inventory on hand. Items with 0 or blank will not be available for purchase.")
-    member_price = models.CharField(max_length=255, blank=True)
+    member_price = models.DecimalField(default=0.0,decimal_places=2, max_digits=8)
     description = RichTextField(blank=True)
     intro = models.CharField(max_length=255, blank=True)
     link_demo = models.URLField("Demo link", blank=True)
@@ -127,8 +127,11 @@ class ProductPage(Page):
         related_name='+'
     )
 
-    def cost(self):
-        return self.price + self.shipping_cost
+    def cost(self, is_member=False):
+        if is_member:
+            return self.member_price + self.shipping_cost
+        else:
+            return self.price + self.shipping_cost
 
     indexed_fields = ('title', 'intro', 'biography')
 
