@@ -41,8 +41,8 @@ Depending in the server setup, the scripts will have to be run under `sudo` in o
 
 Once the `.env` file is set up, and all the supporting images have been created, docker-compose can handle all the rest. Some scripts are available as wrappers around the complexity of app executions.
 
-- `prepare.sh` Will check to see if the necessary application images are available (that aren't pulled down from Docker hub), and build them if they aren't.
-- `start.sh` Will build/pull the required images and start all the containers. TODO: Add args for specifying if images should rebuilt, and if only a certain app should be started.
+- `prepare.sh` checks if our custom Docker images have been built (sans the app runner, as `docker-compose` will handle`), and builds them if they haven't.
+- `start.sh` is essentially an abstraction around the `docker-compose` commands for running the containers. TODO: Add args for specifying if images should rebuilt, and if only a certain app should be started.
 - `stop.sh` Will stop all running containers. TODO: Add args for specifying only a specific app should be stopped.
 - `setup.sh` Will execute commands that can't run until all the containers are fully up and running (i.e. running database migrations)
 - `destroy.sh` Will tear down all the running containers. Volumes and images will still remain, so restarting the containers won't take as long.
