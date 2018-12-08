@@ -104,7 +104,7 @@ class ProductPageTag(TaggedItemBase):
 
 class ProductPage(Page):
     subtitle = models.CharField(max_length=255, blank=True, help_text="This will override the title of the page.")
-    price = models.CharField(max_length=255, blank=True)
+    price = models.DecimalField(default=0.0, decimal_places=2, max_digits=8)
     shipping_cost = models.DecimalField(default=0.0, decimal_places=2, max_digits=6, help_text="Shipping cost")
     inventory = models.IntegerField(default=1, help_text="Current inventory on hand. Items with 0 or blank will not be available for purchase.")
     member_price = models.CharField(max_length=255, blank=True)
@@ -128,7 +128,7 @@ class ProductPage(Page):
     )
 
     def cost(self):
-        return Decimal(self.price) + self.shipping_cost
+        return self.price + self.shipping_cost
 
     indexed_fields = ('title', 'intro', 'biography')
 

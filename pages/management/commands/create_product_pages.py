@@ -1,5 +1,6 @@
 import csv
 import os
+import decimal
 from pathlib import Path
 
 from django.conf import settings
@@ -10,6 +11,12 @@ from wagtail.images.models import Image
 from products.models import ProductPage, ProductIndexPage
 from pages.models import HomePage, StoreFrontPage
 
+def get_decimal(dec, default=0.0):
+    try:
+        ret = decimal.Decimal(dec)
+    except decimal.InvalidOperation:
+        ret = default
+    return ret
 
 class Command(BaseCommand):
     help = 'Create Store Pages'
@@ -43,7 +50,9 @@ class Command(BaseCommand):
 
                 index_category_map[c].add_child(instance=ProductPage(
                     title=row['title'],
-                    price=row['price'],
+                    price=get_decimal(row['price']),
+                    inventory=1,
+                    shipping_cost=get_decimal(row['shipping_first_item']),
                     member_price='10000',  #TODO: calculate actual price based on member_discount percent
                     description=row['description'],
                     image=image
