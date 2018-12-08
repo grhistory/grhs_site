@@ -39,7 +39,11 @@
                                 <div class="card-product-image" style="background-image: url('{{  product_image.url}}')"></div>
                                 <div class="card-product-content card-section">
                                     <p class="card-product-name">{{ product.title }}</p>
-                                    {% if product.price %}<p class="card-product-price">${{ product.price }}</p>{% endif %}
+                                    {% if request.user.is_authenticated %}
+                                        {% if product.member_price %}<p class="card-product-price">${{ product.member_price }}</p>{% endif %}
+                                    {% else %}
+                                        {% if product.price %}<p class="card-product-price">${{ product.price }}</p>{% endif %}
+                                    {% endif %}
                                 </div>
                             </a>
                         </div>

@@ -40,14 +40,14 @@
 
             {% if self.price and self.inventory > 0 %}
                 <div class="medium-4 columns buy-form">
-                    <h1 class="product-price">${{ self.price }}</h1>
+                    <h1 class="product-price">${{ price }}</h1>
                     {% if self.shipping_cost > 0.0 %}
                         <span class="shipping">+ ${{ self.shipping_cost }} S&amp;H</span>
                     {% endif %}
                     <form action="https://{{ settings.products.PaypalSettings.url }}/cgi-bin/webscr" method="post" id="payment_form">
                         <input type="hidden" name="cmd" value="_cart">
                         <input type="hidden" name="add" value="1">
-                        <input type="hidden" name="amount" value="{{ page.cost }}">
+                        <input type="hidden" name="amount" value="{{ cost }}">
                         <input type="hidden" name="business" id="business" value="{{ settings.products.PaypalSettings.email }}"/>
                         <input type="hidden" name="item_name" value="{{ page.title }}">
                         <input type="hidden" name="return" value="{{ request.site.root_url }}/paypal"/>
