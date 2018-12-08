@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block title %}Login - Membership - Grand Rapids Historical Society{% endblock %}
+
+{% block header %}
+{% if self.feed_image %}
+{% else %}
+{{ page.title }}
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+<div id="content" class="grid-container">
+    <div class="grid-x grid-padding-x align-center">
+        <div class="medium-9 cell">
+            <div class="grid-x grid-padding-x">
+                <div class="medium-12 cell">
+                    {% block contact_content %}
+                    <h1>Member Login</h1>
+                    {% if errors %}
+                        <p>Your username or password did not match.  Please double check and try again.</p>
+                    {% endif %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <p><label for="id_username">Username:</label> <input type="text" name="username" autofocus=""
+                                required="" id="id_username" value="{{ username }}"></p>
+                        <p><label for="id_password">Password:</label> <input type="password" name="password" required=""
+                                id="id_password"></p>
+                        <input type="hidden" name="next" value="{{ next }}">
+                        <button type="submit" class="button">Login</button>
+                    </form>
+                    {% endblock %}
+                </div>
+                <aside id="sidebar" class="hide-for-print hide-for-small-only medium-5 cell">
+
+
+                </aside>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

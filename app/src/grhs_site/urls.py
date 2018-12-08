@@ -2,6 +2,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib import admin
+from django.contrib.auth.views import LoginView
 
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
@@ -11,6 +12,7 @@ from wagtail.contrib.sitemaps.views import sitemap
 
 from search import views as search_views
 from products import views as paypal_views
+from membership import views as membership_views
 
 from wagtail_feeds.feeds import (
     BasicFeed, BasicJsonFeed, ExtendedFeed, ExtendedJsonFeed
@@ -27,6 +29,9 @@ urlpatterns = [
     url(r'^payment/membership/(?P<id>\d+)', paypal_views.membership),
     url(r'^payment/donation/(?P<id>\d+)', paypal_views.donation),
     url(r'^paypal', paypal_views.paypal),
+
+    url(r'^membership/login', membership_views.login),
+    url(r'^membership/logout', membership_views.logout),
 
     url(r'^search/$', search_views.search, name='search'),
     url(r'^documents/', include(wagtaildocs_urls)),

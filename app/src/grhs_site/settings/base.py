@@ -221,6 +221,7 @@ WAGTAILSEARCH_BACKENDS = {
         'BACKEND': 'wagtail.contrib.postgres_search.backend',
     },
 }
+WAGTAIL_FRONTEND_LOGIN_URL = '/membership/login'
 
 # Celery settings
 # When you have multiple sites using the same Redis server,
