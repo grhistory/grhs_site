@@ -104,6 +104,7 @@ class Command(BaseCommand):
 
     def create_events_from_csv(self):
         events_csv = os.path.join(settings.PROJECT_ROOT, 'data', 'grhistorysociety_event.csv')
+        event_images_directory = os.path.join(settings.PROJECT_ROOT, 'data', 'event-images')
 
         event_pages = []
         with open(events_csv, 'r') as f:
@@ -118,6 +119,8 @@ class Command(BaseCommand):
                     date_from = dates[0]
                     date_to = None
 
+                image = self.get_event_image(event_images_directory, event['image'])
+
                 e = EventPage(
                     title=event['title'],
                     time_from=event['time'] if event['time'] else None,
@@ -125,7 +128,18 @@ class Command(BaseCommand):
                     body=event['description'],
                     date_from=date_from,
                     date_to=date_to,
+                    feed_image=image
                 )
+                e.tags.add(event['category'])
                 event_pages.append(e)
 
         return event_pages
+
+    def get_event_image(self, event_images_directory, image_name):
+        try:
+            with open( os.path.join(event_images_directory, image_name) , 'rb') as f:
+                image_file = ImageFile(f, name=image_name)
+                image = Image.objects.create(file=image_file)
+                return image
+        except (FileNotFoundError, IsADirectoryError):
+            return None
