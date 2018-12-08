@@ -12,7 +12,7 @@ WORKDIR /opt/app
 
 RUN npm i
 
-FROM grhistory/app_deps:latest
+FROM grhistory/app_deps:1.0.0
 
 COPY ./src/ /opt/app/
 COPY ./config/.env /opt/app/.env

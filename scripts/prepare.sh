@@ -2,8 +2,8 @@
 
 set -o errexit
 
-BUILD_DEPS_IMAGE="grhistory/build_deps:latest"
-APP_DEPS_IMAGE="grhistory/app_deps:latest"
+BUILD_DEPS_IMAGE="grhistory/build_deps:1.0.0"
+APP_DEPS_IMAGE="grhistory/app_deps:1.0.0"
 
 echo 'Checking if the required Docker Images are available...'
 
@@ -20,7 +20,7 @@ fi
 
 if [[ "$(docker images -q $APP_DEPS_IMAGE 2> /dev/null)" == "" ]]; then
   echo "App Dependencies Image does not exist, creating it..."
-  docker build -t $APP_DEPS_IMAGE ./devops/dockerfiles/app-dependencies
+  docker build -t $APP_DEPS_IMAGE -f ./devops/dockerfiles/app-dependencies/Dockerfile ./app/src
 else
   echo "App Dependencies Image exists"
 fi
