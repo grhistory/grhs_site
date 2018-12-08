@@ -9,7 +9,8 @@
 
 @import './home_page';
 @import './contact-page';
-@import './products';
+@import './product-show';
+@import './product-index';
 @import './events-index';
 @import './footer';
 
@@ -251,14 +252,9 @@ header {
 
   @each $num, $fg-color in $section_textures_colors {
     &.num-#{$num} {
+      background-image: url('/#{$static}/img/section-bgs/#{$num}.jpg');
       h1 {
-        color: $red-dark;
-      }
-      @include breakpoint(medium) {
-        background-image: url('/#{$static}/img/section-bgs/#{$num}.jpg');
-        h1 {
-          color: $fg-color;
-        }
+        color: $fg-color;
       }
     }
   }
@@ -276,7 +272,7 @@ header + #content {
 }
 
 .card {
-  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 0 0 $gray-very-light;
   transform: translate3d(0px, 0px, 0px);
   transition: box-shadow 0.2s cubic-bezier(0, 0.2, 0.4, 1) 0s;
 }

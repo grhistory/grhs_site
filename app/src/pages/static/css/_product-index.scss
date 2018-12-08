@@ -1,0 +1,123 @@
+@import "./settings";
+
+// PRODUCT CARD
+
+$card-product-bg: $card-background;
+$card-product-text-color: $body-font-color;
+$card-padding: 1.5em;
+
+.product-grid {
+  width: 100%;
+}
+
+.card-product {
+  position: relative;
+
+  a {
+    text-decoration: none;
+  }
+
+  &:hover {
+    border-color: $green-light;
+    .card-product-image {
+      opacity: 1;
+    }
+  }
+}
+
+.card-product-actions {
+  @include card-divider;
+  padding-top: 0;
+  background: $card-product-bg;
+  display: flex;
+}
+
+.card-product-image-wrapper {
+  background-size: 120%;
+  background-position: center;
+  filter: blur(4px);
+  overflow: hidden;
+  margin: -1em -1em 0 -1em;
+  height: 12.5em;
+}
+
+.card-product-image-wrapper-inner {
+  padding: $card-padding;
+  background-color: rgba($blue-dark, 0.4);
+  height: 13.5em;
+}
+
+.card-product-image {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  background-position: top center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 12.5em;
+  width: 100%;
+  opacity: 0.75;
+  transition: all 0.25s ease;
+}
+
+.card-product-name {
+  margin-bottom: 0;
+  font-weight: 300;
+  padding: 20px;
+}
+
+.card-product-price {
+  font-weight: 600;
+  font-size: 1.25em;
+}
+
+.card-product-button {
+  margin-bottom: 0;
+  flex: 1 0 0;
+
+  + .card-product-button {
+    margin-left: 1rem;
+  }
+}
+
+.card-product-info {
+  font-size: 0.875rem;
+  letter-spacing: 1px;
+  opacity: 0.8;
+}
+
+// END PRODUCT CARD
+
+.product-categories {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-top: 1em;
+  margin-bottom: 1em;
+  border-bottom: 1px solid $gray-very-light;
+  @include breakpoint(medium) {
+    padding-bottom: 1em;
+  }
+  .category {
+    h4 {
+      margin-bottom: 0;
+    }
+    a.button {
+      text-decoration: none;
+      border-width: 1px;
+      padding: 0.5em;
+      @include breakpoint(medium) {
+        padding: 0.5em 2em;
+      }
+      &.active {
+        background: $blue-light;
+        color: $off-white;
+      }
+      &:hover {
+        color: $yellow-light;
+      }
+    }
+  }
+}

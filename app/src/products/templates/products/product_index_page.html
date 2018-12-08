@@ -1,15 +1,31 @@
 {% extends "products/product_base.html" %}
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% block header %} Own a Piece of History {% endblock %}
+
 {% block content %}
     <div id="content" class="grid-container">
         <div class="grid-x grid-padding-x align-center">
-            <div class="medium-12 cell">
-                <center>
-                    <h3>{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}</h3>
-                    {{ self.intro|richtext }}
-                </center>
+            <div class="product-categories">
+              {% for category in categories %}
+                <div class="category">
+                  <h4>
+                    <a href="{% pageurl category %}"
+                       class="button {% if category == page %}active{% endif %}">
+                      {{category.title}}
+                    </a>
+                  </h4>
+                </div>
+              {% endfor %}
             </div>
+
+            {% if self.intro %}
+              <div class="medium-12 cell">
+                  <center>
+                      {{ self.intro|richtext }}
+                  </center>
+              </div>
+            {% endif %}
 
             <div class="product-grid grid-x grid-padding-x medium-up-3" data-equalizer>
                 {% for product in products %}
@@ -23,10 +39,7 @@
                                 <div class="card-product-image" style="background-image: url('{{  product_image.url}}')"></div>
                                 <div class="card-product-content card-section">
                                     <p class="card-product-name">{{ product.title }}</p>
-                                    {% if product.price %}<p>Price: ${{ product.price }}</p>{% endif %}
-                                </div>
-                                <div class="card-product-actions">
-                                    <a href="{% pageurl product %}" class="card-product-button button hollow secondary">More Info</a>
+                                    {% if product.price %}<p class="card-product-price">${{ product.price }}</p>{% endif %}
                                 </div>
                             </a>
                         </div>
