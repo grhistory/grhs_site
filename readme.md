@@ -42,6 +42,8 @@ Depending in the server setup, the scripts will have to be run under `sudo` in o
 
 Once the `.env` file is set up, and all the supporting images have been created, docker-compose can handle all the rest. Some scripts are available as wrappers around the complexity of app executions.
 
+N.B. The `-p` flag is being used to have a more friendly name for the containers. There currently isn't an easy way to keep that in sync in all the bash scripts, so be aware of that when changing the name (sorry!).
+
 - `prepare.sh` checks if our custom Docker images have been built (sans the app runner, as `docker-compose` will handle`), and builds them if they haven't.
 - `start.sh` is essentially an abstraction around the `docker-compose` commands for running the containers. TODO: Add args for specifying if images should rebuilt, and if only a certain app should be started.
 - `stop.sh` Will stop all running containers. TODO: Add args for specifying only a specific app should be stopped.

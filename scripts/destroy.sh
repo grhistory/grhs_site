@@ -9,4 +9,4 @@ echo 'Stopping and removing Docker setup...'
 
 cd "./devops"
 
-docker-compose down
+docker-compose -p grhs_site down

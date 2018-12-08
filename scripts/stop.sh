@@ -9,4 +9,4 @@ echo 'Stopping Docker containers...'
 
 cd "./devops"
 
-docker-compose stop
+docker-compose -p grhs_site stop
