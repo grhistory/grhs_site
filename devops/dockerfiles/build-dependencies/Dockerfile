@@ -1,6 +1,7 @@
 FROM python:3.7.1-alpine
 
 LABEL maintainer="CJ Davis <cj@cjdavis.me>"
+LABEL version="1.0.0"
 
 # See https://stackoverflow.com/a/47871121/1324851 for why we need the extra packages
 # jpeg-dev and zlib-dev are needed for Pillow

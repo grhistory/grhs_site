@@ -3,6 +3,9 @@
 
 FROM node:10.13.0-alpine
 
+LABEL maintainer="CJ Davis <cj@cjdavis.me>"
+LABEL version="1.0.0"
+
 COPY ./src/pages/static/ /opt/app
 
 WORKDIR /opt/app
