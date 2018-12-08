@@ -24,9 +24,9 @@
             {% if self.price and self.inventory > 0 %}
                 <div class="medium-2 columns" style="border:solid 1px;height:240px;text-align:center;">
                     <h5>Price</h5><br><br>
-                    <h1 class="stat"><strong>{{ self.price }}</strong></h1>
+                    <h1 class="stat"><strong>${{ self.price }}</strong></h1>
                     {% if self.shipping_cost > 0.0 %}
-                        <span class="shipping">+ {{ self.shipping_cost }} shipping</span>
+                        <span class="shipping">+ ${{ self.shipping_cost }} S&H</span>
                     {% endif %}
                     <form action="https://{{ settings.products.PaypalSettings.url }}/cgi-bin/webscr" method="post" id="payment_form">
                         <input type="hidden" name="cmd" value="_cart">
