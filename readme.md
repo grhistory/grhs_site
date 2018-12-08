@@ -1,10 +1,12 @@
-# grhs_site
+# Local Development Setup
 
 Run postgresql:
 
 - Mac: `brew services start postgresql`
 
 ```
+cd app/src
+# edit grhs_site/settings/__init__.py to import from ".dev" for now
 make develop_env
 # after server is running, ctrl-c
 
