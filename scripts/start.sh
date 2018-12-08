@@ -16,6 +16,6 @@ cd "./devops"
 # so running `up` or `start` on everything might have issues depending on what other
 # commands have been ran on individual containers beforehand
 
-docker-compose up -d
+docker-compose -p grhs_site up -d
 
 echo 'Wait a moment and run the setup script manually (sorry).'

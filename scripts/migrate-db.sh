@@ -9,4 +9,4 @@ echo 'Executing db migrations within the app container...'
 
 cd "./devops"
 
-docker-compose exec app python manage.py migrate
+docker-compose -p grhs_site exec app python manage.py migrate
