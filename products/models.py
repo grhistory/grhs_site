@@ -144,13 +144,6 @@ ProductPage.promote_panels = [
 ]
 
 @register_setting
-class SnipcartSettings(BaseSetting):
-    api_key = models.CharField(
-        max_length=255,
-        help_text='Enter your Snap Cart Public API Key'
-    )
-
-@register_setting
 class PaypalSettings(BaseSetting):
     identity_token = models.CharField(
         max_length=255,
