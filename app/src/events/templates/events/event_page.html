@@ -1,17 +1,22 @@
 {% extends "events/event_base.html" %}
 {% load grhs_site_utils wagtailcore_tags wagtailimages_tags %}
 
+{% block header_area %}{% endblock %}
+
 {% block event_content %}
 
 	<div class="medium-12 cell">
     	<div class="card" style="margin-bottom: 0;">
     		<div class="grid-x grid-padding-x">
-    	      	<div class="medium-7 cell">
-    	        	{% if self.feed_image %}
+              {% if self.feed_image %}
+              <div class="medium-7 cell">
     	        		{% image self.feed_image fill-1200x880 %}
-    	        	{% endif %}
-    	      	</div>
-    	      	<div class="medium-5 cell">
+              </div>
+              {% else %}
+                <div class="medium-2 cell"></div>
+              {% endif %}
+
+          <div class="{% if self.feed_image %}medium-5{% else %}medium-8{% endif %} cell">
     	        	<br>
     	        	<h4><strong>{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}</strong></h4>
 
@@ -44,19 +49,7 @@
 	    	        </p>
 
     	        	{% if self.location %}
-    	        		<p class="hide-for-small-only">Location: <strong><a href="http://maps.google.com/?q={{ self.location }}" target="_blank">{{ self.location }}</a></strong></p>
-
-    	        		<div class="show-for-small-only">
-    	        			<p>Location: <strong>{{ self.location }}</strong></p>
-		    	        	<div class="grid-x grid-padding-x">
-		    	            	<div class="small-6 cell">
-		    	            		<a class="button small" href="waze://?q={{ self.location }}" style="width: 100%; border-radius: 3px;">Open with Waze</a></strong>
-		    	            	</div>
-		    	            	<div class="small-6 cell">
-		    	            		<a class="button small" href="http://maps.google.com/?q={{ self.location }}" target="_blank" style="width: 100%; border-radius: 3px;">Open with Google Maps</a>
-		    	            	</div>
-		    	            </div>
-    	        		</div>
+    	        		<p>Location: <strong><a href="http://maps.google.com/?q={{ self.location }}" target="_blank">{{ self.location }}</a></strong></p>
     	        	{% endif %}
 
     	        	{% if self.cost %}

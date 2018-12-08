@@ -1,6 +1,10 @@
 {% extends "events/event_base.html" %}
 {% load static wagtailcore_tags wagtailimages_tags %}
 
+{% block header %}
+{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}
+{% endblock %}
+
 {% block content %}
 <div id="content" class="grid-container">
 	<div id="events-index">
@@ -10,14 +14,21 @@
 		<a class="past-future" href="{{ request.path }}?past=true{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}">Show Past Events</a>
 		{% endif %}
 
-		<h3>{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}</h3>
-
 		{% include "events/includes/tags.html" %}
 
 		<div>
 			{% for event in events %}
 			{% include "events/includes/event_list_item.html" %}
 			{% endfor %}
+      {% if not events %}
+        No {% if request.GET.past %}past{% else %}future{% endif %} events found{% if request.GET.tag %} in {{request.GET.tag}} category{% endif %}.
+        {% if request.GET.past %}
+          <a href="{{ request.path }}{% if request.GET.tag %}?tag={{ request.GET.tag }}{% endif %}">Show Future Events</a>
+        {% else %}
+          <a href="{{ request.path }}?past=true{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}">Show Past Events</a>
+        {% endif %}
+
+      {% endif %}
 		</div>
 
 		{% if events.has_other_pages %}
