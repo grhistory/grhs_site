@@ -5,9 +5,9 @@
 <div id="content" class="grid-container">
 	<div id="events-index">
 		{% if request.GET.past %}
-		<a class="past-future" href="{{ request.path }}">Show Future Events</a>
+		<a class="past-future" href="{{ request.path }}{% if request.GET.tag %}?tag={{ request.GET.tag }}{% endif %}">Show Future Events</a>
 		{% else %}
-		<a class="past-future" href="{{ request.path }}?past=true">Show Past Events</a>
+		<a class="past-future" href="{{ request.path }}?past=true{% if request.GET.tag %}&tag={{ request.GET.tag }}{% endif %}">Show Past Events</a>
 		{% endif %}
 
 		<h3>{% if self.subtitle %} {{ self.subtitle }}{% else %}{{ self.title }}{% endif %}</h3>

@@ -15,7 +15,7 @@ from modelcluster.tags import ClusterTaggableManager
 from taggit.models import TaggedItemBase, Tag
 
 from modelcluster.fields import ParentalKey
-from utils.models import LinkFields, RelatedLink, CarouselItem
+from utils.models import LinkFields, RelatedLink
 from .event_utils import export_event
 
 
@@ -106,14 +106,6 @@ EventIndexPage.promote_panels = [
     MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     ImageChooserPanel('feed_image'),
 ]
-
-
-class EventPageCarouselItem(Orderable, CarouselItem):
-    page = ParentalKey('events.EventPage', related_name='carousel_items')
-
-
-class EventPageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('events.EventPage', related_name='related_links')
 
 
 class EventPageSpeaker(Orderable, LinkFields):
@@ -215,10 +207,8 @@ EventPage.content_panels = [
     FieldPanel('cost'),
     FieldPanel('signup_link'),
     FieldPanel('tags'),
-    InlinePanel('carousel_items', label="Carousel items"),
     FieldPanel('body', classname="full"),
     InlinePanel('speakers', label="Speakers"),
-    InlinePanel('related_links', label="Related links"),
 ]
 
 EventPage.promote_panels = Page.promote_panels + [
