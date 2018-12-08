@@ -1,4 +1,7 @@
-FROM grhistory/build_deps:latest
+FROM grhistory/build_deps:1.0.0
+
+LABEL maintainer="CJ Davis <cj@cjdavis.me>"
+LABEL version="1.0.0"
 
 RUN mkdir -p /opt/app
 
