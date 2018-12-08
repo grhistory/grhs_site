@@ -21,6 +21,8 @@ class MembershipForm(ModelForm):
             'zip_code',
             'email',
             'telephone',
+            'digital_newsletter',
+            'print_newsletter',
             'member_type',
             'membership_status'
 
