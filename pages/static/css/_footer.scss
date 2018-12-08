@@ -39,11 +39,13 @@ $brand-twitter: #55acee;
   }
 
   .fa-facebook {
-    color: $brand-facebook;
     margin-right: 5px;
   }
-  .fa-twitter {
-    color: $brand-twitter;
+  .fa-facebook, .fa-twitter {
+    color: white;
+    &:hover {
+      color: $yellow-light;
+    }
   }
 
   input {
