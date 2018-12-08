@@ -25,15 +25,18 @@
                 <div class="medium-2 columns" style="border:solid 1px;height:240px;text-align:center;">
                     <h5>Price</h5><br><br>
                     <h1 class="stat"><strong>{{ self.price }}</strong></h1>
-                    <button class="snipcart-add-item button"
-                        data-item-name="{{ page.title }}"
-                        data-item-id="{{ page.id }}"
-                        data-item-url="{{ page.get_full_url }}"
-                        data-item-price="{{ page.price }}"
-                        data-item-image="{{ self.image.url }}"
-                        <i class="icon icon-plus"></i>
-                        Add to cart
-                    </button>
+                    <form action="https://{{ settings.products.PaypalSettings.url }}/cgi-bin/webscr" method="post" id="payment_form">
+                        <input type="hidden" name="cmd" value="_xclick">
+                        <input type="hidden" name="amount" value="{{ page.price }}">
+                        <input type="hidden" name="business" id="business" value="{{ settings.products.PaypalSettings.email }}"/>
+                        <input type="hidden" name="item_name" value="{{ page.title }}">
+                        <input type="hidden" name="return" value="{{ request.site.root_url }}/paypal"/>
+                        <input type="hidden" name="cancel_return" value="{{ request.site.root_url }}/paypal/cancel"/>
+                        <input type="hidden" name="currency_code" value="USD">
+                        <input type="hidden" name="lc" value="US">
+                        <input type="image" name="submit" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif" alt="Buy Now">
+                        <img alt="" border="0" width="1" height="1" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" >
+                    </form>
                 </div>
             {% endif %}
         </div>
