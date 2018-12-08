@@ -28,7 +28,9 @@
 
     .event-image {
       width: 300px;
+      min-width: 300px;
       background-position: center;
+      background-size: cover;
     }
 
     .event-summary {

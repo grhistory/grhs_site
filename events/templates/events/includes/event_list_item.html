@@ -4,14 +4,14 @@
 		<div class="event">
 			{% if event.feed_image %}
 				{% image event.feed_image width-600 as event_image %}
-				<div class="event-image" style="background-image:url('{{event_image.url}}')"></div>
+				<div class="show-for-medium event-image" style="background-image:url('{{event_image.url}}')"></div>
 			{% endif %}
 
 			<div class="event-summary">
 				<h4>{{ event.title }}</h4>
 
 				<i class="fab fa-clock-o" aria-hidden="true"></i>
-				{{ event.date_from|date:"j F" }} {% if event.time_from %}- {{ event.time_from }}{% endif %}
+				{{ event.date_from|date:"j F Y" }} {% if event.time_from %}- {{ event.time_from }}{% endif %}
 
 				{% if event.location %}
 				<i class="fa fa-map-marker" aria-hidden="true"></i> {{ event.location }}
