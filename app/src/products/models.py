@@ -129,16 +129,16 @@ class ProductPage(Page):
         related_name='+'
     )
 
-    def cost(self, is_member=False):
-        if is_member:
-            return self.member_price + self.shipping_cost
-        else:
-            return self.price + self.shipping_cost
-
     indexed_fields = ('title', 'intro', 'biography')
 
     def get_context(self, request):
         context = super(ProductPage, self).get_context(request)
+        if request.user.is_authenticated:
+            context['price'] = self.member_price
+            context['cost'] = self.member_price + self.shipping_cost
+        else:
+            context['price'] = self.price
+            context['cost'] = self.price + self.shipping_cost
         context['category'] = self.get_parent()
         return context
 
