@@ -3,8 +3,8 @@ from django.contrib.auth import logout as django_logout, authenticate, login as 
 
 def login(request):
     if request.POST:
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get("username", "").strip()
+        password = request.POST.get("password", "")
         user = authenticate(request, username=username, password=password)
         if user is not None:
             django_login(request, user)
